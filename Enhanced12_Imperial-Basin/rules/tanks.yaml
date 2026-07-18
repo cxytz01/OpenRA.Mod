@@ -1,0 +1,585 @@
+# tank.yaml - heavy factory units
+
+mcv:
+	Buildable:
+		Prerequisites: repair_pad
+		Queue: Armor
+		BuildPaletteOrder: 130
+		BuildDuration: 750
+		Description: mcv.description
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 53000
+	Armor:
+		Type: light
+	Mobile:
+		Speed: 31
+	RevealsShroud:
+		Range: 2c768
+	SpawnActorOnDeath:
+		RequiresCondition: !worm-attack
+	AttractsWorms:
+		Intensity: 1170
+
+harvester:
+	Buildable:
+		Queue: Armor
+		Prerequisites: refinery
+		BuildDuration: 600
+		BuildPaletteOrder: 10
+		Description: harvester.description
+	Valued:
+		Cost: 1200
+	Health:
+		HP: 45000
+	Mobile:
+		Speed: 40
+	WithDockingAnimation:
+	DockClientManager:
+	StoresResources:
+		Resources: Spice
+	Harvester:
+		HarvestFacings: 8
+		Resources: Spice
+		EmptyCondition: harvester-empty
+	RevealsShroud:
+		Range: 3c768
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeLarge
+		EmptyWeapon: UnitExplodeLarge
+	FireProjectilesOnDeath@ShrapnelNotEmpty:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 3, 5
+		Range: 1c0, 6c0
+		RequiresCondition: !harvester-empty
+	FireProjectilesOnDeath@DeathHandClusterDebris:
+		Weapons: DeathHandClusterDebris
+		Pieces: 1, 3
+		Range: 1c0, 5c0
+		RequiresCondition: !harvester-empty
+	FireProjectilesOnDeath@ShrapnelEmpty:
+		Weapons: Debris, Debris2
+		Pieces: 0, 2
+		Range: 1c0, 6c0
+		RequiresCondition: harvester-empty
+	FireProjectilesOnDeath@throwSpice:
+		Weapons: HarvesterSpiceExplosion
+		Pieces: 1, 4
+		Range: 1c0, 5c0
+		RequiresCondition: !harvester-empty
+	FireProjectilesOnDeath@wheel:
+		Weapons: debris_harvester_wheel01, debris_harvester_wheel02
+		Pieces: 0, 2
+		Range: 3c0, 5c0
+	SpawnActorOnDeath:
+		RequiresCondition: !worm-attack && harvester-empty
+	AttractsWorms:
+		Intensity: 744
+
+siege_tank:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Queue: Armor
+		Prerequisites: upgrade.heavy
+		BuildDuration: 390
+		BuildPaletteOrder: 50
+		Description: siege-tank.description
+	AttackFrontal:
+		FacingTolerance: 0
+		ForceFireIgnoresActors: True
+		TargetFrozenActors: True
+	Valued:
+		Cost: 750
+	Health:
+		HP: 12000
+	Armor:
+		Type: light
+	Mobile:
+		Speed: 40
+		TurnSpeed: 12
+	Turreted:
+		TurnSpeed: 12
+		Offset: 0,0,-32
+	Armament:
+		Weapon: 155mm
+		Recoil: 150
+		RecoilRecovery: 19
+		LocalOffset: 512,0,320
+		MuzzleSequence: muzzle
+	RevealsShroud:
+		Range: 6c112
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeMed
+		EmptyWeapon: UnitExplodeMed
+	FireProjectilesOnDeath:
+		Weapons: DerbisSiegetank, Debris3
+		Pieces: 1, 2
+		Range: 2c0, 4c0
+	FireProjectilesOnDeath@turret:
+		Weapons: derbisSiegetank.turret
+		Pieces: 1, 1
+		Range: 0c512, 2c0
+	SpawnActorOnDeath:
+		RequiresCondition: !worm-attack
+	AttractsWorms:
+		Intensity: 413
+
+missile_tank:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotATVI
+	Buildable:
+		BuildDuration: 512
+		BuildPaletteOrder: 60
+		Prerequisites: upgrade.heavy, high_tech_factory, ~heavy.missile_tank
+		Description: missile-tank.description
+	AttackFrontal:
+		FacingTolerance: 0
+		ForceFireIgnoresActors: false
+		TargetFrozenActors: true
+	GrantRandomCondition:
+		Conditions: shrapnel-01, shrapnel-02, shrapnel-03
+	Valued:
+		Cost: 900
+	Health:
+		HP: 13000
+	Armor:
+		Type: wood
+	Mobile:
+		Speed: 57
+		TurnSpeed: 20
+	Armament:
+		Weapon: mtank_pri
+		LocalOffset: -128,128,171, -128,-128,171
+	RevealsShroud:
+		Range: 6c112
+	FireProjectilesOnDeath@01:
+		Weapons: Debris, Debris4, Debris3
+		Pieces: 0,1
+		Range: 1c0, 3c0
+		RequiresCondition: shrapnel-01 && !worm-attack
+	FireProjectilesOnDeath@02:
+		Weapons: Debris3, Debris
+		Pieces: 1,2
+		Range: 2c0, 3c0
+		RequiresCondition: shrapnel-02 && !worm-attack
+	FireProjectilesOnDeath@02_02:
+		Weapons: DerbisMissile
+		Pieces: 0,2
+		Range: 3c0, 5c0
+		RequiresCondition: shrapnel-02 && !worm-attack
+	FireProjectilesOnDeath@03:
+		Weapons: DerbisMissile, Debris, Debris4, Debris3
+		Pieces: 1,3
+		Range: 4c0, 6c0
+		RequiresCondition: shrapnel-03 && !worm-attack
+	SpawnActorOnDeath:
+		RequiresCondition: !worm-attack
+	AttractsWorms:
+		Intensity: 486
+
+deviator:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotATVI
+	Buildable:
+		Prerequisites: upgrade.heavy, research_centre, ~heavy.ordos
+		BuildDuration: 618
+		BuildPaletteOrder: 70
+		Description: deviator.description
+	Valued:
+		Cost: 1000
+	Health:
+		HP: 11000
+	Mobile:
+		TurnSpeed: 12
+		Speed: 50
+	Armor:
+		Type: light
+	RevealsShroud:
+		Range: 5c512
+	Armament:
+		Weapon: DeviatorMissile
+		LocalOffset: -299,0,85
+	FireProjectilesOnDeath:
+		Weapons: Debris4, Debris
+		Pieces: 0,2
+		Range: 0c512, 4c512
+	SpawnActorOnDeath:
+		OwnerType: Victim
+		RequiresCondition: !worm-attack
+	SpawnActorOnDeath@dummygas1:
+		Actor: dummy.gas_leak
+		OwnerType: Victim
+	AttractsWorms:
+		Intensity: 605
+
+sonic_tank:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Queue: Armor
+		Prerequisites: upgrade.heavy, research_centre, ~heavy.atreides
+		BuildDuration: 635
+		BuildPaletteOrder: 80
+		Description: sonic-tank.description
+	AttackFrontal:
+		FacingTolerance: 0
+		ForceFireIgnoresActors: True
+		TargetFrozenActors: True
+	Valued:
+		Cost: 1100
+	Health:
+		HP: 28000
+	Armor:
+		Type: light
+	Mobile:
+		TurnSpeed: 15
+		Speed: 31
+	Armament:
+		Weapon: Sound
+		LocalOffset: 600,0,427
+	RevealsShroud:
+		Range: 5c768
+	SpawnActorOnDeath:
+		RequiresCondition: !worm-attack
+	AttractsWorms:
+		Intensity: 640
+
+devastator:
+	Buildable:
+		Prerequisites: upgrade.heavy, research_centre, ~heavy.harkonnen
+		BuildDuration: 690
+		BuildPaletteOrder: 90
+		Description: devastator-desc.description
+	Valued:
+		Cost: 1200
+	Health:
+		HP: 60000
+	Armor:
+		Type: heavy
+	Mobile:
+		TurnSpeed: 12
+		Speed: 30
+	Armament:
+		Weapon: DevBullet
+		LocalOffset: 640,0,32
+		MuzzleSequence: muzzle
+	GrantConditionOnDamageState@forbot:
+		Condition: low-hp
+		ValidDamageStates: Critical
+	GrantCondition@botselfdestruct:
+		Condition: overload
+		RequiresCondition: low-hp && bot-owned && !unit-capturated
+	GrantConditionOnDeploy@REACTOR:
+		DeployedCondition: overload
+		PauseOnCondition: overload
+	KillsSelf@MELTDOWN:
+		Delay: 150
+		GrantsCondition: meltdown
+		RequiresCondition: overload
+	ChangesHealth:
+		Step: 45
+		Delay: 3
+		StartIfBelow: 50
+	AmbientSound@onMeltDown:
+		SoundFiles: audio/DevastatorMeltdown01.wav
+		RequiresCondition: overload
+	FireWarheadsOnDeath@OVERLOAD:
+		Weapon: PlasmaDevastator
+		EmptyWeapon: PlasmaDevastator
+		RequiresCondition: meltdown
+	FireProjectilesOnDeath@TrowOnMeldown:
+		Weapons: Debris2, DeathHandClusterDebris, Debris4, DerbisSiegetank
+		Pieces: 4, 7
+		Range: 2c205, 3c614
+		RequiresCondition: meltdown
+	FireProjectilesOnDeath@standart:
+		Weapons: Debris, Debris3, DerbisSiegetank
+		Pieces: 1, 2
+		RequiresCondition: !meltdown
+	SpawnActorOnDeath:
+		RequiresCondition: !meltdown && !worm-attack
+	SpawnActorOnDeath@crater:
+		Actor: crater_med
+		RequiresCondition: meltdown
+		Offset: -1,0
+	AttractsWorms:
+		Intensity: 840
+
+combat_tank_a:
+	Inherits: ^combat_tank
+	Buildable:
+		Prerequisites: ~heavy.atreides_combat
+		BuildPaletteOrder: 30
+		Description: combat-tank-a.description
+	Tooltip:
+		Name: atreides-combat-tank
+	Mobile:
+		TurnSpeed: 20
+	Armament:
+		Weapon: 80mm_A
+	SpawnActorOnDeath:
+		Actor: combat_tank_a.husk
+		RequiresCondition: Husk01 && !worm-attack
+	SpawnActorOnDeath@husk02:
+		Actor: combat_tank_a.husk02
+		RequiresCondition: Husk02 && !worm-attack
+	SpawnActorOnDeath@husk03:
+		Actor: combat_tank_a.husk03
+		RequiresCondition: Husk03 && !worm-attack
+	SpawnActorOnDeath@husk04:
+		Actor: combat_tank_a.husk04
+		RequiresCondition: Husk04 && !worm-attack
+	FireProjectilesOnDeath@turret:
+		Weapons: debris_turret.atreides
+		Pieces: 1,1
+		Range: 0c250, 2c512
+		RequiresCondition: Husk01
+	FireProjectilesOnDeath@turret01:
+		Weapons: debris_turret01.atreides
+		Pieces: 1,1
+		Range: 1c0, 2c512
+		RequiresCondition: Husk02
+	AttractsWorms:
+		Intensity: 438
+
+combat_tank_h:
+	Inherits: ^combat_tank
+	Buildable:
+		Prerequisites: ~heavy.harkonnen_combat
+		BuildPaletteOrder: 40
+		Description: combat-tank-h.description
+	Tooltip:
+		Name: harkonnen-combat-tank
+	Health:
+		HP: 29000
+	Mobile:
+		Speed: 62
+	SpeedMultiplier@HEAVYDAMAGE:
+		Modifier: 85
+	Armament:
+		Weapon: 80mm_H
+	SpawnActorOnDeath:
+		Actor: combat_tank_h.husk
+		RequiresCondition: Husk01 && !worm-attack
+	SpawnActorOnDeath@husk02:
+		Actor: combat_tank_h.husk02
+		RequiresCondition: Husk02 && !worm-attack
+	SpawnActorOnDeath@husk03:
+		Actor: combat_tank_h.husk03
+		RequiresCondition: Husk03 && !worm-attack
+	SpawnActorOnDeath@husk04:
+		Actor: combat_tank_h.husk04
+		RequiresCondition: Husk04 && !worm-attack
+	FireProjectilesOnDeath@turret:
+		Weapons: debris_turret.harkonnen
+		Pieces: 1,1
+		Range: 0c250, 2c512
+		RequiresCondition: Husk01
+	FireProjectilesOnDeath@turret01:
+		Weapons: debris_turret01.harkonnen
+		Pieces: 1,1
+		Range: 1c0, 2c512
+		RequiresCondition: Husk02
+	AttractsWorms:
+		Intensity: 466
+
+combat_tank_o:
+	Inherits: ^combat_tank
+	Buildable:
+		Prerequisites: ~heavy.ordos_combat
+		BuildPaletteOrder: 20
+		Description: combat-tank-o.description
+	Tooltip:
+		Name: ordos-combat-tank
+	Health:
+		HP: 19000
+	Mobile:
+		Speed: 82
+		TurnSpeed: 22
+	Turreted:
+		TurnSpeed: 24
+	Armament:
+		Weapon: 80mm_O
+	SpawnActorOnDeath:
+		Actor: combat_tank_o.husk
+		RequiresCondition: Husk01 && !worm-attack
+	SpawnActorOnDeath@husk02:
+		Actor: combat_tank_o.husk02
+		RequiresCondition: Husk02 && !worm-attack
+	SpawnActorOnDeath@husk03:
+		Actor: combat_tank_o.husk03
+		RequiresCondition: Husk03 && !worm-attack
+	SpawnActorOnDeath@husk04:
+		Actor: combat_tank_o.husk04
+		RequiresCondition: Husk04 && !worm-attack
+	FireProjectilesOnDeath@turret:
+		Weapons: debris_turret.ordos
+		Pieces: 1,1
+		Range: 1c0, 2c512
+		RequiresCondition: Husk01 || Husk02
+	AttractsWorms:
+		Intensity: 426
+
+bison_tank:
+	Inherits: ^Tank
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotVTI
+	Buildable:
+		Prerequisites: ~disabled
+		BuildPaletteOrder: 100
+		Description: bison-tank-desc.description
+	Tooltip:
+		Name: bison-tank
+	Health:
+		HP: 31000
+	Valued:
+		Cost: 950
+	Armor:
+		Type: heavy
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+	Armament:
+		Weapon: 80mm_double
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 300,60,0, 300,-40,0
+		MuzzleSequence: muzzle
+	Turreted:
+		TurnSpeed: 20
+		RealignDelay: 0
+	AttackTurreted:
+	RevealsShroud:
+		Range: 5c512
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	RenderSprites:
+		PlayerPalette: player_r16
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeMed
+		EmptyWeapon: UnitExplodeMed
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SpawnActorOnDeath:
+		Actor: bison_tank.husk
+		RequiresCondition: !worm-attack
+	AttractsWorms:
+		Intensity: 599
+
+bombardment_tank:
+	Inherits: ^Tank
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Queue: Armor
+		Prerequisites: ~disabled
+		BuildPaletteOrder: 120
+		Description: bombardment-tank-desc.description
+	Tooltip:
+		Name: bombardment-tank
+	AttackFrontal:
+		FacingTolerance: 0
+		ForceFireIgnoresActors: True
+		TargetFrozenActors: True
+	Health:
+		HP: 27000
+	Valued:
+		Cost: 1050
+	Armor:
+		Type: light
+	Mobile:
+		Speed: 45
+		TurnSpeed: 17
+	Turreted:
+		TurnSpeed: 15
+		Offset: -200,0,170
+	Armament:
+		Weapon: clusterMissile
+		LocalOffset: -200,128,171, -200,-128,171, -200,70,250, -200,-70,300
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		PipCount: 4
+	ReloadAmmoPool:
+		Count: 1
+		Delay: 75
+		ResetOnFire: true
+	AttackTurreted:
+		ForceFireIgnoresActors: True
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RevealsShroud:
+		Range: 5c512
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeMed
+		EmptyWeapon: UnitExplodeMed
+	SpawnActorOnDeath:
+		Actor: bombardment_tank.husk
+		RequiresCondition: !worm-attack
+	AttractsWorms:
+		Intensity: 611
+
+scorch_tank:
+	Inherits: ^Tank
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Prerequisites: ~disabled
+		BuildPaletteOrder: 110
+		Description: scorch-tank-desc.description
+	Tooltip:
+		Name: scorch-tank
+	Health:
+		HP: 25000
+	Valued:
+		Cost: 1000
+	Armor:
+		Type: light
+	Mobile:
+		Speed: 78
+	AttackFrontal:
+		FacingTolerance: 0
+		ForceFireIgnoresActors: True
+		TargetFrozenActors: True
+	AutoTarget:
+		ScanRadius: 6
+	Armament:
+		Weapon: flamethrower
+		LocalOffset: 100,0, 200
+	RevealsShroud:
+		Range: 5c0
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeMed
+		EmptyWeapon: UnitExplodeMed
+		DeathTypes: BulletDeath
+	FireWarheadsOnDeath@big:
+		Weapon: flamer_explosion_big
+		EmptyWeapon: flamer_explosion_big
+		DeathTypes: ExplosionDeath, SoundDeath, FireDeath, SmallExplosionDeath
+	FireWarheadsOnDeath@small1:
+		Offset: 500,400,0
+		Chance: 50
+		Weapon: flamer_explosion_small
+		EmptyWeapon: flamer_explosion_small
+		DeathTypes: ExplosionDeath, SoundDeath, FireDeath, SmallExplosionDeath
+	FireWarheadsOnDeath@small2:
+		Offset: -800,-300,0
+		Chance: 50
+		Weapon: flamer_explosion_small02
+		EmptyWeapon: flamer_explosion_small02
+		DeathTypes: ExplosionDeath, SoundDeath, FireDeath, SmallExplosionDeath
+	FireWarheadsOnDeath@small3:
+		Offset: 200,900,0
+		Chance: 50
+		Weapon: flamer_explosion_small03
+		EmptyWeapon: flamer_explosion_small03
+		DeathTypes: ExplosionDeath, SoundDeath, FireDeath
+	SpawnActorOnDeath:
+		Actor: scorch_tank.husk
+		RequiresCondition: !worm-attack
+	AttractsWorms:
+		Intensity: 580

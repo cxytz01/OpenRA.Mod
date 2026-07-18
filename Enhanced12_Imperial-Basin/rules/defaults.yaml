@@ -1,0 +1,286 @@
+# defaults.yaml - generated from units.yaml
+
+^AutoTargetGroundAssaultMove:
+	Inherits: ^AutoTargetGround
+	AutoTargetPriority@Bot_walls:
+		RequiresCondition: ignore-creeps
+		ValidTargets: Wall
+
+^AutoTargetAllAssaultMove:
+	AutoTargetPriority@Bot_walls:
+		RequiresCondition: ignore-creeps
+		ValidTargets: Wall
+
+^AutoTargetPriorityFotBotIVT:
+	AutoTargetPriority@IVT_infantry:
+		ValidTargets: Infantry
+		Priority: 20
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@IVT_vehicle:
+		ValidTargets: Vehicle
+		Priority: 10
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@IVT_tank:
+		ValidTargets: Tank
+		Priority: 5
+#		RequiresCondition: bot-owned
+
+^AutoTargetPriorityFotBotVTI:
+	AutoTargetPriority@VTI_vehicle:
+		ValidTargets: Vehicle
+		Priority: 20
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@VTI_tank:
+		ValidTargets: Tank
+		Priority: 10
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@VTI_infantry:
+		ValidTargets: Infantry
+		Priority: 5
+#		RequiresCondition: bot-owned
+
+^AutoTargetPriorityFotBotATVI:
+	AutoTargetPriority@ATVI_air:
+		ValidTargets: Air
+		Priority: 20
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@ATVI_tank:
+		ValidTargets: Tank
+		Priority: 10
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@ATVI_vehicle:
+		ValidTargets: Vehicle
+		Priority: 5
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@ATVI_infantry:
+		ValidTargets: Infantry
+		Priority: 2
+#		RequiresCondition: bot-owned
+
+^AutoTargetPriorityFotBotTVI:
+	AutoTargetPriority@TVI_tank:
+		ValidTargets: Tank
+		Priority: 20
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@TVI_vehicle:
+		ValidTargets: Vehicle
+		Priority: 10
+#		RequiresCondition: bot-owned
+	AutoTargetPriority@TVI_infantry:
+		ValidTargets: Infantry
+		Priority: 5
+#		RequiresCondition: bot-owned
+
+^BotRejectOrders:
+	ExternalCondition@rejectorders:
+		Condition: reject-orders
+	RejectsOrders@rejectorders:
+		RequiresCondition: reject-orders
+		RemoveOrders: true
+	ScriptTags:        
+
+^BotLogicRepairing:
+	ExternalCondition@startrepair:
+		Condition: start-repair
+	RejectsOrders@rejectOnRepairPad:
+		RequiresCondition: repairing
+	GrantConditionOnDamageState@fullyrepaird:
+		Condition: full-hp
+		ValidDamageStates: Undamaged
+	GrantCondition:
+		RequiresCondition: start-repair && !full-hp
+		Condition: repairing
+	ChangesHealth@BotRepairing:
+		Step: 800
+		Delay: 10
+		StartIfBelow: 105
+		RequiresCondition: start-repair
+	ScriptTags:
+
+^GainsExperience:
+	ChangesHealth@ELITE:
+		Step: 0
+		PercentageStep: 4
+		Delay: 125
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: rank-veteran >= 3
+
+^TemporaryCloak:
+	ExternalCondition@temporeryclock:
+		Condition: temporary-clock
+	Cloak@temporeryclock:
+		RequiresCondition: temporary-clock
+		UncloakOn: Attack, Load, Unload, Infiltrate, Demolish, Dock, Damage, Heal
+		InitialDelay: 100
+		CloakDelay: 160
+		IsPlayerPalette: true
+		CloakStyle: Alpha
+
+^WormSlowing:
+	ExternalCondition@wormIsnear:
+		Condition: worm-attack
+	ExternalCondition@stop:
+		Condition: notmobile
+	SpeedMultiplier@worm_eating:
+		Modifier: 55
+		RequiresCondition: worm-attack
+	Mobile:
+		PauseOnCondition: notmobile
+	ChangesHealth@wormattack:
+		PercentageStep: -2
+		Delay: 4
+		StartIfBelow: 110
+		RequiresCondition: worm-attack
+		DamageTypes: BulletDeath
+
+^SandStorm:
+	ExternalCondition@sandStorm:
+		Condition: sandstorm-dmg
+	ChangesHealth@sandStorm:
+		RequiresCondition: sandstorm-dmg
+		Step: -300
+		StartIfBelow: 101
+		DamageTypes: BulletDeath
+
+^Infantry:
+#	Inherits@SandStorm: ^SandStorm
+	Inherits@WormSlowing: ^WormSlowing
+	Inherits@TemporaryCloak: ^TemporaryCloak
+	Inherits@Healing: ^InfantryHealing
+	Inherits@BotInMission: ^BotRejectOrders
+	GrantRandomCondition:
+		Conditions: inf-cond01, inf-cond02, inf-cond03
+	Crushable:
+		CrushSound: CRUSH1.WAV
+		RequiresCondition: inf-cond01
+	Crushable@2:
+		CrushSound: audio/crush_guy_2.wav
+		RequiresCondition: inf-cond02
+	Crushable@3:
+		CrushSound: audio/crush_guy_4.wav
+		RequiresCondition: inf-cond03
+	Crushable@worm:
+		CrushClasses: worm_dinner
+		WarnProbability: 0
+		CrushedByFriendlies: true
+		CrushSound: audio/EBoD_normal_dying_3.wav
+		RequiresCondition: inf-cond01
+	Crushable@worm2:
+		CrushClasses: worm_dinner
+		WarnProbability: 0
+		CrushedByFriendlies: true
+		CrushSound: CRUSH1.WAV
+		RequiresCondition: inf-cond02
+	Crushable@worm3:
+		CrushClasses: worm_dinner
+		WarnProbability: 0
+		CrushedByFriendlies: true
+		CrushSound: audio/EBoD_normal_dying_3.wav
+		RequiresCondition: inf-cond03
+	WithDeathAnimation:
+		DeathTypes:
+			FireDeath: 6, 3
+			BulletDeath: 4
+	DeathSounds@choke:
+		Voice: Choke
+		DeathTypes: ChokeDeath
+		VolumeMultiplier: 0.8
+	DeathSounds@burn:
+		Voice: Burn
+		DeathTypes: FireDeath
+		VolumeMultiplier: 0.8
+	ExternalCondition@slowed:
+		Condition: slowed
+	WithColoredOverlay@slowed:
+		Color: 8093FF5E
+		RequiresCondition: slowed
+	SpeedMultiplier@slowed:
+		Modifier: 50
+		RequiresCondition: slowed
+	Demolishable@wormCrush:
+		RequiresCondition: worm-attack
+
+^Vehicle:
+#	Inherits@SandStorm: ^SandStorm
+	Inherits@WormSlowing: ^WormSlowing
+	Inherits@TemporaryCloak: ^TemporaryCloak
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@BotInMission: ^BotRejectOrders
+	Inherits@BotRepair: ^BotLogicRepairing
+	ExternalCondition:
+		Condition: unit-capturated
+	RevealsShroud:
+		RevealGeneratedShroud: false
+		RequiresCondition: !unit-capturated
+	RevealsShroud@whileCaptured:
+		Range: 3c512
+		RequiresCondition: unit-capturated
+	Demolishable:
+		Condition: being-demolished
+	SpeedMultiplier@HEAVYDAMAGE:
+		RequiresCondition: heavy-damage
+		Modifier: 75
+	Crushable:
+		CrushClasses: vehicle
+		WarnProbability: 0
+		CrushedByFriendlies: true
+		CrushSound: WORM.WAV
+	AmbientSound@saboteurCharge:
+		SoundFiles: audio/explodeSaboteurEmperor02.wav
+		RequiresCondition: being-demolished
+	Targetable:
+		TargetTypes: Ground, Vehicle, C4
+		RequiresCondition: !unit-capturated
+	Targetable@CAPTURED:
+		TargetTypes: CapturedUnit, Ground, Vehicle, C4
+		RequiresCondition: unit-capturated
+	FireWarheadsOnDeath@sabotuerdemolition:
+		RequiresCondition: being-demolished
+		Type: CenterPosition
+		Weapon: PlasmaExplosion
+		EmptyWeapon: PlasmaExplosion
+	AttractsWorms:
+		Intensity: 30
+		Falloff: 100, 95, 70, 42, 22, 10, 4, 1, 0
+
+^Tank:
+	GrantConditionOnDamageState@HEAVY:
+		ValidDamageStates: Critical
+	AttractsWorms:
+		Intensity: 70
+		Falloff: 100, 95, 70, 42, 22, 10, 4, 1, 0
+
+^combat_tank:
+	Inherits: ^Tank
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotVTI
+	GrantRandomCondition:
+		Conditions: Husk01, Husk02, Husk03, Husk04
+	Buildable:
+		Queue: Armor
+		BuildDuration: 432
+		Description: main-battle-tank
+	Valued:
+		Cost: 700
+	Health:
+		HP: 22000
+	Mobile:
+		Speed: 72
+		TurnSpeed: 20
+	Armor:
+		Type: heavy
+	Turreted:
+		TurnSpeed: 20
+		RealignDelay: 0
+	Armament:
+		Weapon: 80mm_A
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 256,0,0
+		MuzzleSequence: muzzle
+	RevealsShroud:
+		Range: 5c112
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris3, debris_vehicle02, debris_vehicle01
+		Pieces: 0, 2
+		Range: 2c0, 4c0

@@ -1,0 +1,337 @@
+^BaseWorld:
+	Faction@Atreides:
+		Name: Atreides
+		InternalName: atreides
+	Faction@Harkonnen:
+		Name: Harkonnen
+		InternalName: harkonnen
+	Faction@Ordos:
+		Name: Ordos
+		InternalName: ordos
+	Faction@Random:
+		Name: Any
+		InternalName: Random
+		RandomFactionMembers: atreides, harkonnen, ordos
+	Locomotor@FOOT:
+		Name: foot
+		Crushes: crate, spicebloom
+		SharesCell: true
+		TerrainSpeeds:
+			Sand: 100
+			Rock: 100
+			Transition: 100
+			Concrete: 105
+			SpiceSand: 100
+			Spice: 100
+			SpiceBlobs: 60
+			Dune: 80
+			Rough: 80
+	Locomotor@LIGHTVEHICLE:
+		Name: light_vehicle
+		Crushes: crate, spicebloom
+		WaitAverage: 20
+		TerrainSpeeds:
+			Sand: 100
+			Rock: 100
+			Transition: 100
+			Concrete: 125
+			SpiceSand: 100
+			Spice: 100
+			SpiceBlobs: 75
+			Dune: 85
+	Locomotor@VEHICLE:
+		Name: vehicle
+		Crushes: crate, spicebloom
+		TerrainSpeeds:
+			Sand: 100
+			Rock: 100
+			Transition: 100
+			Concrete: 115
+			SpiceSand: 100
+			Spice: 100
+			SpiceBlobs: 80
+			Dune: 70
+	Locomotor@TANK:
+		Name: tank
+		Crushes: crate, infantry, spicebloom
+		TerrainSpeeds:
+			Sand: 100
+			Rock: 100
+			Transition: 100
+			Concrete: 110
+			SpiceSand: 100
+			Spice: 100
+			SpiceBlobs: 90
+			Dune: 60
+	Locomotor@DEVASTATOR:
+		Name: devastator
+		Crushes: crate, infantry, spicebloom, wall, husk
+		TerrainSpeeds:
+			Sand: 100
+			Rock: 100
+			Transition: 100
+			Concrete: 110
+			SpiceSand: 100
+			Spice: 100
+			SpiceBlobs: 100
+			Dune: 50
+	Locomotor@WORMMP:
+		Name: worm_mp
+		Crushes: crate, worm_dinner, spicebloom, vehicle, husk
+		TerrainSpeeds:
+			Sand: 100
+			Dune: 105
+			SpiceSand: 100
+			Spice: 100
+World:
+	LuaScript:
+		Scripts: scripts/scripts.lua, scripts/starport.lua, scripts/atreides_reinforcements.lua, scripts/support_powers.lua, scripts/harkonnen_reinforcements.lua, scripts/ordos_reinforcements.lua, scripts/thumper_mission.lua
+	MissionData:
+		Briefing: \n\n**** Enhanced D2k 1.2 ****\nAdditional Assets by SirCake, Fey, Kipp, N.N.> and Fed2k forum.\nFULL CHANGELOG AT ORA DISCORD.
+	MapOptions:
+		TechLevelDropdownVisible: false
+		TechLevel: unrestricted
+		ShortGameCheckboxVisible: true
+		GameSpeed: fast
+	MapCreeps:
+		CheckboxEnabled: true
+		CheckboxLocked: true
+		CheckboxVisible: false
+	SpawnStartingUnits:
+		StartingUnitsClass: none
+		DropdownDisplayOrder: 70
+	TimeLimitManager:
+		TimeLimitDisplayOrder: 3
+	ScriptLobbyDropdown@WormsSpawnDelay:
+		ID: WormsSpawnDelay
+		Label: spawn-worms
+		Description: spawn-worms-options
+		Default: 10
+		Values:
+			5: after-5-min
+			10: after-10-min
+			15: after-15-min
+			0: Never
+		Locked: false
+		Visible: true
+		DisplayOrder: 30
+	StartingUnits@lightatreides:
+		Class: light
+		ClassName: mcv-carryall
+		Factions: atreides
+		BaseActor: mcv
+		SupportActors: carryall.support
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	StartingUnits@lightharkonnen:
+		Class: light
+		ClassName: mcv-carryall
+		Factions: harkonnen
+		BaseActor: mcv
+		SupportActors: carryall.support
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	StartingUnits@lightordos:
+		Class: light
+		ClassName: mcv-carryall
+		Factions: ordos
+		BaseActor: mcv
+		SupportActors: carryall.support
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	StartingUnits@heavyatreides:
+		Class: heavy
+		ClassName: mcv-2x-carryall
+		Factions: atreides
+		BaseActor: mcv
+		SupportActors: carryall.support, carryall.support
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	StartingUnits@heavyharkonnen:
+		Class: heavy
+		ClassName: mcv-2x-carryall
+		Factions: harkonnen
+		BaseActor: mcv
+		SupportActors: carryall.support, carryall.support
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	StartingUnits@heavyordos:
+		Class: heavy
+		ClassName: mcv-2x-carryall
+		Factions: ordos
+		BaseActor: mcv
+		SupportActors: carryall.support, carryall.support
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	FlashPostProcessEffect:
+		Type: flash
+		Color: E2DD8F4D
+	TerrainLighting:
+	WeatherOverlay:
+		ParticleSize: 1,2
+		FadeInTicks: 500
+		FadeOutTicks: 0
+		InitialParticlePercentage: 100
+		ScatterDirection: -2,2
+		ParticleColors: e8c297, f7d7b2, fae0c3, edcda8, dbb68a, cca576
+		RequiresCondition: active-sand-storm
+	ExternalCondition@weather:
+		Condition: active-sand-storm
+	SmudgeLayer@RockSmoke:
+		Type: RockCrater_with_smoke
+		Sequence: rockcraters
+		SmokeChance: 100
+		SmokeImage: smoke_m
+		SmokeSequences: smokeFromRA01loop
+	SmudgeLayer@SandSmoke:
+		Type: SandCrater_with_smoke
+		Sequence: sandcraters
+		SmokeChance: 100
+		SmokeImage: smoke_m
+		SmokeSequences: smokeFromRA01loop
+
+Player:
+	DeveloperMode:
+	Shroud:
+		ExploredMapCheckboxEnabled: true
+		FogCheckboxEnabled: true
+		FogCheckboxLocked: true
+	LobbyPrerequisiteCheckbox@AUTOCONCRETE:
+		Enabled: True
+		Locked: true
+	ExternalCondition@frigateCheck:
+		Condition: frigate-not-empty
+	ProvidesPrerequisite@frigatenotempty:
+		Prerequisite: frigate.not_empty
+		RequiresCondition: frigate-not-empty
+	ExternalCondition@frigatefull:
+		Condition: frigate-full
+	ExternalCondition@shipmentInProgress:
+		Condition: shipment-in-progress
+	ProvidesPrerequisite@shipmentInProgress:
+		Prerequisite: shipment-in-progress
+		RequiresCondition: shipment-in-progress
+	ExternalCondition@stockDepletedHarvester:
+		Condition: stock-depleted-harvester
+	ProvidesPrerequisite@stockDepletedHarvester:
+		Prerequisite: stock-depleted-harvester
+		RequiresCondition: stock-depleted-harvester
+	ExternalCondition@stockDepletedTrike:
+		Condition: stock-depleted-trike
+	ProvidesPrerequisite@stockDepletedTrike:
+		Prerequisite: stock-depleted-trike
+		RequiresCondition: stock-depleted-trike
+	ExternalCondition@stockDepletedRaider:
+		Condition: stock-depleted-raider
+	ProvidesPrerequisite@stockDepletedRaider:
+		Prerequisite: stock-depleted-raider
+		RequiresCondition: stock-depleted-raider
+	ExternalCondition@stockDepletedQuad:
+		Condition: stock-depleted-quad
+	ProvidesPrerequisite@stockDepletedQuad:
+		Prerequisite: stock-depleted-quad
+		RequiresCondition: stock-depleted-quad
+	ExternalCondition@stockDepletedHeavyQuad:
+		Condition: stock-depleted-heavy_quad
+	ProvidesPrerequisite@stockDepletedHeavyQuad:
+		Prerequisite: stock-depleted-heavy_quad
+		RequiresCondition: stock-depleted-heavy_quad
+	ExternalCondition@stockDepletedDustrider:
+		Condition: stock-depleted-dustrider
+	ProvidesPrerequisite@stockDepletedDustrider:
+		Prerequisite: stock-depleted-dustrider
+		RequiresCondition: stock-depleted-dustrider
+	ExternalCondition@stockDepletedCombatTankA:
+		Condition: stock-depleted-combat_tank_a
+	ProvidesPrerequisite@stockDepletedCombatTankA:
+		Prerequisite: stock-depleted-combat_tank_a
+		RequiresCondition: stock-depleted-combat_tank_a
+	ExternalCondition@stockDepletedCombatTankH:
+		Condition: stock-depleted-combat_tank_h
+	ProvidesPrerequisite@stockDepletedCombatTankH:
+		Prerequisite: stock-depleted-combat_tank_h
+		RequiresCondition: stock-depleted-combat_tank_h
+	ExternalCondition@stockDepletedCombatTankO:
+		Condition: stock-depleted-combat_tank_o
+	ProvidesPrerequisite@stockDepletedCombatTankO:
+		Prerequisite: stock-depleted-combat_tank_o
+		RequiresCondition: stock-depleted-combat_tank_o
+	ExternalCondition@stockDepletedSiegeTank:
+		Condition: stock-depleted-siege_tank
+	ProvidesPrerequisite@stockDepletedSiegeTank:
+		Prerequisite: stock-depleted-siege_tank
+		RequiresCondition: stock-depleted-siege_tank
+	ExternalCondition@stockDepletedMissileTank:
+		Condition: stock-depleted-missile_tank
+	ProvidesPrerequisite@stockDepletedMissileTank:
+		Prerequisite: stock-depleted-missile_tank
+		RequiresCondition: stock-depleted-missile_tank
+	ExternalCondition@stockDepletedMcv:
+		Condition: stock-depleted-mcv
+	ProvidesPrerequisite@stockDepletedMcv:
+		Prerequisite: stock-depleted-mcv
+		RequiresCondition: stock-depleted-mcv
+	ExternalCondition@stockDepletedCarryall:
+		Condition: stock-depleted-carryall
+	ProvidesPrerequisite@stockDepletedCarryall:
+		Prerequisite: stock-depleted-carryall
+		RequiresCondition: stock-depleted-carryall
+	ClassicProductionQueue@Infantry:
+		BuildTimeSpeedReduction: 100, 80, 60, 50
+	ClassicProductionQueue@Building:
+		BuildTimeSpeedReduction: 100, 75, 50
+	ClassicProductionQueue@Armor:
+		BuildTimeSpeedReduction: 100, 75, 50
+	ClassicProductionQueue@Aircraft:
+		BuildTimeSpeedReduction: 100, 75, 50
+	ClassicProductionQueue@Starport:
+		Type: Starport
+		DisplayOrder: 4
+		DisallowPaused: true
+		BuildDurationModifier: 100
+		BlockedAudio: NoRoom
+		PayUpFront: true
+		BlockedTextNotification: no-room-for-new-unit
+		QueuedAudio: Silent
+		OnHoldAudio: Silent
+		CancelledAudio: Silent
+		QueueLimit: 6
+	PlaceBuilding:
+		ToggleVariantKey: ToggleVariant
+	ProductionIconOverlayManager:
+		Image: iconchevrons
+		Sequence: veteran
+		Type: veteran
+	ProvidesPrerequisite@FrigateFULL:
+		RequiresCondition: frigate-full
+		Prerequisite: frigate.full
+	ProductionIconOverlayManager@StarportsOverlay1:
+		Image: choam_unit_number
+		Sequence: 1
+		Type: 1
+	ProductionIconOverlayManager@StarportsOverlay2:
+		Image: choam_unit_number
+		Sequence: 2
+		Type: 2
+	ProductionIconOverlayManager@StarportsOverlay3:
+		Image: choam_unit_number
+		Sequence: 3
+		Type: 3
+	ProductionIconOverlayManager@StarportsOverlay4:
+		Image: choam_unit_number
+		Sequence: 4
+		Type: 4
+	ProductionIconOverlayManager@StarportsOverlay5:
+		Image: choam_unit_number
+		Sequence: 5
+		Type: 5
+	ProductionIconOverlayManager@StarportsOverlay6:
+		Image: choam_unit_number
+		Sequence: 6
+		Type: 6
+
+wormspawner:
+	ExternalCondition:
+		Condition: worm-spam-delayed
+	ActorSpawner:
+		RequiresCondition: worm-spam-delayed

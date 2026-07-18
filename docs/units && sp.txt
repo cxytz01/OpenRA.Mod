@@ -1,0 +1,94 @@
+这是我计划的，openra d2k的三个faction
+
+Atreides - 特点，多才多艺，数值平衡
+一.Infantry
+ - public: engineer, light_infantry, trooper(可对空)
+ - unique: grenadier
+
+二.Light Vehicles
+  - normal: Sand Runner(前文提及的hunter改名), Missile quad
+
+三.Heavy Vehicles
+  - public: Spice Harvester, Atreides Combat Tank, Mobile Construction Vehicle
+  - update heavy factor: Siege Tank
+  - technology 1: Missile Tank(优先地面有威胁的车辆、其次攻击Ornithopter、然后攻击Harvester、最后carryall、最后frigate)
+  - technology 2: Sonic Tank
+  
+四.Aircraft
+  - Carryall, Ornithopter(可以在aircraft内建造，可以控制，使用重力航弹)
+ 
+五.Support power
+ - infantry: fremen, officer, worm rider。
+ - skill: Airstrike
+ 
+六.Passive bonus
+   None
+   
+七.Building
+   unique: Sietch
+ 
+
+Ordos - 特点，速度取胜，出其不意，高风险、高收益
+一.Infantry
+ - public: engineer, light_infantry, trooper(可对空)
+ - unique: worm_thumper(deploy时进入隐形，一段时间后召唤1只沙虫)
+
+二.Light Vehicles
+  - normal: Raider Trike, Missile Quad
+  - technology 1: Stealth Raider Trike, crawler(具备基础攻击能力，可以运送saboteur)
+
+三.Heavy Vehicles
+  - public: Spice Harvester, Ordos Combat Tank, Mobile Construction Vehicle
+  - update heavy factor: Flamer(替代siege tank，对light vehicle更具威胁)
+  - technology 1: -
+  - technology 2: Deviator(优先地面有威胁的车辆、其次攻击Ornithopter、然后攻击carryall、最后Harvester、最后frigate)
+
+四.Aircraft
+  - Carryall
+
+五.Support power
+ - infantry: saboteur(high tech factor update之后解锁)。
+ - air force: Smugglers Dropship
+   一艘frigate：包含1*Devastator、1*Sonic Tank、1*Missile tank、1*Siege tank、1*Flamer。
+   一艘carryall：包含3*light_infantry、1*trooper、1*grenadier。
+   一艘carryall：包含1*Heavy quad, 2*Raider Trike, 2*Sand Runner。
+   经ds研判无法做到仅能投放到有视野的地方，那么pvp时会导致投放到玩家家里，那么需要设置为长CD。需要升级smuggler starport解锁，升级金额是这些部队的总价值。升级时间和CD时间为生产frigate中所有tank的总时间，按两个heavy factor时的生产时间计算。
+ - skill: Chaos bomb
+ 
+六.Passive bonus
+   Smugglers starport
+
+七.Building
+   unique: Smugglers starport
+ 
+
+Harkonnen - 特点，适合正面战场，重火力碾压
+一.Infantry
+ - public: engineer, light_infantry, trooper(可对空)
+ - unique: sardaukar
+
+二.Light Vehicles
+   - normal: Trike
+   - technology 1: Heavy quad
+
+三.Heavy Vehicles
+  - public: Spice Harvester, Harkonnen Combat Tank, Mobile Construction Vehicle
+  - update heavy factor: Siege Tank
+  - technology 1: Missile Tank(优先地面有威胁的车辆、其次攻击Ornithopter、然后攻击Harvester、最后carryall、最后frigate)
+  - technology 2: Devastator
+  
+四.Aircraft
+  - Carryall
+
+五.Support power
+   - skill: Death Hand，Rally sardaukar(需要是非常强大的buf技能，弥补sardaukar打不过light infrantry的不足)
+
+六.Passive bonus
+   None
+   
+七.Building
+   unique: palace corrino
+   
+
+
+中立单位：frigate -- 不可被Deviator转换

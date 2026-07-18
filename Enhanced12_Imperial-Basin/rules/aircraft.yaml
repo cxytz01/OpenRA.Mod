@@ -1,0 +1,510 @@
+# aircraft.yaml - generated from units.yaml
+
+carryall.reinforce:
+	Inherits: ^Plane
+	Inherits@SandStorm: ^SandStorm
+	Valued:
+		Cost: 1000
+	Health:
+		HP: 20000
+	Armor:
+		Type: light
+	Aircraft:
+		CruiseAltitude: 2160
+		CruisingCondition: cruising
+		Speed: 144
+		TurnSpeed: 16
+		LandableTerrainTypes: Sand, Rock, Transition, Spice, SpiceSand, Dune, Concrete
+		Repulsable: False
+		AirborneCondition: airborne
+		CanSlide: True
+		VTOL: true
+		IdleTurnSpeed: 4
+		IdleSpeed: 115
+		MinAirborneAltitude: 400
+		TakeoffSounds: audio/adv_carryall_takeoff_1.wav
+		LandingSounds: audio/adv_carryall_land_1.wav
+	GrantConditionOnDamageState@HEAVY:
+		Condition: heavy-damage
+	Cloak:
+	HiddenUnderFog:
+		AlwaysVisibleRelationships: Ally
+	FloatingSpriteEmitter@smoke:
+		RequiresCondition: heavy-damage
+		Image: smoke3
+		Lifetime: 20, 22
+		Speed: 15
+		Gravity: 10
+		SpawnFrequency: 2, 7
+		RandomFacing: true
+		RandomRate: 4
+		Offset: 300,383,0
+		TurnRate: 3
+		Duration: 500
+	FireProjectilesOnDeath@derbis:
+		Weapons: Debris, Debris2, debris_vehicle01, debris_vehicle02
+		Pieces: 1, 3
+		Range: 1c0, 6c0
+	FireProjectilesOnDeath@derbisExplosions:
+		Weapons: DeathHandClusterDebris
+		Pieces: 1 , 3
+		Range: 1c0, 5c0
+	FireProjectilesOnDeath@derbisExplosions2:
+		Weapons: DeathHandClusterDebris
+		Pieces: 0 , 2
+		Range: 1c0, 5c0
+
+carryall:
+	Inherits@SelectableEco: ^SelectableSupportUnit
+	-Interactable:
+	-Cloak:
+	Buildable:
+		BuildPaletteOrder: 101
+		Description: carryall-manual.description
+	Selectable:
+		Priority: 5
+	GrantConditionOnBotOwner@BOTOWNER:
+		Condition: bot-owned
+		Bots: omnius, vidious, gladius
+	GrantConditionOnDeploy@AUTO:
+		DeployedCondition: manual
+		CanDeployOnRamps: true
+		SkipMakeAnimation: true
+	RejectsOrders@botNoControl:
+		RequiresCondition: bot-owned
+	AutoCarryall:
+		AutoCarryCondition: !manual
+		CarryCondition: loaded
+		LocalOffset: 0, 0, -128
+	Repairable:
+		RepairActors: repair_pad
+	AmbientSound:
+		SoundFiles: audio/carryallSound(2).wav
+		RequiresCondition: cruising
+	BlocksProjectiles:
+		RequiresCondition: airborne
+	RevealOnDeath:
+	RevealsShroud:
+		Range: 0c512
+		Type: CenterPosition
+		RequiresCondition: loaded
+	TemporaryOwnerManager:
+
+carryall.support:
+	Inherits: carryall.reinforce
+	-Cloak:
+	-Carryall:
+	-Buildable:
+	AutoCarryall:
+		LocalOffset: 0, 0, -128
+
+carryall.transport:
+	Inherits: carryall
+	-Buildable:
+	Cargo:
+		MaxWeight: 10
+		Types: Infantry, Vehicle
+
+ornithopter:
+	Inherits@SandStorm: ^SandStorm
+	Inherits@SelectableCombat: ^SelectableCombatUnit
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	-AttackBomber:
+	-Armament:
+	-Interactable:
+	-RejectsOrders:
+	Valued:
+		Cost: 1300
+	Health:
+		HP: 10000
+	Armor:
+		Type: light
+	TemporaryOwnerManager:
+	ExternalCondition:
+		Condition: unit-capturated
+	Aircraft:
+		MinAirborneAltitude: 500
+		AirborneCondition: airborne
+		CruiseAltitude: 1920
+		IdleSpeed: 90
+		IdleTurnSpeed: 4
+		TurnSpeed: 6
+		Repulsable: true
+		Voice: Move
+	AttackAircraft:
+		AttackType: Strafe
+		StrafeRunLength: 4c0
+		Voice: Attack
+		PersistentTargeting: false
+		AbortOnResupply: true
+	GrantConditionOnDamageState@HEAVY:
+		Condition: heavy-damage
+	Targetable@AIRBORNE:
+		TargetTypes: Air
+		RequiresCondition: airborne
+	Targetable@CAPTURED:
+		TargetTypes: CapturedUnit, Air
+		RequiresCondition: unit-capturated
+	Repairable:
+		RepairActors: repair_pad
+	HitShape:
+		Type: Circle
+			Radius: 32
+	RevealOnFire:
+		Duration: 90
+		Radius: 5c112
+	RevealsShroud:
+		Range: 7c0
+		Type: CenterPosition
+		RequiresCondition: !unit-capturated
+	RevealsShroud@whileCaptured:
+		Range: 3c512
+		Type: CenterPosition
+		RequiresCondition: unit-capturated
+	Voiced:
+		VoiceSet: AircraftVoice
+	RenderSprites:
+		Image: ornithopter
+	AmbientSound:
+		SoundFiles: audio/ornithopterMotor01.wav
+	FloatingSpriteEmitter@smoke:
+		RequiresCondition: heavy-damage
+		Image: smoke3
+		Lifetime: 60, 90
+		Speed: 12
+		Gravity: 30
+		SpawnFrequency: 3, 6
+		RandomFacing: true
+		RandomRate: 12
+		Offset: 200,-150,0
+		TurnRate: 4
+		Duration: 1000
+	FireProjectilesOnDeath@derbis:
+		Weapons: Debris, Debris2, debris_vehicle01
+		Pieces: 1, 3
+		Range: 0c512, 2c0
+	SpawnActorOnDeath:
+		Actor: ornithopter.husk
+
+ornithopter.sound:
+	Inherits: ornithopter
+	Buildable:
+		Queue: Aircraft
+		Prerequisites: research_centre, ~hightech.atreides
+		BuildDuration: 550
+		BuildDurationModifier: 100
+		BuildPaletteOrder: 150
+		Description: sonic-orni.description
+	Tooltip:
+		Name: sonic-ornithopter
+	Valued:
+		Cost: 1250
+	Health:
+		HP: 10500
+	Aircraft:
+		Speed: 130
+	AttackAircraft:
+		FacingTolerance: 256
+		PersistentTargeting: false
+	Armament@primary:
+		Weapon: OrnithopterSound
+		LocalOffset: -120,0,0
+		ForceTargetRelationships: Enemy, Ally, Neutral
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+
+ornithopter.laser:
+	Inherits: ornithopter
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotATVI
+	Buildable:
+		Queue: Aircraft
+		Prerequisites: research_centre, ~hightech.ordos
+		BuildDuration: 600
+		BuildDurationModifier: 100
+		BuildPaletteOrder: 151
+		Description: laser-orni.description
+	Tooltip:
+		Name: laser-ornithopter
+	Valued:
+		Cost: 1300
+	Health:
+		HP: 11000
+	Aircraft:
+		Speed: 147
+		IdleSpeed: 0
+#		CanHover: true
+	AttackAircraft:
+		AttackType: Default
+		FacingTolerance: 512
+		PersistentTargeting: false
+	Armament@primary:
+		Weapon: OrnithopterLaser
+		LocalOffset: -120,0,0
+		ForceTargetRelationships: Enemy, Ally, Neutral
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+
+ornithopter.bomber:
+	Inherits: ornithopter
+	-Selectable:
+	-ActorLostNotification:
+	Interactable:
+	Tooltip:
+		Name: bomber-ornithopter
+	Health:
+		HP: 17000
+	Aircraft:
+		Speed: 155
+		Repulsable: false
+	AttackAircraft:
+		AttackType: Strafe
+		StrafeRunLength: 6c0
+		OpportunityFire: false
+		ForceFireIgnoresActors: true
+		Voice: Attack
+		FacingTolerance: 512
+		PersistentTargeting: false
+		AbortOnResupply: true
+	Armament:
+		Weapon: OrnithopterBomb
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 18
+		AmmoCondition: ammo
+	RejectsOrders@botNoControl:
+		RequiresCondition: bot-owned
+
+ornithopter.deviator:
+	Inherits: ornithopter
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotATVI
+	-Selectable:
+	-ActorLostNotification:
+	Interactable:
+	RejectsOrders:
+	Tooltip:
+		Name: deviator-ornithopter
+	Health:
+		HP: 16000
+	Aircraft:
+		Speed: 150
+		TurnSpeed: 3
+		IdleTurnSpeed: 2
+	AttackAircraft:
+		FacingTolerance: 256
+		PersistentTargeting: false
+	GrantCondition@out-of-ammo:
+		Condition: out-of-ammo
+		RequiresCondition: !ammo
+	ExternalCondition@engage-timer:
+		Condition: engage-timer
+	Armament@primary:
+		Weapon: clusterDeviatorMissile
+		LocalOffset: -120,0,0, -120,-300,0, -120,300,0
+		ForceTargetRelationships: Enemy, Ally, Neutral
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	RejectsOrders@botNoControl:
+		RequiresCondition: bot-owned
+	KillsSelf@outOfAmmo:
+		GrantsCondition: out-of-ammo
+		Delay: 13
+		RequiresCondition: out-of-ammo
+	KillsSelf@engageTimer:
+		Delay: 925
+		RequiresCondition: engage-timer
+	SpawnActorOnDeath@c4:
+		Actor: ornithopter_c4.husk
+
+frigate.harkonnen_fortress:
+	Inherits: ^Plane
+	Inherits@SandStorm: ^SandStorm
+	Inherits@SelectableCombat: ^SelectableCombatUnit
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	-Interactable:
+	RenderSprites:
+		Image: frigate.harkonnen
+	Buildable:
+		Queue: Aircraft
+		Prerequisites: research_centre, ~hightech.harkonnen
+		BuildPaletteOrder: 152
+		BuildDuration: 1700
+		Description: air-fortress.description
+	Tooltip:
+		Name: harkonnen-air-fortress
+	Valued:
+		Cost: 3370
+	Health:
+		HP: 60000
+	Armor:
+		Type: light
+	Voiced:
+		VoiceSet: AircraftVoice
+	Turreted@ground_left:
+		Turret: ground_left
+		TurnSpeed: 25
+		Offset: 0,-800,-250
+	Turreted@ground_right:
+		Turret: ground_right
+		TurnSpeed: 25
+		Offset: 0,800,-250
+	Turreted@aa_center:
+		Turret: aa_center
+		TurnSpeed: 30
+		Offset: 0,0,250
+	AttackTurreted:
+		Armaments: ground_left, ground_right, aa_center
+		PersistentTargeting: false
+		Turrets: ground_left, ground_right, aa_center
+	Armament@ground_L:
+		Name: ground_left
+		Weapon: DevBulletBurst
+		LocalOffset: -100,0,0
+		PauseOnCondition: !ammo
+		Turret: ground_left
+	Armament@ground_R:
+		Name: ground_right
+		Weapon: DevBulletBurst
+		LocalOffset: -100,0,0
+		PauseOnCondition: !ammo
+		Turret: ground_right
+	Armament@aa_Mid:
+		Name: aa_center
+		Weapon: AirShockCannon
+		LocalOffset: -100,0,0
+		Turret: aa_center
+		MuzzleSequence: muzzle
+	Aircraft:
+		IdleBehavior: None
+		CruisingCondition: cruising
+		Speed: 30
+		TurnSpeed: 3
+		IdleTurnSpeed: 3
+		IdleSpeed: 20
+		Repulsable: true
+		CruiseAltitude: 2048
+		VTOL: true
+		CanHover: true
+		CanSlide: true
+		CanForceLand: false
+		LandableTerrainTypes: Sand, Rock, Transition, Spice, SpiceSand, Dune, Concrete
+		TakeoffSounds: audio/EITSTakeOff.wav
+		LandingSounds: audio/frigate_land.wav
+		Voice: Move
+	WithMuzzleOverlay:
+	AmmoPool:
+		Ammo: 4
+		Armaments: ground_left, ground_right
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Count: 1
+		Delay: 85
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		PipCount: 4
+		RequiresCondition: ammo
+	Targetable@AIRBORNE:
+		TargetTypes: Air
+		RequiresCondition: cruising
+	Targetable@CAPTURED:
+		TargetTypes: CapturedUnit, Air
+		RequiresCondition: unit-capturated
+	GrantConditionOnDamageState@HEAVY:
+		Condition: heavy-damage
+	Repairable:
+		RepairActors: repair_pad
+	RevealsShroud:
+		Range: 5c0
+		Type: CenterPosition
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	FloatingSpriteEmitter@smoke:
+		RequiresCondition: heavy-damage
+		Image: smoke3
+		Lifetime: 120, 180
+		Speed: 18
+		Gravity: 10
+		SpawnFrequency: 1, 1
+		RandomFacing: true
+		RandomRate: 8
+		Offset: 0,383,0
+		TurnRate: 6
+		Duration: 1200
+	FloatingSpriteEmitter@smoke2:
+		RequiresCondition: heavy-damage
+		Image: smoke4
+		Lifetime: 100, 150
+		Speed: 14
+		Gravity: 10
+		SpawnFrequency: 1, 1
+		RandomFacing: true
+		RandomRate: 6
+		Offset: 200,-200,0
+		TurnRate: 5
+		Duration: 1200
+	FloatingSpriteEmitter@smoke3:
+		RequiresCondition: heavy-damage
+		Image: smoke3
+		Lifetime: 80, 130
+		Speed: 10
+		Gravity: 10
+		SpawnFrequency: 1, 2
+		RandomFacing: true
+		RandomRate: 10
+		Offset: -150,0,0
+		TurnRate: 7
+		Duration: 1000
+	FireProjectilesOnDeath@derbis:
+		Weapons: Debris, Debris2, debris_vehicle01
+		Pieces: 1, 3
+		Range: 0c512, 2c0
+	AmbientSound:
+		SoundFiles: audio/frigate_new2.wav
+		RequiresCondition: cruising
+	SpawnActorOnDeath@CRUISING:
+		Actor: frigate.husk
+		RequiresCondition: cruising
+	SpawnActorOnDeath@LANDING:
+		Actor: frigate.huskvtol
+		RequiresCondition: !cruising
+	TemporaryOwnerManager:
+	ExternalCondition:
+		Condition: unit-capturated
+
+frigate_choam:
+	Inherits: carryall.reinforce
+	-Cloak:
+	Health:
+		HP: 57000
+	RejectsOrders:
+	RenderSprites:
+		Image: frigate
+	Cargo:
+		MaxWeight: 20
+	Aircraft:
+		IdleBehavior: LeaveMapAtClosestEdge
+		Speed: 130
+		TurnSpeed: 4
+		Repulsable: False
+		MaximumPitch: 20
+		CruiseAltitude: 2048
+		VTOL: true
+		CanHover: true
+		CanSlide: true
+		TakeoffSounds: audio/EITSTakeOff.wav
+		LandingSounds: audio/frigate_land.wav
+	ProximityExternalCondition:
+		Condition: frigate-proximity-influence
+		Range: 6c0
+	AmbientSound:
+		SoundFiles: audio/frigate_new2.wav
+		RequiresCondition: cruising
+	SpawnActorOnDeath@CRUISING:
+		Actor: frigate.husk
+		RequiresCondition: cruising
+	SpawnActorOnDeath@LANDING:
+		Actor: frigate.huskvtol
+		RequiresCondition: !cruising
