@@ -1,0 +1,16 @@
+# Backup files
+*.bak
+*.bak2
+*.bak3
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+Desktop.ini

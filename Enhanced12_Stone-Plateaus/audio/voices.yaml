@@ -1,0 +1,68 @@
+GenericVoice:
+	DefaultVariant: .AUD
+	Variants:
+		atreides: .WAV
+		harkonnen: .WAV
+		ordos: .WAV
+	Voices:
+		Choke: audio/choke_dying_2, audio/choke_dying_6
+		Burn: audio/burn_dying_1, audio/burn_dying_2, audio/burn_dying_6
+
+InfantryVoice:
+	DefaultVariant: .AUD
+	Variants:
+		atreides: .WAV
+		harkonnen: .WAV
+		ordos: .WAV
+	Voices:
+		Choke: audio/choke_dying_2, audio/choke_dying_6
+		Burn: audio/burn_dying_1, audio/burn_dying_2, audio/burn_dying_6, KILLGUY5,KILLGUY6,KILLGUY7
+	DisablePrefixes: Die, Choke, Burn
+	DisableVariants: Select, Action, Guard
+
+EngineerVoice:
+	DefaultVariant: .AUD
+	Variants:
+		atreides: .WAV
+		harkonnen: .WAV
+		ordos: .WAV
+	Voices:
+		Choke: audio/choke_dying_2, audio/choke_dying_6
+		Burn: audio/burn_dying_1, audio/burn_dying_2, audio/burn_dying_6
+	DisablePrefixes: Die, Choke, Burn
+	DisableVariants: Select, Action, Guard
+
+FremenVoice:
+	DefaultVariant: .AUD
+	Variants:
+		atreides: .WAV
+		harkonnen: .WAV
+		ordos: .WAV
+	Voices:
+		Choke: audio/choke_dying_2, audio/choke_dying_6
+		Burn: audio/burn_dying_1, audio/burn_dying_2, audio/burn_dying_6, KILLGUY5,KILLGUY6,KILLGUY7
+	DisablePrefixes: Select, Action, Die, Choke, Burn
+
+SaboteurVoice:
+	DefaultVariant: .AUD
+	Variants:
+		atreides: .WAV
+		harkonnen: .WAV
+		ordos: .WAV
+	Voices:
+		Choke: audio/choke_dying_2, audio/choke_dying_6
+		Burn: audio/burn_dying_1, audio/burn_dying_2, audio/burn_dying_6
+	DisablePrefixes: Die, Choke, Burn, Select, Action, Die
+
+AircraftVoice:
+	DefaultVariant: .AUD
+	Prefixes:
+		atreides: A
+		harkonnen: H
+		ordos: O
+	Voices:
+		Select: _VSEL1,_VSEL2,_VSEL3
+		Action: _VCONF1,_VCONF2,_VCONF3
+		Move: _VCONF1,_VCONF2,_VCONF3
+		Attack: _VCONF1,_VCONF2,_VCONF3
+		Guard: I_GUARD

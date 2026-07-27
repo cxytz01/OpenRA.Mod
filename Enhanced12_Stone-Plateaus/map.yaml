@@ -1,0 +1,282 @@
+MapFormat: 12
+
+RequiresMod: d2k
+
+Title: Stone Plateaus - Enhanced 1.2
+Author: Violetnred, BLACKSIR, Xen
+
+Tileset: ARRAKIS
+MapSize: 130,130
+Bounds: 1,1,128,128
+Visibility: Lobby
+Categories: Enhanced_D2k_1.2
+
+Players:
+	PlayerReference@Neutral:
+		Name: Neutral
+		OwnsWorld: True
+		NonCombatant: True
+		Faction: Random
+	PlayerReference@Creeps:
+		Name: Creeps
+		NonCombatant: True
+		Faction: Random
+		Enemies: Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11
+	PlayerReference@Multi0:
+		Name: Multi0
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi1:
+		Name: Multi1
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi2:
+		Name: Multi2
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi3:
+		Name: Multi3
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi4:
+		Name: Multi4
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi5:
+		Name: Multi5
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi6:
+		Name: Multi6
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi7:
+		Name: Multi7
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi8:
+		Name: Multi8
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi9:
+		Name: Multi9
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi10:
+		Name: Multi10
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi11:
+		Name: Multi11
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+
+Actors:
+	Actor0: wormspawner
+		Owner: Neutral
+		Location: 53,55
+	Actor1: wormspawner
+		Owner: Neutral
+		Location: 51,75
+	Actor2: wormspawner
+		Owner: Neutral
+		Location: 72,75
+	Actor3: wormspawner
+		Owner: Neutral
+		Location: 72,55
+	Actor4: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 4,125
+	Actor5: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 32,123
+	Actor6: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 4,98
+	Actor7: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 70,126
+	Actor8: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 45,121
+	Actor9: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 79,120
+	Actor10: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 93,119
+	Actor11: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 124,124
+	Actor12: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 123,95
+	Actor13: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 119,82
+	Actor14: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 126,66
+	Actor15: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 119,49
+	Actor16: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 120,36
+	Actor17: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 124,4
+	Actor18: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 102,5
+	Actor19: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 80,10
+	Actor20: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 56,4
+	Actor21: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 43,14
+	Actor22: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 30,9
+	Actor23: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 4,3
+	Actor24: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 7,33
+	Actor25: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 9,42
+	Actor26: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 3,61
+	Actor27: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 6,82
+	Actor28: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 62,90
+	Actor29: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 36,65
+	Actor30: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 60,37
+	Actor31: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 89,63
+	Actor32: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 30,96
+	Actor33: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 30,31
+	Actor34: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 91,27
+	Actor35: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 92,99
+	Actor36: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 64,51
+	Actor37: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 57,51
+	Actor38: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 49,57
+	Actor39: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 45,67
+	Actor40: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 58,78
+	Actor41: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 64,77
+	Actor42: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 77,61
+	Actor43: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 76,67
+	Actor44: mpspawn
+		Owner: Neutral
+		Location: 17,110
+	Actor45: mpspawn
+		Owner: Neutral
+		Location: 16,17
+	Actor46: mpspawn
+		Owner: Neutral
+		Location: 111,16
+	Actor47: mpspawn
+		Owner: Neutral
+		Location: 110,110
+	Actor48: mpspawn
+		Owner: Neutral
+		Location: 61,110
+	Actor49: mpspawn
+		Owner: Neutral
+		Location: 15,63
+	Actor50: mpspawn
+		Owner: Neutral
+		Location: 62,17
+	Actor51: mpspawn
+		Owner: Neutral
+		Location: 110,65
+	Actor52: mpspawn
+		Owner: Neutral
+		Location: 41,85
+	Actor53: mpspawn
+		Owner: Neutral
+		Location: 44,43
+	Actor54: mpspawn
+		Owner: Neutral
+		Location: 83,42
+	Actor55: mpspawn
+		Owner: Neutral
+		Location: 82,85
+	Actor56: ecology_station
+		Owner: Neutral
+		Location: 63,63
+	Actor57: radar_station
+		Owner: Neutral
+		Location: 60,64
+	Actor58: defensive_post
+		Owner: Neutral
+		Location: 62,62
+	Actor59: crane
+		Owner: Neutral
+		Location: 60,62
+	Actor60: spice_sifter
+		Owner: Neutral
+		Location: 58,64
+	Actor61: mining_rig
+		Owner: Neutral
+		Location: 59,63
+	Actor62: sietch
+		Owner: Neutral
+		Location: 68,70
+
+FluentMessages: fluent/rules.ftl
+Rules: rules/defaults.yaml, rules/infantry.yaml, rules/vehicles.yaml, rules/tanks.yaml, rules/aircraft.yaml, rules/arrakis.yaml, rules/husks.yaml, rules/starport.yaml, rules/structures.yaml, rules/world.yaml, rules/misc.yaml, rules/ai.yaml, palettes/palettes.yaml, rules/tiles.yaml, rules/neutral.yaml
+Sequences: sequences/units.yaml, sequences/tiles.yaml
+Weapons: rules/weapons.yaml, rules/effects.yaml
+Voices: audio/voices.yaml
+Notifications: audio/notifications.yaml
