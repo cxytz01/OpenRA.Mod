@@ -1,0 +1,889 @@
+# husks.yaml - generated from misc.yaml
+
+^Husk:
+	Health:
+		HP: 14000
+
+^VehicleHusk:
+	Inherits: ^Husk
+	Husk:
+		AllowedTerrain: Sand, Rock, Transition, Concrete, Spice, SpiceSand, SpiceBlobs, Dune
+	-HiddenUnderFog:
+	CaptureManager:
+	Capturable:
+		Types: husk
+	TransformOnCapture:
+		ForceHealthPercentage: 15
+	AlwaysVisible:
+	Crushable@husk:
+		CrushClasses: husk
+		CrushedByFriendlies: true
+		CrushSound: EXPLSML1.WAV
+	ChangesHealth:
+		Step: -30
+		StartIfBelow: 101
+		Delay: 4
+	GrantRandomCondition:
+	WithIdleOverlay@Burns:
+		Image: fire_slow
+		Sequence: 1_loop
+		StartSequence: 1_start
+		IsDecoration: True
+		RequiresCondition: decoration1 || decoration3
+	FloatingSpriteEmitter@SMOKE:
+		Image: smoke3
+		Lifetime: 10, 20
+		Speed: 7
+		Gravity: 50
+		SpawnFrequency: 2, 10
+		RandomFacing: true
+		RandomRate: 4
+		Offset: 0, 0, 200
+		TurnRate: 3
+		Duration: 500
+		RequiresCondition: decoration2 || decoration3
+	FireWarheadsOnDeath:
+		Weapon: huskExplode01
+		EmptyWeapon: huskExplode01
+		Chance: 70
+
+mcv.husk:
+	Health:
+		HP: 11000
+	TransformOnCapture:
+		IntoActor: mcv
+	InfiltrateForTransform:
+		IntoActor: mcv
+	Crushable@husk:
+		CrushClasses: husk
+		CrushedByFriendlies: true
+		CrushSound: EXPLSML3.WAV
+
+harvester.husk:
+	Health:
+		HP: 9000
+	TransformOnCapture:
+		IntoActor: harvester
+	InfiltrateForTransform:
+		IntoActor: harvester
+	Crushable@husk:
+		CrushClasses: husk
+		CrushedByFriendlies: true
+		CrushSound: EXPLSML3.WAV
+
+dustrider.husk:
+	Inherits: ^VehicleHusk
+	Health:
+		HP: 6400
+	Tooltip:
+		Name: dustrider-husk-destroyed
+	TransformOnCapture:
+		IntoActor: dustrider
+	InfiltrateForTransform:
+		IntoActor: dustrider
+	Crushable@husk:
+		CrushClasses: husk
+		CrushedByFriendlies: true
+		CrushSound: EXPLSML3.WAV
+
+siege_tank.husk:
+	Inherits: ^VehicleHusk
+	Health:
+		HP: 10000
+	-ThrowsParticle@turret:
+	TransformOnCapture:
+		IntoActor: siege_tank
+	InfiltrateForTransform:
+		IntoActor: siege_tank
+	WithIdleOverlay@Burns:
+		Image: fire
+		StartSequence: 2
+		Sequence: 1
+		IsDecoration: True
+
+missile_tank.husk:
+	Inherits: ^VehicleHusk
+	TransformOnCapture:
+		IntoActor: missile_tank
+	InfiltrateForTransform:
+		IntoActor: missile_tank
+	ThrowsParticle@turret:
+		Anim: turret
+		TurnSpeed: 10
+	ThrowsParticle@debris01:
+		Anim: tankdebris01
+		MaxThrowRange: 2c512
+		MinThrowRange: 1c0
+	ThrowsParticle@debris02:
+		Anim: tankdebris02
+		MinThrowAngle: 80
+		MaxThrowAngle: 200
+	ThrowsParticle@debris03:
+		Anim: tankdebris03
+		MinThrowAngle: 30
+		MaxThrowAngle: 150
+	ThrowsParticle@debris04:
+		Anim: tankdebris04
+
+deviator.husk:
+	Inherits: ^VehicleHusk
+	TransformOnCapture:
+		IntoActor: deviator
+	InfiltrateForTransform:
+		IntoActor: deviator
+	ExternalCondition@timedCondition:
+		Condition: gas-leak-timer
+	FireWarheads:
+		Weapons: DeviatorGas
+		StartCooldown: 75
+		Interval: 25
+		RequiresCondition: gas-leak-timer
+	WithIdleOverlay@Burns:
+		Image: smoke_m
+		-StartSequence:
+		Sequence: smoke_player
+		IsPlayerPalette: True
+		IsDecoration: True
+		Offset: -100, -200, 312
+	Crushable@husk:
+		CrushClasses: husk
+		CrushedByFriendlies: true
+		CrushSound: EXPLSML1.WAV
+
+sonic_tank.husk:
+	Inherits: ^VehicleHusk
+	WithIdleOverlay@Burns:
+		Image: fire_slow
+		Sequence: 1
+		IsDecoration: True
+	InfiltrateForTransform:
+		IntoActor: sonic_tank
+	ThrowsParticle@turret:
+		Anim: turret
+		MaxThrowRange: 1c224
+		MinThrowRange: 0c512
+	ThrowsParticle@debris01:
+		Anim: tankdebris01
+	ThrowsParticle@debris02:
+		Anim: tankdebris02
+	ThrowsParticle@debris03:
+		Anim: tankdebris03
+	ThrowsParticle@debris04:
+		Anim: tankdebris04
+
+devastator.husk:
+	Inherits: ^VehicleHusk
+	TransformOnCapture:
+		IntoActor: devastator
+	InfiltrateForTransform:
+		IntoActor: devastator
+
+bombardment_tank.husk:
+	Inherits: ^VehicleHusk
+	Tooltip:
+		Name: bombardment-tank-destroyed
+	TransformOnCapture:
+		IntoActor: bombardment_tank
+	InfiltrateForTransform:
+		IntoActor: bombardment_tank
+	ThrowsParticle@turret:
+		Anim: turret
+		TurnSpeed: 10
+	ThrowsParticle@debris01:
+		Anim: tankdebris01
+		MaxThrowRange: 2c512
+		MinThrowRange: 1c0
+	ThrowsParticle@debris02:
+		Anim: tankdebris02
+		MinThrowAngle: 80
+		MaxThrowAngle: 200
+	ThrowsParticle@debris03:
+		Anim: tankdebris03
+		MinThrowAngle: 30
+		MaxThrowAngle: 150
+	ThrowsParticle@debris04:
+		Anim: tankdebris04
+
+bison_tank.husk:
+	Inherits: ^combat_tank.husk
+	Tooltip:
+		Name: bison-tank-destroyed
+	TransformOnCapture:
+		IntoActor: bison_tank
+	InfiltrateForTransform:
+		IntoActor: bison_tank
+	RenderSprites:
+		PlayerPalette: player_r16
+	WithIdleOverlay@Burns:
+		Palette: d2k
+	Crushable@husk:
+		CrushClasses: husk
+		CrushedByFriendlies: true
+		CrushSound: EXPLSML3.WAV
+
+scorch_tank.husk:
+	Inherits: ^VehicleHusk
+	Tooltip:
+		Name: scorch-tank-destroyed
+	TransformOnCapture:
+		IntoActor: scorch_tank
+	InfiltrateForTransform:
+		IntoActor: scorch_tank
+	ThrowsParticle@debris01:
+		Anim: tankdebris01
+	ThrowsParticle@debris02:
+		Anim: tankdebris02
+	ThrowsParticle@debris03:
+		Anim: tankdebris03
+	ThrowsParticle@debris04:
+		Anim: tankdebris04
+
+^combat_tank.husk:
+	Inherits: ^VehicleHusk
+	Health:
+		HP: 12000
+	ThrowsParticle@turret:
+		Anim: turret
+		TurnSpeed: 10
+	Crushable@husk:
+		CrushClasses: husk
+		CrushedByFriendlies: true
+		CrushSound: EXPLSML1.WAV
+
+combat_tank_a.husk:
+	InfiltrateForTransform:
+		IntoActor: combat_tank_a
+	-ThrowsParticle@turret:
+
+combat_tank_a.husk02:
+	Inherits: ^combat_tank.husk
+	TransformOnCapture:
+		IntoActor: combat_tank_a
+	InfiltrateForTransform:
+		IntoActor: combat_tank_a
+	Health:
+		HP: 10000
+	WithIdleOverlay@Burns:
+	ThrowsParticle@turret:
+
+combat_tank_a.husk03:
+	Inherits: ^combat_tank.husk
+	TransformOnCapture:
+		IntoActor: combat_tank_a
+	InfiltrateForTransform:
+		IntoActor: combat_tank_a
+	Health:
+		HP: 13000
+	ThrowsParticle@turret:
+		Anim: turret
+		MinThrowRange: 0c112
+		MaxThrowRange: 1c768
+		MinThrowAngle: 30
+		MaxThrowAngle: 50
+		Velocity: 50
+		TurnSpeed: 50
+
+combat_tank_a.husk04:
+	Inherits: ^combat_tank.husk
+	TransformOnCapture:
+		IntoActor: combat_tank_a
+	InfiltrateForTransform:
+		IntoActor: combat_tank_a
+	Health:
+		HP: 9000
+	WithIdleOverlay@Burns:
+	ThrowsParticle@turret:
+		Anim: turret
+		MinThrowRange: 0c512
+		MaxThrowRange: 1c768
+		MinThrowAngle: 50
+		MaxThrowAngle: 70
+		Velocity: 40
+		TurnSpeed: 100
+
+combat_tank_h.husk:
+	InfiltrateForTransform:
+		IntoActor: combat_tank_h
+	-ThrowsParticle@turret:
+
+combat_tank_h.husk02:
+	Inherits: ^combat_tank.husk
+	Health:
+		HP: 13000
+	TransformOnCapture:
+		IntoActor: combat_tank_h
+	InfiltrateForTransform:
+		IntoActor: combat_tank_h
+	WithIdleOverlay@Burns:
+		Image: fire_slow
+		Sequence: 2
+		IsDecoration: True
+	ThrowsParticle@turret:
+
+combat_tank_h.husk03:
+	Inherits: ^combat_tank.husk
+	Health:
+		HP: 11000
+	WithIdleOverlay@Burns:
+	TransformOnCapture:
+		IntoActor: combat_tank_h
+	InfiltrateForTransform:
+		IntoActor: combat_tank_h
+	ThrowsParticle@turret:
+		Anim: turret
+		MinThrowRange: 0c512
+		MaxThrowRange: 4c768
+		MinThrowAngle: 20
+		MaxThrowAngle: 100
+		Velocity: 50
+		TurnSpeed: 50
+
+combat_tank_h.husk04:
+	Inherits: ^combat_tank.husk
+	Health:
+		HP: 9000
+	TransformOnCapture:
+		IntoActor: combat_tank_h
+	InfiltrateForTransform:
+		IntoActor: combat_tank_h
+	WithIdleOverlay@Burns:
+		Image: fire_slow
+		Sequence: 2
+	ThrowsParticle@turret:
+		Anim: turret
+		MinThrowRange: 0c512
+		MaxThrowRange: 3c768
+		MinThrowAngle: 70
+		MaxThrowAngle: 150
+		Velocity: 40
+		TurnSpeed: 20
+
+combat_tank_o.husk:
+	InfiltrateForTransform:
+		IntoActor: combat_tank_o
+	-ThrowsParticle@turret:
+
+combat_tank_o.husk02:
+	Inherits: ^combat_tank.husk
+	TransformOnCapture:
+		IntoActor: combat_tank_o
+	InfiltrateForTransform:
+		IntoActor: combat_tank_o
+	WithIdleOverlay@Burns:
+		Image: fire_slow
+		Sequence: 2
+		IsDecoration: True
+	-ThrowsParticle@turret:
+
+combat_tank_o.husk03:
+	Inherits: ^combat_tank.husk
+	Health:
+		HP: 9000
+	TransformOnCapture:
+		IntoActor: combat_tank_o
+	InfiltrateForTransform:
+		IntoActor: combat_tank_o
+	WithIdleOverlay@Burns:
+	ThrowsParticle@turret:
+		Anim: turret
+		MinThrowRange: 1c0
+		MaxThrowRange: 3c768
+		MinThrowAngle: 30
+		MaxThrowAngle: 80
+		Velocity: 50
+		TurnSpeed: 50
+
+combat_tank_o.husk04:
+	Inherits: ^combat_tank.husk
+	Health:
+		HP: 12000
+	TransformOnCapture:
+		IntoActor: combat_tank_o
+	InfiltrateForTransform:
+		IntoActor: combat_tank_o
+	WithIdleOverlay@Burns:
+	ThrowsParticle@turret:
+		Anim: turret
+		MinThrowRange: 0c512
+		MaxThrowRange: 3c768
+		MinThrowAngle: 60
+		MaxThrowAngle: 120
+		Velocity: 40
+		TurnSpeed: 20
+
+^AircraftHusk:
+	FallsToEarth:
+		Explosion: ExplosionAircraft
+	HitShape:
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+
+carryall.husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: carryall-husk-destroyed
+	Aircraft:
+		TurnSpeed: 4
+		Speed: 95
+		CanSlide: True
+		VTOL: true
+	FallsToEarth:
+		MaximumSpinSpeed: 14
+		Explosion: ExplosionAircraft
+	RenderSprites:
+		Image: carryall
+	AmbientSound:
+		SoundFiles: audio/explosion_Carryall.wav
+		Interval: 5000
+	Contrail@1:
+		Offset: -300,-383,0
+		StartColor: 000000
+		StartColorUsePlayerColor: false
+	Contrail@2:
+		Offset: -598,383,0
+		StartColor: 000000
+		StartColorUsePlayerColor: false
+	SpawnActorOnDeath@carry:
+		Actor: carryall.husk_on_land
+		OwnerType: InternalName
+	SpawnActorOnDeath@debris:
+		Actor: dummyShrapnelThrower_carryall
+		OwnerType: InternalName
+
+carryall.husk_on_land:
+	Inherits: ^VehicleHusk
+	-TransformOnCapture:
+	-InfiltrateForTransform:
+	Health:
+		HP: 10000
+	WithIdleOverlay@Burns:
+		Image: fire_slow
+		Sequence: 1
+		IsDecoration: True
+		Palette: effect
+	WithIdleOverlay@Smoke:
+		Image: smoke_m
+		Sequence: smokLandFromR_idle
+		StartSequence: smokLandFromRA_Open
+		Palette: disabled
+		IsDecoration: True
+		Offset: 512, -512, 0
+	RenderSprites:
+		Image: carryall.husk_on_land
+	Tooltip:
+		Name: carryall-husk-destroyed
+	FireProjectilesOnDeath:
+		Weapons: Debris3, Debris4
+		Pieces: 1, 4
+		Range: 1c0, 3c0
+	GivesCashOnCapture:
+		Amount: 800
+	TransformOnCapture:
+		IntoActor: dummy.kill_self
+
+carryall.huskVTOL:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: carryall-husk-destroyed
+	FallsToEarth:
+	Aircraft:
+		TurnSpeed: 16
+		CanSlide: True
+		VTOL: true
+	RenderSprites:
+		Image: carryall
+	SpawnActorOnDeath@debris:
+		Actor: dummyShrapnelThrower_carryall
+		OwnerType: InternalName
+
+ornithopter.husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: ornithopter-husk-destroyed
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 190
+	FallsToEarth:
+		MaximumSpinSpeed: 1
+		Explosion: ExplosionAircraft
+		Velocity: 0c35
+	RenderSprites:
+		Image: ornithopter
+	AmbientSound@falldown:
+		SoundFiles: audio/ornithroperFall01.wav
+		Delay: 10
+	Contrail@1:
+		Offset: -300,-383,0
+		StartColor: 000000
+		StartWidth: 0c128
+		StartColorUsePlayerColor: false
+	Contrail@2:
+		Offset: -598,383,0
+		StartColor: 000000
+		StartWidth: 0c80
+		StartColorUsePlayerColor: false
+	SpawnActorOnDeath:
+		Actor: dummyShrapnelThrower
+
+ornithopter_c4.husk:
+	Inherits: ornithopter.husk
+	GrantCondition@c4-countdown:
+		Condition: c4-countdown
+	KillsSelf:
+		Delay: 70
+		RequiresCondition: c4-countdown
+	AmbientSound@c4:
+		SoundFiles: audio/explodeSaboteurEmperor02.wav
+		RequiresCondition: c4-countdown
+	FireWarheadsOnDeath@C4:
+		Weapon: HuskC4
+		EmptyWeapon: HuskC4
+	SpawnActorOnDeath@crater:
+		Actor: crater_small
+
+frigate.husk:
+	Inherits: carryall.husk
+	Tooltip:
+		Name: frigate-husk-destroyed
+	RenderSprites:
+		Image: frigate.harkonnen
+	Aircraft:
+		Speed: 135
+	FallsToEarth:
+		MaximumSpinSpeed: 0
+		Explosion: ExplosionFrigate
+	Contrail@01:
+		ZOffset: -100
+	Contrail@02:
+		ZOffset: -100
+	Contrail@03:
+		Offset: -0,0,-300
+		ZOffset: -100
+		StartWidth: 0c120
+		StartColor: 000000
+		StartColorUsePlayerColor: false
+	SpawnActorOnDeath@carry:
+		Actor: frigate.husk_on_land
+		OwnerType: InternalName
+	AmbientSound@falldown:
+		SoundFiles: audio/ornithroperFall01.wav
+		Delay: 10
+
+frigate.huskvtol:
+	Inherits: carryall.huskVTOL
+	Tooltip:
+		Name: frigate-husk-destroyed
+	RenderSprites:
+		Image: frigate.harkonnen
+	SpawnActorOnDeath:
+		Actor: frigate.husk_on_land
+	SpawnActorOnDeath@debris:
+		Actor: dummyShrapnelThrower_carryall
+		OwnerType: InternalName
+	FallsToEarth:
+		Explosion: ExplosionFrigate
+
+frigate.husk_on_land:
+	Inherits: carryall.husk_on_land
+	RenderSprites:
+		Image: frigate.husk
+	Tooltip:
+		Name: frigate-husk-destroyed
+	WithIdleOverlay@Smoke:
+		Offset: -1000, -600, 0
+	GivesCashOnCapture:
+		Amount: 1200
+
+^BuildingHusk:
+	Inherits@1: ^SpriteActor
+	GrantRandomCondition:
+		Conditions: decoration01, decoration02, decoration03
+	Interactable:
+	Health:
+		HP: 15000
+	Armor:
+		Type: wood
+	FrozenUnderFog:
+	WithSpriteBody:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	MapEditorData:
+		Categories: Husk
+	Targetable:
+		TargetTypes: Ground, Husk
+		RequiresForceFire: true
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		TerrainTypes: Rock, Concrete
+	WithColoredOverlay@darker:
+		Color: 00000040
+	WithBuildingBib:
+	ChangesHealth:
+		Step: -70
+		StartIfBelow: 101
+		Delay: 4
+	ChangesHealth@damageidle:
+		Step: -160
+		StartIfBelow: 50
+		Delay: 4
+	Tooltip:
+		Name: building-destroyed
+
+windTrap.husk_passable:
+	Inherits: ^BuildingHusk
+	RenderSprites:
+		Image: husk_wind_trap_passable
+	Health:
+		HP: 15000
+	Building:
+		Footprint: __ __ __
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 1024
+	WithIdleOverlay@smoke:
+		Image: smoke_big
+		Sequence: loop
+		StartSequence: start
+		Palette: disabled
+		IsDecoration: True
+		Offset: 0, 0, 312
+		RequiresCondition: decoration02 || decoration03
+	WithIdleOverlay@fire2:
+		Image: fire_slow
+		StartSequence: 1
+		Sequence: 2
+		IsDecoration: True
+		Offset: 0,-512,0
+		RequiresCondition: decoration01
+	ThrowsParticle@debris01:
+		Anim: debris01
+		MinThrowRange: 1c115
+		MaxThrowRange: 3c0
+	ThrowsParticle@debris02:
+		Anim: debris02
+		MinThrowRange: 1c115
+		MaxThrowRange: 2c0
+	ThrowsParticle@debris03:
+		Anim: debris03
+		MinThrowRange: 2c115
+		MaxThrowRange: 5c0
+	ThrowsParticle@debris04:
+		Anim: debris04
+
+windTrap.husk:
+	Inherits: ^BuildingHusk
+	RenderSprites:
+		Image: husk_wind_trap.ordos
+		FactionImages:
+			atreides: husk_wind_trap.atreides
+			harkonnen: husk_wind_trap.harkonnen
+	Health:
+		HP: 12000
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 1024
+	WithIdleOverlay@smoke:
+		Image: smoke_big
+		Sequence: loop
+		StartSequence: start
+		Palette: disabled
+		IsDecoration: True
+		Offset: 250, 0, 312
+		RequiresCondition: decoration02 || decoration03
+	WithIdleOverlay@fire:
+		Image: fire_fromts
+		Palette: effect
+		Sequence: 1
+		IsDecoration: True
+		Offset: 2000, 0, 0
+		RequiresCondition: decoration01 || decoration02
+	WithIdleOverlay@fire2:
+		Image: fire_slow
+		StartSequence: 1
+		Sequence: 2
+		IsDecoration: True
+		Offset: 0,-512,0
+		RequiresCondition: decoration01 || decoration03
+	SpawnActorOnDeath@passableruins:
+		Actor: windTrap.husk_passable
+
+refinery_ruins:
+	Inherits: ^BuildingHusk
+	Building:
+		Dimensions: 3,3
+		Footprint: ___ ___ ___
+		LocalCenterOffset: 0,-512,0
+	WithIdleOverlay@smokeSmall:
+		Image: smoke_m
+		StartSequence: smokeFromRA01idle
+		Sequence: smokeFromRA01loop
+		IsDecoration: True
+		Offset: 1024, 1500, 0
+		Palette: huskPalette
+		RequiresCondition: decoration01 ||  decoration02
+	WithIdleOverlay@smokeCenter:
+		Image: smoke_m
+		StartSequence: smokeFromRA01idle
+		Sequence: smokeFromRA01loop
+		IsDecoration: True
+		Offset: 0, 0, -1024
+		Palette: huskPalette
+		RequiresCondition: decoration03 || decoration02
+
+refinery_husk.ordos:
+	Inherits: ^BuildingHusk
+	RenderSprites:
+		Image: husk_refinery.ordos
+	WithIdleOverlay@front:
+		Sequence: idle-front
+	WithIdleOverlay@top:
+		Sequence: idle-top
+	Building:
+		Dimensions: 3,3
+		Footprint: =xx x=x ___
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		Type: Rectangle
+			TopLeft: -512, -1024
+			BottomRight: 1536, 0
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -1536, 0
+			BottomRight: 512, 1024
+	WithIdleOverlay@smoke:
+		Image: smoke_big
+		Sequence: loop
+		StartSequence: start
+		Palette: disabled
+		IsDecoration: True
+		Offset: 1400, 600, 0
+		RequiresCondition: decoration01 || decoration02
+	WithIdleOverlay@smoke2:
+		Image: smoke_m
+		Sequence: smokLandFromR_idle
+		StartSequence: smokLandFromRA_Open
+		Palette: disabled
+		IsDecoration: True
+		Offset: -1024,-400,0
+		RequiresCondition: decoration02 || decoration03
+	WithIdleOverlay@fire2:
+		Image: fire_slow
+		StartSequence: 1
+		Sequence: 2
+		IsDecoration: True
+		Offset: 0,-1024,0
+		RequiresCondition: decoration01 || decoration03
+	SpawnActorOnDeath@ruins:
+		Actor: refinery_ruins
+
+refinery_husk.atreides:
+	Inherits: ^BuildingHusk
+	RenderSprites:
+		Image: husk_refinery.atreides
+	WithIdleOverlay@front:
+		Sequence: idle-front
+	WithIdleOverlay@top:
+		Sequence: idle-top
+	Building:
+		Footprint: =xx xx= ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		Type: Rectangle
+			TopLeft: -512, -1024
+			BottomRight: 1536, 0
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -1536, 0
+			BottomRight: 512, 1024
+	WithIdleOverlay@smoke:
+		Image: smoke_big
+		Sequence: loop
+		StartSequence: start
+		Palette: disabled
+		IsDecoration: True
+		Offset: -500,-700, 0
+		RequiresCondition: decoration01 || decoration03
+	WithIdleOverlay@smoke2:
+		Image: smoke_m
+		Sequence: smokLandFromR_idle
+		StartSequence: smokLandFromRA_Open
+		Palette: disabled
+		IsDecoration: True
+		Offset: -800,-400,0
+		RequiresCondition: decoration02 || decoration03
+	WithIdleOverlay@fire2:
+		Image: fire_slow
+		StartSequence: 1
+		Sequence: 2
+		IsDecoration: True
+		Offset: 1400, 600, 0
+		RequiresCondition: decoration01 || decoration03  || decoration02
+	SpawnActorOnDeath@ruins:
+		Actor: refinery_ruins
+
+refinery_husk.harkonnen:
+	Inherits: ^BuildingHusk
+	RenderSprites:
+		Image: husk_refinery.harkonnen
+	WithIdleOverlay@front:
+		Sequence: idle-front
+	WithIdleOverlay@top:
+		Sequence: idle-top
+	Building:
+		Footprint: =xx =x= =X=
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		Type: Rectangle
+			TopLeft: -512, -1024
+			BottomRight: 1536, 0
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -1536, 0
+			BottomRight: 512, 1024
+	WithIdleOverlay@smokeLeft:
+		Image: smoke_big
+		Sequence: loop
+		StartSequence: start
+		Palette: disabled
+		IsDecoration: True
+		Offset: 1024, 1500, 500
+		RequiresCondition: decoration01 || decoration02
+	WithIdleOverlay@smoke2:
+		Image: smoke_m
+		Sequence: smokLandFromR_idle
+		Palette: disabled
+		IsDecoration: True
+		Offset: -1024,-700,0
+		RequiresCondition: decoration02 || decoration03 || decoration01
+	WithIdleOverlay@smokeSmall:
+		Image: smoke_m
+		StartSequence: smokeFromRA01idle
+		Sequence: smokeFromRA01loop
+		IsDecoration: True
+		Offset: 1024, 1500, 0
+		Palette: huskPalette
+		RequiresCondition: decoration01 || decoration03 || decoration02
+	WithIdleOverlay@fire2:
+		Image: fire_slow
+		StartSequence: 1
+		Sequence: 2
+		IsDecoration: True
+		Offset: 1024, 1000, 0
+		RequiresCondition: decoration03  || decoration02
+	SpawnActorOnDeath@ruins:
+		Actor: refinery_ruins

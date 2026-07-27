@@ -1,0 +1,13 @@
+Developed based on N.N.'s Enhanced11, BLACKSIR, Cumpinatorhi Ascend.
+
+Highlights
+1.Removed the three sub-factions and merged them into their respective main factions through the Reinforcement system. Each House now has access to the Reinforcements previously exclusive to its sub-faction.
+2.Removed several units and support powers.
+3.Reworked the Rally Sardaukars support power. It no longer accelerates Sardaukar production.
+4.Added a new Deviator Airstrike support power for House Ordos.
+5.Added a new air unit for each of the three Houses.
+6.Troopers, Deviators, and Dustriders can now attack air units.
+7.Added Thumper Infantry for House Ordos. It can attract new Sandworms onto the battlefield. Due to engine limitations, Sandworms that disappear or die may be revived, so the maximum number of Thumper Infantry is limited to 4.
+8.Completely rewrote the Starport code and introduced an inventory system.
+9.Implemented the Attract Worms mechanic for all vehicles. Due to an engine divide-by-zero bug, infantry cannot use this mechanic.
+10.Improved the AI logic. Bots are now more aggressive and can properly control Thumpers and Worm Riders
