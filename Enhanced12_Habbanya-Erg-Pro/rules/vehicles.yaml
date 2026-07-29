@@ -1,0 +1,264 @@
+# vehicles.yaml - light factory units
+
+trike:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Prerequisites: ~light.trike
+		BuildDuration: 225
+		BuildPaletteOrder: 10
+		Description: trike.description
+	Valued:
+		Cost: 300
+	Health:
+		HP: 9000
+	Armor:
+		Type: wood
+	Mobile:
+		TurnSpeed: 40
+		Speed: 120
+		Locomotor: light_vehicle
+	AutoTarget:
+		MinimumScanTimeInterval: 0
+		MaximumScanTimeInterval: 0
+	Armament@damage:
+		FireDelay: 0
+		Weapon: HMG
+		LocalOffset: 100,0,0
+	Armament@muzzle:
+		FireDelay: 0
+		Weapon: HMG_muzzle
+		LocalOffset: 100,0,0
+		MuzzleSequence: muzzle
+	AttractsWorms:
+		Intensity: 175
+
+raider:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Prerequisites: ~light.raider
+		BuildDuration: 250
+		BuildPaletteOrder: 20
+		Description: raider.description
+	Valued:
+		Cost: 350
+	Health:
+		HP: 9500
+	Armor:
+		Type: wood
+	Mobile:
+		TurnSpeed: 40
+		Speed: 140
+		Locomotor: light_vehicle
+	AutoTarget:
+		MinimumScanTimeInterval: 0
+		MaximumScanTimeInterval: 0
+	Armament@damage:
+		Weapon: HMGo
+	Armament@muzzle:
+		Weapon: HMGo_muzzle
+		LocalOffset: 100,0,0
+	AttractsWorms:
+		Intensity: 202
+
+stealth_raider:
+	Inherits: raider
+	Buildable:
+		Prerequisites: upgrade.light, high_tech_factory, ~light.ordos
+		BuildPaletteOrder: 30
+		BuildDuration: 275
+		Description: stealth-raider.description
+	Valued:
+		Cost: 400
+	Health:
+		HP: 10000
+	Mobile:
+		TurnSpeed: 32
+		Speed: 135
+		Locomotor: light_vehicle
+	Cloak:
+		InitialDelay: 45
+		CloakDelay: 90
+		UncloakOn: Attack, Unload, Infiltrate, Demolish, Dock, Damage, Heal
+		IsPlayerPalette: true
+		PauseOnCondition: cloak-force-disabled
+	AttractsWorms:
+		Intensity: 228
+
+sand_runner:
+	Inherits: trike
+	Buildable:
+		-Queue:
+		Prerequisites: ~disabled
+		Description: sand-runner-desc.description
+	Tooltip:
+		Name: sand-runner
+	Valued:
+		Cost: 400
+	Armor:
+		Type: light
+	Mobile:
+		Speed: 120
+		Locomotor: vehicle
+	Selectable:
+		Class: sand_runner
+	ProducibleWithLevel:
+		InitialLevels: 5
+	Turreted:
+		TurnSpeed: 30
+		Offset: -200,0,30
+		RealignDelay: 0
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	Armament@damage:
+		Weapon: HMG
+		LocalOffset: -200,0,0
+		MuzzleSequence: muzzle
+	Armament@muzzle:
+		Weapon: HMG_muzzle
+		LocalOffset: -200,0,0
+		MuzzleSequence: muzzle
+	GrantConditionOnTerrain@DESERT:
+		TerrainTypes: Sand, Spice, Dune, SpiceSand
+		Condition: temporary-clock
+	AttractsWorms:
+		Intensity: 229
+
+quad:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotVTI
+	Buildable:
+		Prerequisites: upgrade.light
+		BuildDuration: 325
+		BuildPaletteOrder: 40
+		Description: quad.description
+	Valued:
+		Cost: 400
+	Health:
+		HP: 11000
+	Armor:
+		Type: light
+	Mobile:
+		TurnSpeed: 40
+		Speed: 96
+		Locomotor: vehicle
+	Armament:
+		Weapon: Rocket
+		LocalOffset: 128,64,64, 128,-64,64
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	AttractsWorms:
+		Intensity: 235
+
+heavy_quad:
+	Inherits: quad
+	Buildable:
+		-Queue:
+		Prerequisites: ~disabled
+		Description: heavy-quad-desc.description
+	Tooltip:
+		Name: heavy-quad
+	Valued:
+		Cost: 450
+	Health:
+		HP: 12700
+	Armor:
+		Type: light
+	Mobile:
+		Speed: 85
+		Locomotor: vehicle
+	Armament:
+		Weapon: Rocket_heavy
+		LocalOffset: 128,64,64, 128,-64,64, 128,0,0
+	AttractsWorms:
+		Intensity: 266
+
+dustrider:
+	Inherits: ^Vehicle
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotATVI
+	Buildable:
+		Queue: Vehicle
+		Prerequisites: upgrade.light, heavy_factory
+		BuildDuration: 530
+		BuildPaletteOrder: 60
+		BuildDurationModifier: 100
+		Description: dustrider.description
+	Tooltip:
+		Name: Dustrider
+	Health:
+		HP: 12800
+	Valued:
+		Cost: 550
+	Armor:
+		Type: light
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+		Locomotor: tank
+		PauseOnCondition: notmobile
+	AutoTarget:
+		MinimumScanTimeInterval: 0
+		MaximumScanTimeInterval: 0
+	Armament@turret:
+		Weapon: HMG_dustrider
+		Turret: primary
+		LocalOffset: 512,100,80
+		MuzzleSequence: muzzle
+	Armament@muzzle:
+		Weapon: HMG_muzzle
+		Turret: primary
+		LocalOffset: 512,100,80
+		MuzzleSequence: muzzle
+	Armament@aa:
+		Weapon: Bazzoka_AA_dustrider
+		LocalOffset: -290,0,320
+	Turreted:
+		TurnSpeed: 27
+		RealignDelay: 0
+	AttackTurreted:
+	WithSpriteTurret:
+		Sequence: turret_cheap
+	WithMuzzleOverlay:
+	Cargo:
+		Types: Infantry
+		MaxWeight: 4
+		LoadingCondition: notmobile
+		LoadedCondition: full
+	SpeedMultiplier:
+		Modifier: 87
+		RequiresCondition: full
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		Margin: 4, 3
+		RequiresSelection: true
+	RevealsShroud:
+		Range: 5c512
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	SpawnActorOnDeath@trooper:
+		Actor: trooper
+		RequiresCondition: !being-demolished
+	SpawnActorOnDeath@light_inf:
+		Actor: light_inf
+		RequiresCondition: !being-demolished
+	SpawnActorOnDeath@husk:
+		Actor: dustrider.husk
+	AttractsWorms:
+		Intensity: 316
+
+probe.reachability:
+	Inherits: raider
+	-Buildable:
+	-Armament@damage:
+	-Armament@muzzle:
+	-WithMuzzleOverlay:
+	-RevealsShroud:
+	-UpdatesPlayerStatistics:
+	RenderSprites:
+		Image: raider
+	Cloak:
+		InitialDelay: 0
+		CloakDelay: 0

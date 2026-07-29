@@ -1,0 +1,591 @@
+Player:
+	ModularBot@Omnius:
+		Name: Omnius
+		Type: omnius
+	ModularBot@Vidius:
+		Name: Vidious
+		Type: vidious
+	ModularBot@Gladius:
+		Name: Gladius
+		Type: gladius
+	GrantConditionOnBotOwner@omnius:
+		Condition: enable-omnius-ai
+		Bots: omnius
+	GrantConditionOnBotOwner@vidious:
+		Condition: enable-vidious-ai
+		Bots: vidious
+	GrantConditionOnBotOwner@gladius:
+		Condition: enable-gladius-ai
+		Bots: gladius
+
+	SupportPowerBotModule:
+		RequiresCondition: enable-omnius-ai || enable-vidious-ai || enable-gladius-ai
+		Decisions:
+			AtreidesAirstrike:
+				OrderName: atreides_airstrike
+				MinimumAttractiveness: 5000
+				Consideration@1:
+					Against: Enemy
+					Types: Defense
+					Attractiveness: 7
+					TargetMetric: Value
+					CheckRadius: 4c0
+				Consideration@2:
+					Against: Enemy
+					Types: Vehicle, Tank
+					Attractiveness: 4
+					TargetMetric: Value
+					CheckRadius: 5c0
+				Consideration@3:
+					Against: Enemy
+					Types: Structure, Defense
+					Attractiveness: 2
+					TargetMetric: Value
+					CheckRadius: 6c0
+				Consideration@4:
+					Against: Ally
+					Types: Ground
+					Attractiveness: -1
+					TargetMetric: Value
+					CheckRadius: 6c0
+			Fremen:
+				OrderName: ProduceActorPower.AtreidesReinforcements
+				MinimumAttractiveness: 1
+				Consideration@1:
+					Against: Ally
+					Types: Structure
+					Attractiveness: 1
+			WormRider:
+				OrderName: SpawnActorPowerInfoOrder.wormride
+				MinimumAttractiveness: 1
+				Consideration@1:
+					Against: Ally
+					Types: Structure
+					Attractiveness: 1
+			OrdosAirstrike:
+				OrderName: ordos_airstrike
+				MinimumAttractiveness: 7000
+				Consideration@1:
+					Against: Enemy
+					Types: Vehicle, Tank, Air
+					Attractiveness: 10
+					TargetMetric: Value
+					CheckRadius: 10c0
+				Consideration@2:
+					Against: Enemy
+					Types: Structure
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 5c0
+				Consideration@3:
+					Against: Enemy
+					Types: Defense
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 10c0
+			Saboteur:
+				OrderName: ProduceActorPower.SaboteurOrdos
+				MinimumAttractiveness: 1
+				Consideration@1:
+					Against: Ally
+					Types: Structure
+					Attractiveness: 1
+			NukePower:
+				OrderName: NukePowerInfoOrder
+				MinimumAttractiveness: 5500
+				Consideration@1:
+					Against: Enemy
+					Types: Structure, Defense
+					Attractiveness: 10
+					TargetMetric: Value
+					CheckRadius: 5c0
+				Consideration@2:
+					Against: Enemy
+					Types: Infantry, Vehicle, Tank, Defense
+					Attractiveness: 10
+					TargetMetric: Value
+					CheckRadius: 4c0
+				Consideration@3:
+					Against: Ally
+					Types: Ground
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 5c0
+			RallySardaukar:
+				OrderName: Orderproduction.sardaukar
+				MinimumAttractiveness: 1
+				Consideration@1:
+					Against: Ally
+					Types: Structure
+					Attractiveness: 1
+
+	HarvesterBotModule:
+		RequiresCondition: enable-omnius-ai || enable-vidious-ai || enable-gladius-ai
+		HarvesterTypes: harvester
+		HarvesterEnemyAvoidanceRadius: 15c0
+		RefineryTypes: refinery, refinery_inverted
+
+	BaseBuilderBotModule@omnius:
+		RequiresCondition: enable-omnius-ai
+		BuildingQueues: Building, Upgrade
+		MinimumExcessPower: 80
+		MaximumExcessPower: 600
+		ExcessPowerIncrement: 10
+		ExcessPowerIncreaseThreshold: 4
+		MaxBaseRadius: 35
+		ConstructionYardTypes: construction_yard
+		RefineryTypes: refinery, refinery_inverted
+		PowerTypes: wind_trap
+		VehiclesFactoryTypes: light_factory, heavy_factory, starport
+		ProductionTypes: barracks, light_factory, heavy_factory, starport, high_tech_factory
+		SiloTypes: silo
+		BarracksTypes: light_factory
+		StructureProductionInactiveDelay: 50
+		StructureProductionActiveDelay: 25
+		MaximumFailedPlacementAttempts: 4
+		MaxResourceCellsToCheck: 15
+		AdditionalMinimumRefineryCount: 3
+		InititalMinimumRefineryCount: 2
+		MinimumDefenseRadius: 5
+		MaximumDefenseRadius: 30
+		CheckForNewBasesDelay: 1500
+		NewProductionCashThreshold: 1500
+		ProductionMinCashRequirement: 700
+		RallyPointScanRadius: 15
+		AssignRallyPointsInterval: 500
+		BuildingLimits:
+			barracks: 4
+			light_factory: 4
+			outpost: 2
+			heavy_factory: 3
+			high_tech_factory: 3
+			repair_pad: 2
+			research_centre: 2
+			starport: 2
+			palace.atreides: 2
+			palace.harkonnen: 2
+			palace.ordos: 2
+			palace.corrino: 2
+			fremen_sietch: 2
+			upgrade.conyard: 1
+			upgrade.barracks: 1
+			upgrade.light: 1
+			upgrade.heavy: 1
+			upgrade.hightech: 1
+			upgrade.starport: 1
+		BuildingFractions:
+			refinery: 15
+			refinery_inverted: 9
+			barracks: 1
+			light_factory: 5
+			outpost: 3
+			heavy_factory: 2
+			high_tech_factory: 4
+			repair_pad: 3
+			research_centre: 1
+			starport: 4
+			palace.atreides: 1
+			palace.harkonnen: 1
+			palace.ordos: 1
+			palace.corrino: 1
+			fremen_sietch: 1
+			medium_gun_turret: 8
+			large_gun_turret: 6
+			upgrade.conyard: 1
+			upgrade.barracks: 1
+			upgrade.light: 1
+			upgrade.heavy: 1
+			upgrade.hightech: 1
+			upgrade.starport: 1
+		BuildingDelays:
+			medium_gun_turret: 8000
+			upgrade.conyard: 20000
+			upgrade.barracks: 3822
+			upgrade.heavy: 8858
+		DefenseTypes: medium_gun_turret, large_gun_turret
+
+	BaseBuilderBotModule@vidious:
+		RequiresCondition: enable-vidious-ai
+		BuildingQueues: Building, Upgrade
+		MinimumExcessPower: 100
+		MaximumExcessPower: 600
+		ExcessPowerIncrement: 10
+		ExcessPowerIncreaseThreshold: 4
+		ConstructionYardTypes: construction_yard
+		RefineryTypes: refinery, refinery_inverted
+		PowerTypes: wind_trap
+		VehiclesFactoryTypes: light_factory, heavy_factory, starport
+		ProductionTypes: barracks, light_factory, heavy_factory, starport, high_tech_factory
+		SiloTypes: silo
+		StructureProductionInactiveDelay: 50
+		StructureProductionActiveDelay: 25
+		CheckForNewBasesDelay: 1500
+		MaxBaseRadius: 40
+		MaximumDefenseRadius: 30
+		NewProductionCashThreshold: 2000
+		InititalMinimumRefineryCount: 3
+		BarracksTypes: heavy_factory
+		AdditionalMinimumRefineryCount: 3
+		MaxResourceCellsToCheck: 20
+		ProductionMinCashRequirement: 900
+		RallyPointScanRadius: 15
+		AssignRallyPointsInterval: 500
+		BuildingLimits:
+			barracks: 4
+			light_factory: 3
+			outpost: 2
+			heavy_factory: 4
+			high_tech_factory: 3
+			repair_pad: 2
+			research_centre: 2
+			starport: 2
+			palace.atreides: 2
+			palace.harkonnen: 2
+			palace.ordos: 2
+			palace.corrino: 2
+			fremen_sietch: 2
+			upgrade.conyard: 1
+			upgrade.barracks: 1
+			upgrade.light: 1
+			upgrade.heavy: 1
+			upgrade.hightech: 1
+			upgrade.starport: 1
+		BuildingFractions:
+			refinery: 16
+			refinery_inverted: 10
+			barracks: 1
+			light_factory: 1
+			outpost: 5
+			heavy_factory: 5
+			high_tech_factory: 6
+			repair_pad: 4
+			research_centre: 10
+			starport: 6
+			palace.atreides: 3
+			palace.harkonnen: 3
+			palace.ordos: 3
+			palace.corrino: 3
+			fremen_sietch: 3
+			medium_gun_turret: 25
+			large_gun_turret: 6
+			upgrade.conyard: 1
+			upgrade.barracks: 1
+			upgrade.light: 1
+			upgrade.heavy: 1
+			upgrade.hightech: 1
+			upgrade.starport: 1
+		BuildingDelays:
+			light_factory: 70000
+			repair_pad: 10000
+			upgrade.conyard: 20000
+			upgrade.barracks: 8000
+			upgrade.heavy: 20000
+		DefenseTypes: medium_gun_turret, large_gun_turret
+
+	BaseBuilderBotModule@gladius:
+		RequiresCondition: enable-gladius-ai
+		BuildingQueues: Building, Upgrade
+		MinimumExcessPower: 70
+		MaximumExcessPower: 600
+		ExcessPowerIncrement: 10
+		MaxResourceCellsToCheck: 10
+		MinBaseRadius: 0
+		ExcessPowerIncreaseThreshold: 4
+		StructureProductionInactiveDelay: 50
+		BarracksTypes: barracks
+		MaxBaseRadius: 35
+		ConstructionYardTypes: construction_yard
+		RefineryTypes: refinery, refinery_inverted
+		PowerTypes: wind_trap
+		InititalMinimumRefineryCount: 1
+		AdditionalMinimumRefineryCount: 3
+		VehiclesFactoryTypes: light_factory, heavy_factory, starport
+		ProductionTypes: barracks, light_factory, heavy_factory, starport, high_tech_factory
+		SiloTypes: silo
+		NewProductionCashThreshold: 1000
+		CheckForNewBasesDelay: 1500
+		ProductionMinCashRequirement: 500
+		RallyPointScanRadius: 15
+		AssignRallyPointsInterval: 500
+		BuildingLimits:
+			barracks: 5
+			light_factory: 3
+			outpost: 2
+			heavy_factory: 3
+			high_tech_factory: 3
+			repair_pad: 2
+			research_centre: 2
+			starport: 2
+			palace.atreides: 2
+			palace.harkonnen: 2
+			palace.ordos: 2
+			palace.corrino: 2
+			fremen_sietch: 2
+			upgrade.conyard: 1
+			upgrade.barracks: 1
+			upgrade.light: 1
+			upgrade.heavy: 1
+			upgrade.hightech: 1
+			upgrade.starport: 1
+		BuildingFractions:
+			refinery: 14
+			refinery_inverted: 8
+			barracks: 5
+			light_factory: 1
+			outpost: 2
+			heavy_factory: 3
+			high_tech_factory: 5
+			repair_pad: 2
+			research_centre: 3
+			starport: 5
+			palace.atreides: 3
+			palace.harkonnen: 3
+			palace.ordos: 3
+			palace.corrino: 3
+			fremen_sietch: 3
+			medium_gun_turret: 3
+			large_gun_turret: 5
+			upgrade.conyard: 1
+			upgrade.barracks: 1
+			upgrade.light: 1
+			upgrade.heavy: 1
+			upgrade.hightech: 1
+			upgrade.starport: 1
+		BuildingDelays:
+			heavy_factory: 4000
+			repair_pad: 10000
+			medium_gun_turret: 9246
+			upgrade.conyard: 20000
+			upgrade.barracks: 3822
+			upgrade.light: 4572
+		DefenseTypes: medium_gun_turret, large_gun_turret
+	BuildingRepairBotModule:
+		RequiresCondition: enable-omnius-ai || enable-vidious-ai || enable-gladius-ai
+	CaptureManagerBotModule:
+		RequiresCondition: enable-omnius-ai || enable-vidious-ai || enable-gladius-ai
+		CapturingActorTypes: engineer
+		MinimumCaptureDelay: 200
+		MaximumCaptureTargetOptions: 20
+		CheckCaptureTargetsForVisibility: false
+	SquadManagerBotModule@omnius:
+		RequiresCondition: enable-omnius-ai
+		SquadSize: 15
+		SquadSizeRandomBonus: 15
+		MaxBaseRadius: 100
+		ProtectionScanRadius: 13
+		ExcludeFromSquadsTypes: carryall.reinforce, carryall, carryall.support, carryall.transport, ornithopter.bomber, ornithopter.deviator, frigate_choam, engineer, worm_rider, probe.reachability, mcv, harvester, dummy.generic, dummy.sardaukar_rally, waypoint.ordos_airstrike, waypoint.atreides_airstrike, waypoint.atreides_reinf, dummy.kill_self, dummyShrapnelThrower, dummyShrapnelThrower_carryall, dummy.gas_leak
+		ConstructionYardTypes: construction_yard
+		IgnoredEnemyTargetTypes: Creep, Cliff, Air, AirSupport, CapturedUnit
+		ProtectUnitScanRadius: 25
+		MinimumAttackForceDelay: 100
+		RushAttackScanRadius: 20
+		AttackForceInterval: 80
+		RushInterval: 3375
+		IdleScanRadius: 45
+		DangerScanRadius: 20
+		AttackScanRadius: 15
+		ProtectionTypes: construction_yard, mcv, medium_gun_turret, large_gun_turret, refinery, refinery_inverted, barracks, light_factory, heavy_factory, high_tech_factory, starport, research_centre, palace.atreides, palace.harkonnen, palace.ordos, palace.corrino, fremen_sietch, harvester, wind_trap, outpost, repair_pad, engineer
+	SquadManagerBotModule@vidious:
+		RequiresCondition: enable-vidious-ai
+		SquadSize: 7
+		SquadSizeRandomBonus: 7
+		MaxBaseRadius: 100
+		ExcludeFromSquadsTypes: carryall.reinforce, carryall, carryall.support, carryall.transport, ornithopter.bomber, ornithopter.deviator, frigate_choam, engineer, worm_rider, probe.reachability, mcv, harvester, dummy.generic, dummy.sardaukar_rally, waypoint.ordos_airstrike, waypoint.atreides_airstrike, waypoint.atreides_reinf, dummy.kill_self, dummyShrapnelThrower, dummyShrapnelThrower_carryall, dummy.gas_leak
+		ConstructionYardTypes: construction_yard
+		IgnoredEnemyTargetTypes: Creep, Cliff, Air, AirSupport, CapturedUnit
+		ProtectUnitScanRadius: 25
+		IdleScanRadius: 30
+		AttackScanRadius: 17
+		AttackForceInterval: 90
+		RushInterval: 3024
+		MinimumAttackForceDelay: 100
+		RushAttackScanRadius: 20
+		DangerScanRadius: 20
+		ProtectionScanRadius: 13
+		ProtectionTypes: construction_yard, mcv, medium_gun_turret, large_gun_turret, refinery, refinery_inverted, barracks, light_factory, heavy_factory, high_tech_factory, starport, research_centre, palace.atreides, palace.harkonnen, palace.ordos, palace.corrino, fremen_sietch, harvester, wind_trap, outpost, repair_pad, engineer
+	SquadManagerBotModule@gladius:
+		RequiresCondition: enable-gladius-ai
+		SquadSize: 25
+		SquadSizeRandomBonus: 25
+		MaxBaseRadius: 40
+		ExcludeFromSquadsTypes: carryall.reinforce, carryall, carryall.support, carryall.transport, ornithopter.bomber, ornithopter.deviator, frigate_choam, engineer, worm_rider, probe.reachability, mcv, harvester, dummy.generic, dummy.sardaukar_rally, waypoint.ordos_airstrike, waypoint.atreides_airstrike, waypoint.atreides_reinf, dummy.kill_self, dummyShrapnelThrower, dummyShrapnelThrower_carryall, dummy.gas_leak
+		ConstructionYardTypes: construction_yard
+		IgnoredEnemyTargetTypes: Creep, Cliff, Air, AirSupport, CapturedUnit
+		ProtectUnitScanRadius: 25
+		IdleScanRadius: 20
+		RushInterval: 1500
+		ProtectionTypes: construction_yard, mcv, medium_gun_turret, large_gun_turret, refinery, refinery_inverted, barracks, light_factory, heavy_factory, high_tech_factory, starport, research_centre, palace.atreides, palace.harkonnen, palace.ordos, palace.corrino, fremen_sietch, harvester, wind_trap, outpost, repair_pad, engineer
+		MinimumAttackForceDelay: 100
+		RushAttackScanRadius: 20
+		DangerScanRadius: 20
+		AttackScanRadius: 13
+		ProtectionScanRadius: 13
+	UnitBuilderBotModule@omnius:
+		RequiresCondition: enable-omnius-ai
+		ProductionMinCashRequirement: 700
+		IdleBaseUnitsMaximum: -1
+		UnitQueues: Infantry, Vehicle, Armor, Starport, Aircraft
+		UnitsToBuild:
+			thumper: 1
+			light_inf: 7
+			trooper: 7
+			engineer: 1
+			grenadier: 3
+			sardaukar: 15
+			trike: 17
+			dummy.trike: 1
+			raider: 17
+			dummy.raider: 1
+			stealth_raider: 3
+			quad: 20
+			dummy.quad: 1
+			dummy.heavy_quad: 1
+			dustrider: 25
+			dummy.dustrider: 1
+			mcv: 1
+			dummy.mcv: 1
+			harvester: 25
+			dummy.harvester: 2
+			siege_tank: 5
+			dummy.siege_tank: 1
+			missile_tank: 15
+			dummy.missile_tank: 3
+			deviator: 7
+			sonic_tank: 10
+			devastator: 25
+			combat_tank_a: 10
+			dummy.combat_tank_a: 1
+			combat_tank_h: 4
+			dummy.combat_tank_h: 1
+			combat_tank_o: 25
+			dummy.combat_tank_o: 1
+			carryall: 5
+			dummy.carryall: 1
+			ornithopter.sound: 3
+			ornithopter.laser: 3
+			frigate.harkonnen_fortress: 1
+			purchase.starport: 1
+		UnitLimits:
+			engineer: 2
+			carryall: 25
+			mcv: 1
+		UnitDelays:
+			engineer: 8000
+	McvManagerBotModule:
+		RequiresCondition: enable-omnius-ai || enable-gladius-ai
+		McvTypes: mcv, dummy.mcv
+		MinimumConstructionYardCount: 4
+		MinBaseRadius: 20
+		ScanForNewMcvInterval: 100
+		RestrictMCVDeploymentFallbackToBase: false
+		ConstructionYardTypes: construction_yard
+		McvFactoryTypes: heavy_factory, starport
+	McvManagerBotModule@vidious-ai:
+		RequiresCondition: enable-vidious-ai
+		McvTypes: mcv, dummy.mcv
+		MinimumConstructionYardCount: 4
+		ScanForNewMcvInterval: 150
+		RestrictMCVDeploymentFallbackToBase: True
+		MaxBaseRadius: 50
+		MinBaseRadius: 20
+		ConstructionYardTypes: construction_yard
+		McvFactoryTypes: heavy_factory, starport
+	UnitBuilderBotModule@vidious:
+		IdleBaseUnitsMaximum: -1
+		RequiresCondition: enable-vidious-ai
+		ProductionMinCashRequirement: 1100
+		UnitQueues: Infantry, Vehicle, Armor, Starport, Aircraft
+		UnitsToBuild:
+			thumper: 1
+			light_inf: 25
+			trooper: 15
+			engineer: 1
+			grenadier: 3
+			sardaukar: 15
+			trike: 4
+			dummy.trike: 1
+			raider: 4
+			dummy.raider: 1
+			stealth_raider: 2
+			quad: 6
+			dummy.quad: 1
+			dummy.heavy_quad: 1
+			dustrider: 15
+			dummy.dustrider: 1
+			mcv: 1
+			dummy.mcv: 1
+			harvester: 25
+			dummy.harvester: 1
+			siege_tank:6
+			dummy.siege_tank: 1
+			missile_tank: 30
+			dummy.missile_tank: 3
+			deviator: 10
+			sonic_tank: 17
+			devastator: 50
+			combat_tank_a: 25
+			dummy.combat_tank_a: 1
+			combat_tank_h: 7
+			dummy.combat_tank_h: 1
+			combat_tank_o: 37
+			dummy.combat_tank_o: 1
+			carryall: 5
+			dummy.carryall: 1
+			ornithopter.sound: 3
+			ornithopter.laser: 3
+			frigate.harkonnen_fortress: 1
+			purchase.starport: 1
+		UnitLimits:
+			engineer: 2
+			carryall: 25
+			mcv: 1
+		UnitDelays:
+			engineer: 20000
+	UnitBuilderBotModule@gladius:
+		IdleBaseUnitsMaximum: -1
+		RequiresCondition: enable-gladius-ai
+		UnitQueues: Infantry, Vehicle, Armor, Starport, Aircraft
+		UnitsToBuild:
+			thumper: 1
+			light_inf: 20
+			trooper: 15
+			engineer: 1
+			grenadier: 4
+			sardaukar: 30
+			trike: 12
+			dummy.trike: 1
+			raider: 10
+			dummy.raider: 1
+			stealth_raider: 3
+			quad: 13
+			dummy.quad: 1
+			dummy.heavy_quad: 1
+			dustrider: 20
+			dummy.dustrider: 1
+			mcv: 1
+			dummy.mcv: 1
+			harvester: 20
+			dummy.harvester: 2
+			siege_tank: 6
+			dummy.siege_tank: 1
+			missile_tank: 25
+			dummy.missile_tank: 3
+			deviator: 10
+			sonic_tank: 15
+			devastator: 25
+			combat_tank_a: 20
+			dummy.combat_tank_a: 1
+			combat_tank_h: 15
+			dummy.combat_tank_h: 1
+			combat_tank_o: 25
+			dummy.combat_tank_o: 1
+			carryall: 5
+			dummy.carryall: 1
+			ornithopter.sound: 3
+			ornithopter.laser: 3
+			frigate.harkonnen_fortress: 1
+			purchase.starport: 7
+		UnitLimits:
+			engineer: 2
+			carryall: 23
+			mcv: 1

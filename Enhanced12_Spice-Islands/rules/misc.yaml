@@ -1,0 +1,237 @@
+# misc.yaml - dummies, waypoints, crates, effects
+
+spicebloom:
+	SpiceBloom:
+		Bursts: 2, 10
+		Lifetime: 2500, 3000
+
+^Dummy:
+	EditorOnlyTooltip:
+		Name: wpdummy
+	MapEditorData:
+		Categories: system
+	AlwaysVisible:
+	Interactable:
+	Immobile:
+		OccupiesSpace: false
+	RenderSpritesEditorOnly:
+		Image: waypoint
+	WithSpriteBody:
+	BodyOrientation:
+		QuantizedFacings: 1
+	OwnerLostAction:
+		Action: Dispose
+
+^DummyVehicle:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	Interactable:
+	Mobile:
+		TurnSpeed: 20
+		Locomotor: vehicle
+		Speed: 20
+		PauseOnCondition: notmobile
+	Targetable:
+		TargetTypes: Ground, Vehicle, C4
+	Passenger:
+		CargoType: Vehicle
+	HiddenUnderFog:
+	WithFacingSpriteBody:
+	HitShape:
+		Type: Circle
+			Radius: 16
+	Tooltip:
+		Name: dummy-vehicle
+	AutoCarryable:
+		CarriedCondition: notmobile
+		LockedCondition: notmobile
+	RejectsOrders:
+
+dummy.kill_self:
+	Inherits: dummyShrapnelThrower_carryall
+	-FireProjectilesOnDeath@derbisshort:
+	-FireProjectilesOnDeath@derbislong:
+
+dummy.generic:
+	Inherits: ^DummyVehicle
+	Targetable:
+		TargetTypes: Ground, AirSupport
+		RequiresForceFire: true
+	RenderSprites:
+		Image: invisible
+	GrantCondition@dontmoveDammit:
+		Condition: notmobile
+	Health:
+		HP: 1000000
+	Armor:
+		Type: invulnerable
+
+dummyShrapnelThrower_carryall:
+	Inherits: ^Dummy
+	KillsSelf:
+		Delay: 0
+	HitShape:
+		Type: Circle
+			Radius: 16
+	Health:
+		HP: 1
+	FireProjectilesOnDeath@derbisshort:
+		Weapons: Debris, Debris2, debris_vehicle01
+		Pieces: 1, 3
+		Range: 1c0, 3c0
+	FireProjectilesOnDeath@derbislong:
+		Weapons: Debris, Debris2, Debris3, Debris4, DeathHandClusterDebris
+		Pieces: 2, 4
+		Range: 4c0, 7c0
+
+dummyShrapnelThrower:
+	Inherits: ^Dummy
+	KillsSelf:
+		Delay: 0
+	HitShape:
+		Type: Circle
+			Radius: 16
+	Health:
+		HP: 1
+	FireProjectilesOnDeath@derbis:
+		Weapons: Debris, Debris2, debris_vehicle01, debris_vehicle02, DeathHandClusterDebris
+		Pieces: 3, 7
+		Range: 1c0, 6c0
+
+dummy.gas_leak:
+	Inherits: ^Dummy
+	ProximityExternalCondition@isHuskAlive:
+		Condition: gas-leak-timer
+		Range: 1c128
+		MaximumVerticalOffset: 1c0
+		AffectsParent: true
+		ValidRelationships: Ally
+	KillsSelf:
+		Delay: 380
+
+waypoint.ordos_airstrike:
+	Inherits: ^Dummy
+
+waypoint.atreides_airstrike:
+	Inherits: ^Dummy
+
+waypoint.atreides_reinf:
+	Inherits: ^Dummy
+	Buildable:
+		Prerequisites: ~disabled
+		Queue: PalaceQueue
+	Tooltip:
+		Name: reinforcements-waypoint
+	Valued:
+		Cost: 0
+
+dummy.sardaukar_rally:
+	Inherits: ^Dummy
+	-RenderSpritesEditorOnly:
+	RenderSprites:
+		Image: invisible
+	Buildable:
+		Prerequisites: ~disabled
+		Queue: Sardaukar
+	Tooltip:
+		Name: rally-sardaukar
+	Valued:
+		Cost: 1
+	Health:
+		HP: 10
+	Armor:
+		Type: invulnerable
+	ProvidesPrerequisite:
+		Prerequisite: rallySardaukar
+	KillsSelf:
+		Delay: 1000
+	TerrainLightSource:
+		Range: 3c640
+		Intensity: 0.01
+		RedTint: 0.75
+		GreenTint: 0.01
+		BlueTint: 0.01
+	HitShape:
+
+^Crater:
+	Inherits: ^Husk
+	-WithFacingSpriteBody:
+	-Tooltip:
+	WithSpriteBody:
+	Armor:
+		Type: invulnerable
+	GrantConditionOnTerrain@rock:
+		Condition: rock
+		TerrainTypes: Rock, Concrete
+	GrantConditionOnTerrain@sand:
+		Condition: sand
+		TerrainTypes: Sand, Dune, Spice, SpiceSand
+	RenderSprites:
+		Palette: terrain
+	RequiresSpecificOwners:
+		ValidOwnerNames: Neutral
+	MapEditorData:
+		ExcludeTilesets: INTERIOR
+		Categories: Decorations
+	ChangesHealth:
+		Step: -70
+		StartIfBelow: 101
+		Delay: 4
+
+crater_small:
+	Inherits: ^Crater
+	Building:
+		Dimensions: 1, 1
+		Footprint: _
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	WithIdleOverlay@rock:
+		RequiresCondition: rock
+		Image: crater_small
+		Sequence: rock
+		Palette: terrain
+	WithIdleOverlay@sand:
+		RequiresCondition: sand
+		Image: crater_small
+		Sequence: sand
+		Palette: terrain
+	ChangesHealth:
+		Delay: 2
+
+crater_med:
+	Inherits: crater_small
+	Building:
+		Dimensions: 2, 2
+		Footprint: __ __
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	WithIdleOverlay@rock:
+		Image: crater_med
+	WithIdleOverlay@sand:
+		Image: crater_med
+
+crater_big:
+	Inherits: crater_small
+	Building:
+		Dimensions: 3, 2
+		Footprint: ___ ___
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	WithIdleOverlay@rock:
+		Image: crater_big
+	WithIdleOverlay@sand:
+		Image: crater_big
+
+crate:
+	ExplodeCrateAction@1:
+		Weapon: CrateExplosion
+		SelectionShares: 10

@@ -1,0 +1,267 @@
+# arrakis.yaml - generated from units.yaml
+
+# Due to an engine bug, sandworms summoned by thumper that die or disappear
+# will be respawned by the ActorSpawnManager after a delay.
+# The Sandworm.Disposing() unconditionally calls DecreaseActorCount(),
+# causing the manager to replenish worms up to its configured Maximum.
+thumper:
+	Inherits@selection: ^SelectableSupportUnit
+	-AttractsWorms:
+	ActorLostNotification:
+		RequiresCondition: !spawn-worm
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 50
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		Prerequisites: ~barracks.ordos, upgrade.barracks, outpost, high_tech_factory
+		Description: thumper.description
+		BuildLimit: 4
+	Valued:
+		Cost: 500
+	Health:
+		HP: 12750
+	Mobile:
+		Speed: 39
+		RequireForceMoveCondition: !undeployed
+		Locomotor: foot
+	ExternalCondition@deploy-via-lua:
+		Condition: deployed
+	GrantConditionOnTerrain@forBotonly:
+		TerrainTypes: Sand, Spice, Dune, SpiceSand
+		Condition: desert_terain
+	GrantCondition@temporary-cloak:
+		Condition: temporary-clock
+		RequiresCondition: !deployed
+	AmbientSound:
+		SoundFiles: THUMPER1.WAV
+		Delay: 10
+		Interval: 60
+		RequiresCondition: deployed && desert_terain
+	KillsSelf:
+		Delay: 290
+		GrantsCondition: spawn-worm
+		RequiresCondition: deployed && desert_terain
+	SpawnActorOnDeath@eating:
+		Actor: worm_eating
+		RequiresCondition: spawn-worm
+
+worm_rider:
+	Inherits: thumper
+	-SpawnActorOnDeath@eating:
+	Tooltip:
+		Name: worm-rider
+	Buildable:
+		Queue: UnusedQueue
+		Prerequisites: ~disabled
+		BuildPaletteOrder: 80
+		Description: worm-rider-desc.description
+	Health:
+		HP: 14000
+	Mobile:
+		Speed: 33
+		PauseOnCondition: deployed || notmobile
+	WithDecoration@ScullIcon:
+		Image: skullicon
+		Sequence: idle
+		ValidRelationships: Enemy, Neutral, Ally
+		Palette: effect
+		Position: BottomRight
+		Margin: 5, 6
+	GrantConditionOnDeploy:
+		PauseOnCondition: deployed
+		UndeployOnMove: false
+	KillsSelf:
+		Delay: 370
+		GrantsCondition: spawn-worm
+		RequiresCondition: deployed && desert_terain
+	Voiced:
+		VoiceSet: FremenVoice
+	AmbientSound:
+		SoundFiles: THUMPER1.WAV
+		Delay: 10
+		Interval: 30
+		RequiresCondition: deployed && desert_terain
+	SpawnActorOnDeath@worm:
+		Actor: mp_sandworm
+		RequiresCondition: spawn-worm
+		SkipMakeAnimations: false
+
+sandworm:
+	Sandworm:
+		ChanceToDisappear: 37
+	ProximityExternalCondition@wormdamage:
+		Condition: worm-attack
+		Range: 1c768
+		ValidRelationships: Ally, Neutral, Enemy
+
+mp_sandworm:
+	Inherits@World: ^ExistsInWorld
+	Inherits@Selectable: ^SelectableCombatUnit
+	Inherits@1: ^SpriteActor
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: Sandworm
+	Health:
+		HP: 300000
+	Armor:
+		Type: wall
+	Mobile:
+		Speed: 45
+		TurnSpeed: 26
+		Locomotor: worm_mp
+		PauseOnCondition: make-animation
+	AutoTarget:
+		ScanOnIdle: true
+		AllowMovement: true
+		RequiresCondition: !make-animation
+	Targetable:
+		TargetTypes: Ground, Vehicle, Creep
+	Selectable:
+		Bounds: 1024, 1024, 0, 0
+		Priority: 3
+	HitShape:
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 1024
+	RevealsShroud:
+		Range: 8c0
+	RevealOnFire:
+		Duration: 50
+		Radius: 2c512
+	RenderSprites:
+		Palette: terrain
+	WithFacingSpriteBody:
+	WithMakeAnimation:
+		Condition: make-animation
+	WithIdleOverlay@makeanimfromdummy:
+		RequiresCondition: make-animation
+		Sequence: make
+		Image: mp_sandworm
+	LeavesTrails:
+		Image: sandtrail
+		Sequences: traila, trailb, trailc
+		Palette: effect
+		Type: CenterPosition
+		TerrainTypes: Sand, Dune, SpiceSand, Spice
+		MovingInterval: 3
+		Offsets: -1024,0,0
+	ProximityExternalCondition@wormdamage:
+		Condition: worm-attack
+		Range: 1c768
+		ValidRelationships: Ally, Neutral, Enemy
+	GrantConditionOnCombatantOwner@nonAi:
+		Condition: human-player
+	RejectsOrders:
+		Reject: AttackMove, AssaultMove
+		RequiresCondition: human-player
+	IgnoresCloak:
+	HiddenUnderFog:
+	AppearsOnRadar:
+		UseLocation: true
+	AnnounceOnSeen:
+		Notification: WormSign
+		PingRadar: True
+	Wanders:
+		WanderMoveRadius: 20
+		AvoidTerrainTypes: Rock, Rough, Concrete
+	KillsSelf:
+		Delay: 3500
+		GrantsCondition: dispose
+	Demolition:
+		DetonationDelay: 0
+		Flashes: 0
+		DamageTypes: Vehicle, Infantry
+		EnterBehaviour: Exit
+		Cursor: attack
+	Armament@1:
+		Name: primary
+		Weapon: Fremen_wormrider
+		Recoil: 128
+		RecoilRecovery: 32
+		RequiresCondition: !make-animation
+	Armament@2:
+		Name: secondary
+		Weapon: Fremen_wormrider2
+		Recoil: 128
+		RecoilRecovery: 32
+		Turret: secondary
+		RequiresCondition: !make-animation
+	Turreted@1:
+		TurnSpeed: 25
+		Turret: primary
+		Offset: -600,0,200
+	Turreted@2:
+		TurnSpeed: 25
+		Turret: secondary
+		Offset: -50,-150,350
+	AttackTurreted:
+		Turrets: primary, secondary
+	WithSpriteTurret@1:
+		Turret: primary
+		RequiresCondition: !make-animation
+	WithSpriteTurret@2:
+		Turret: secondary
+		RequiresCondition: !make-animation
+	AmbientSound:
+		SoundFiles: WRMSIGN1.WAV
+		Delay: 500
+		Interval: 500
+	AmbientSound@worm_roar:
+		SoundFiles: audio/worm_roar_1_tc.wav, audio/worm_roar_2_tc.wav, audio/worm_roar_5_tc.wav, audio/worm_roar_6_tc.wav,
+		Interval: 20, 100
+		RequiresCondition: !make-animation
+	AmbientSound@invoking:
+		SoundFiles: audio/worm_sign_elec_1.wav
+		RequiresCondition: make-animation
+	FireWarheadsOnDeath@1:
+		Weapon: worm_disapier
+		EmptyWeapon: worm_disapier
+		RequiresCondition: dispose
+	FireWarheadsOnDeath@2:
+		Weapon: worm_explode
+		EmptyWeapon: worm_explode
+		RequiresCondition: !dispose
+	SpawnActorOnDeath@rideEnds:
+		Actor: fremen.spawn
+		RequiresCondition: dispose
+		SkipMakeAnimations: false
+
+worm_eating:
+	Inherits: ^Husk
+	-WithFacingSpriteBody:
+	-Tooltip:
+	Armor:
+		Type: invulnerable
+	KillsSelf:
+		Delay: 25
+	GrantConditionOnTerrain@sand:
+		Condition: sand
+		TerrainTypes: Sand, Spice, Dune, SpiceSand, Rock, Transition, Concrete, SpiceBlobs
+	WithSpriteBody:
+	RenderSprites:
+		Palette: terrain
+	RequiresSpecificOwners:
+		ValidOwnerNames: Neutral
+	Building:
+		Dimensions: 1, 1
+		Footprint: _
+	HitShape:
+		UseTargetableCellsOffsets: false
+	AmbientSound:
+		SoundFiles: WORM.WAV
+	WithIdleOverlay@mouth:
+		RequiresCondition: sand
+		Image: worm_eating
+		Sequence: mouth
+		Palette: terrain
+	WithIdleOverlay@sand:
+		RequiresCondition: sand
+		Image: worm_eating
+		Sequence: sand
+		Palette: terrain
+	SpawnActorOnDeath:
+		Actor: sandworm
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		SpawnAfterDefeat: false

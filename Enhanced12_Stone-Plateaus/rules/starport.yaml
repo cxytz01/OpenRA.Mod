@@ -1,0 +1,735 @@
+^overlay_external_conditions:
+	ExternalCondition@order1:
+		Condition: order-1
+	ExternalCondition@order2:
+		Condition: order-2
+	ExternalCondition@order3:
+		Condition: order-3
+	ExternalCondition@order4:
+		Condition: order-4
+	ExternalCondition@order5:
+		Condition: order-5
+	ExternalCondition@order6:
+		Condition: order-6
+
+^bot_eco_manager:
+	GrantConditionOnPlayerResources@botonly:
+		Condition: good-eco
+	GrantConditionOnBotOwner:
+		Condition: im-bot
+	ProvidesPrerequisite:
+		Prerequisite: bot.allow_buy
+		RequiresCondition: im-bot && good-eco
+
+^starport_dummy:
+	Tooltip:
+		Name: purchase-items
+	Buildable:
+		Queue: Starport
+		BuildDuration: 2
+		BuildPaletteOrder: 150
+		Description: purchase-vehicles-from-choam
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress
+	Valued:
+		Cost: 1
+	AlwaysVisible:
+	Interactable:
+	ScriptTriggers:
+
+purchase.starport:
+	Tooltip:
+		Name: request-choam-delivery
+	Buildable:
+		Queue: Starport
+		BuildDuration: 2
+		BuildPaletteOrder: 2000
+		BuildDurationModifier: 100
+		Description: finalize-order-and-dispatch-choam-frigate
+		Prerequisites: starport
+	AlwaysVisible:
+	Interactable:
+	ScriptTriggers:
+	Valued:
+		Cost: 0
+	RenderSprites:
+		Image: purchase
+
+dummy.harvester:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: actor-harvester.name
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, !stock-depleted-harvester
+		BuildPaletteOrder: 10
+		Description: harvester.description
+	Valued:
+		Cost: 1605
+	RenderSprites:
+		Image: harvester
+	ProvidesPrerequisite@harvester1:
+		Prerequisite: starport.harvester_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@harvester2:
+		Prerequisite: starport.harvester_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@harvester3:
+		Prerequisite: starport.harvester_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@harvester4:
+		Prerequisite: starport.harvester_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@harvester5:
+		Prerequisite: starport.harvester_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@harvester6:
+		Prerequisite: starport.harvester_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.harvester_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.harvester_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.harvester_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.harvester_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.harvester_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.harvester_6
+
+dummy.trike:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: actor-trike.name
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, ~!starport.ordos, !stock-depleted-trike
+		BuildPaletteOrder: 14
+		Description: trike.description
+	Valued:
+		Cost: 336
+	RenderSprites:
+		Image: trike
+	ProvidesPrerequisite@trike1:
+		Prerequisite: starport.trike_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@trike2:
+		Prerequisite: starport.trike_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@trike3:
+		Prerequisite: starport.trike_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@trike4:
+		Prerequisite: starport.trike_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@trike5:
+		Prerequisite: starport.trike_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@trike6:
+		Prerequisite: starport.trike_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.trike_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.trike_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.trike_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.trike_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.trike_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.trike_6
+
+dummy.raider:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: actor-raider.name
+	Buildable:
+		Prerequisites:  ~starport, !frigate.full, !shipment-in-progress, ~starport.ordos, !stock-depleted-raider
+		BuildPaletteOrder: 18
+		Description: raider.description
+	Valued:
+		Cost: 385
+	RenderSprites:
+		Image: raider
+	ProvidesPrerequisite@raider1:
+		Prerequisite: starport.raider_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@raider2:
+		Prerequisite: starport.raider_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@raider3:
+		Prerequisite: starport.raider_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@raider4:
+		Prerequisite: starport.raider_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@raider5:
+		Prerequisite: starport.raider_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@raider6:
+		Prerequisite: starport.raider_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.raider_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.raider_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.raider_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.raider_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.raider_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.raider_6
+
+dummy.quad:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: actor-quad.name
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, !stock-depleted-quad
+		BuildPaletteOrder: 22
+		Description: quad.description
+	Valued:
+		Cost: 480
+	RenderSprites:
+		Image: quad
+	ProvidesPrerequisite@quad1:
+		Prerequisite: starport.quad_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@quad2:
+		Prerequisite: starport.quad_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@quad3:
+		Prerequisite: starport.quad_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@quad4:
+		Prerequisite: starport.quad_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@quad5:
+		Prerequisite: starport.quad_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@quad6:
+		Prerequisite: starport.quad_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.quad_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.quad_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.quad_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.quad_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.quad_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.quad_6
+
+dummy.heavy_quad:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: heavy-quad
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, !stock-depleted-heavy_quad
+		BuildPaletteOrder: 26
+		Description: heavy-quad-desc.description
+	Valued:
+		Cost: 540
+	RenderSprites:
+		Image: heavy_quad
+	ProvidesPrerequisite@heavy_quad1:
+		Prerequisite: starport.heavy_quad_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@heavy_quad2:
+		Prerequisite: starport.heavy_quad_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@heavy_quad3:
+		Prerequisite: starport.heavy_quad_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@heavy_quad4:
+		Prerequisite: starport.heavy_quad_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@heavy_quad5:
+		Prerequisite: starport.heavy_quad_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@heavy_quad6:
+		Prerequisite: starport.heavy_quad_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.heavy_quad_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.heavy_quad_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.heavy_quad_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.heavy_quad_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.heavy_quad_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.heavy_quad_6
+
+dummy.dustrider:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: Dustrider
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, !stock-depleted-dustrider
+		BuildPaletteOrder: 30
+		Description: dustrider.description
+	Valued:
+		Cost: 715
+	RenderSprites:
+		Image: dustrider
+	ProvidesPrerequisite@dustrider1:
+		Prerequisite: starport.dustrider_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@dustrider2:
+		Prerequisite: starport.dustrider_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@dustrider3:
+		Prerequisite: starport.dustrider_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@dustrider4:
+		Prerequisite: starport.dustrider_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@dustrider5:
+		Prerequisite: starport.dustrider_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@dustrider6:
+		Prerequisite: starport.dustrider_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.dustrider_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.dustrider_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.dustrider_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.dustrider_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.dustrider_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.dustrider_6
+
+dummy.combat_tank_a:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: atreides-combat-tank
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, ~starport.atreides, !stock-depleted-combat_tank_a
+		BuildPaletteOrder: 40
+		Description: combat-tank-a.description
+	Valued:
+		Cost: 878
+	RenderSprites:
+		Image: combat_tank_a
+	ProvidesPrerequisite@combat_tank_a1:
+		Prerequisite: starport.combat_tank_a_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@combat_tank_a2:
+		Prerequisite: starport.combat_tank_a_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@combat_tank_a3:
+		Prerequisite: starport.combat_tank_a_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@combat_tank_a4:
+		Prerequisite: starport.combat_tank_a_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@combat_tank_a5:
+		Prerequisite: starport.combat_tank_a_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@combat_tank_a6:
+		Prerequisite: starport.combat_tank_a_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.combat_tank_a_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.combat_tank_a_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.combat_tank_a_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.combat_tank_a_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.combat_tank_a_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.combat_tank_a_6
+
+dummy.combat_tank_h:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: harkonnen-combat-tank
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, ~starport.harkonnen, !stock-depleted-combat_tank_h
+		BuildPaletteOrder: 50
+		Description: combat-tank-h.description
+	Valued:
+		Cost: 878
+	RenderSprites:
+		Image: combat_tank_h
+	ProvidesPrerequisite@combat_tank_h1:
+		Prerequisite: starport.combat_tank_h_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@combat_tank_h2:
+		Prerequisite: starport.combat_tank_h_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@combat_tank_h3:
+		Prerequisite: starport.combat_tank_h_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@combat_tank_h4:
+		Prerequisite: starport.combat_tank_h_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@combat_tank_h5:
+		Prerequisite: starport.combat_tank_h_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@combat_tank_h6:
+		Prerequisite: starport.combat_tank_h_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.combat_tank_h_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.combat_tank_h_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.combat_tank_h_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.combat_tank_h_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.combat_tank_h_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.combat_tank_h_6
+
+dummy.combat_tank_o:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: ordos-combat-tank
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, ~starport.ordos, !stock-depleted-combat_tank_o
+		BuildPaletteOrder: 60
+		Description: combat-tank-o.description
+	Valued:
+		Cost: 878
+	RenderSprites:
+		Image: combat_tank_o
+	ProvidesPrerequisite@combat_tank_o1:
+		Prerequisite: starport.combat_tank_o_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@combat_tank_o2:
+		Prerequisite: starport.combat_tank_o_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@combat_tank_o3:
+		Prerequisite: starport.combat_tank_o_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@combat_tank_o4:
+		Prerequisite: starport.combat_tank_o_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@combat_tank_o5:
+		Prerequisite: starport.combat_tank_o_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@combat_tank_o6:
+		Prerequisite: starport.combat_tank_o_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.combat_tank_o_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.combat_tank_o_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.combat_tank_o_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.combat_tank_o_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.combat_tank_o_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.combat_tank_o_6
+
+dummy.siege_tank:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: actor-siege-tank.name
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, !stock-depleted-siege_tank
+		BuildPaletteOrder: 70
+		Description: siege-tank.description
+	Valued:
+		Cost: 1188
+	RenderSprites:
+		Image: siege_tank
+	ProvidesPrerequisite@siege_tank1:
+		Prerequisite: starport.siege_tank_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@siege_tank2:
+		Prerequisite: starport.siege_tank_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@siege_tank3:
+		Prerequisite: starport.siege_tank_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@siege_tank4:
+		Prerequisite: starport.siege_tank_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@siege_tank5:
+		Prerequisite: starport.siege_tank_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@siege_tank6:
+		Prerequisite: starport.siege_tank_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.siege_tank_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.siege_tank_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.siege_tank_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.siege_tank_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.siege_tank_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.siege_tank_6
+
+dummy.missile_tank:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: actor-missile-tank.name
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, !stock-depleted-missile_tank
+		BuildPaletteOrder: 80
+		Description: missile-tank.description
+	Valued:
+		Cost: 1260
+	RenderSprites:
+		Image: missile_tank
+	ProvidesPrerequisite@missile_tank1:
+		Prerequisite: starport.missile_tank_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@missile_tank2:
+		Prerequisite: starport.missile_tank_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@missile_tank3:
+		Prerequisite: starport.missile_tank_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@missile_tank4:
+		Prerequisite: starport.missile_tank_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@missile_tank5:
+		Prerequisite: starport.missile_tank_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@missile_tank6:
+		Prerequisite: starport.missile_tank_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.missile_tank_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.missile_tank_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.missile_tank_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.missile_tank_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.missile_tank_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.missile_tank_6
+
+dummy.mcv:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: actor-mcv.name
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, !stock-depleted-mcv
+		BuildPaletteOrder: 90
+		Description: mcv.description
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: mcv
+	ProvidesPrerequisite@mcv1:
+		Prerequisite: starport.mcv_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@mcv2:
+		Prerequisite: starport.mcv_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@mcv3:
+		Prerequisite: starport.mcv_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@mcv4:
+		Prerequisite: starport.mcv_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@mcv5:
+		Prerequisite: starport.mcv_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@mcv6:
+		Prerequisite: starport.mcv_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.mcv_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.mcv_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.mcv_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.mcv_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.mcv_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.mcv_6
+
+dummy.carryall:
+	Inherits@Overlay: ^overlay_external_conditions
+	Inherits: ^starport_dummy
+	Tooltip:
+		Name: actor-carryall-reinforce.name
+	Buildable:
+		Prerequisites: ~starport, !frigate.full, !shipment-in-progress, !stock-depleted-carryall
+		BuildPaletteOrder: 100
+		Description: carryall-manual.description
+	Valued:
+		Cost: 1620
+	RenderSprites:
+		Image: carryall
+	ProvidesPrerequisite@carryall1:
+		Prerequisite: starport.carryall_1
+		RequiresCondition: order-1
+	ProvidesPrerequisite@carryall2:
+		Prerequisite: starport.carryall_2
+		RequiresCondition: order-2
+	ProvidesPrerequisite@carryall3:
+		Prerequisite: starport.carryall_3
+		RequiresCondition: order-3
+	ProvidesPrerequisite@carryall4:
+		Prerequisite: starport.carryall_4
+		RequiresCondition: order-4
+	ProvidesPrerequisite@carryall5:
+		Prerequisite: starport.carryall_5
+		RequiresCondition: order-5
+	ProvidesPrerequisite@carryall6:
+		Prerequisite: starport.carryall_6
+		RequiresCondition: order-6
+	WithProductionIconOverlay@order1:
+		Types: 1
+		Prerequisites: starport.carryall_1
+	WithProductionIconOverlay@order2:
+		Types: 2
+		Prerequisites: starport.carryall_2
+	WithProductionIconOverlay@order3:
+		Types: 3
+		Prerequisites: starport.carryall_3
+	WithProductionIconOverlay@order4:
+		Types: 4
+		Prerequisites: starport.carryall_4
+	WithProductionIconOverlay@order5:
+		Types: 5
+		Prerequisites: starport.carryall_5
+	WithProductionIconOverlay@order6:
+		Types: 6
+		Prerequisites: starport.carryall_6
+
+harvester.starport:
+	-Buildable:
+
+mcv.starport:
+	-Buildable:
+
+trike.starport:
+	-Buildable:
+
+quad.starport:
+	-Buildable:
+
+siege_tank.starport:
+	-Buildable:
+
+missile_tank.starport:
+	-Buildable:
+
+combat_tank_a.starport:
+	-Buildable:
+
+combat_tank_h.starport:
+	-Buildable:
+
+combat_tank_o.starport:
+	-Buildable:
+
+carryall.starport:
+	-Buildable:

@@ -1,0 +1,298 @@
+MapFormat: 12
+RequiresMod: d2k
+Title: Tenaya of Test - Enhanced 1.2
+Author: Westwood Studios, NN, Xen
+Tileset: ARRAKIS
+MapSize: 132,132
+Bounds: 2,2,128,128
+Visibility: Lobby
+Categories: Enhanced_D2k_1.2
+
+Players:
+	PlayerReference@Neutral:
+		Name: Neutral
+		OwnsWorld: True
+		NonCombatant: True
+		Faction: Random
+	PlayerReference@Creeps:
+		Name: Creeps
+		NonCombatant: True
+		Faction: Random
+		Enemies: Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7
+	PlayerReference@Multi0:
+		Name: Multi0
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi1:
+		Name: Multi1
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi2:
+		Name: Multi2
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi3:
+		Name: Multi3
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi4:
+		Name: Multi4
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi5:
+		Name: Multi5
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi6:
+		Name: Multi6
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi7:
+		Name: Multi7
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+
+Actors:
+	Actor17: spicebloom.spawnpoint
+		Location: 74,42
+		Owner: Neutral
+	Actor20: spicebloom.spawnpoint
+		Location: 72,57
+		Owner: Neutral
+	Actor21: spicebloom.spawnpoint
+		Location: 56,58
+		Owner: Neutral
+	Actor23: spicebloom.spawnpoint
+		Location: 40,59
+		Owner: Neutral
+	Actor26: spicebloom.spawnpoint
+		Location: 57,74
+		Owner: Neutral
+	Actor27: spicebloom.spawnpoint
+		Location: 73,74
+		Owner: Neutral
+	Actor111: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 71,92
+	Actor112: wormspawner
+		Owner: Neutral
+		Location: 58,82
+	Actor113: wormspawner
+		Owner: Neutral
+		Location: 74,81
+	Actor114: wormspawner
+		Owner: Neutral
+		Location: 75,55
+	Actor115: wormspawner
+		Owner: Neutral
+		Location: 54,55
+	Actor53: mpspawn
+		Owner: Neutral
+		Location: 64,118
+	Actor54: mpspawn
+		Owner: Neutral
+		Location: 105,103
+	Actor55: mpspawn
+		Owner: Neutral
+		Location: 118,66
+	Actor56: mpspawn
+		Owner: Neutral
+		Location: 106,25
+	Actor57: mpspawn
+		Owner: Neutral
+		Location: 63,12
+	Actor58: mpspawn
+		Owner: Neutral
+		Location: 27,25
+	Actor59: mpspawn
+		Owner: Neutral
+		Location: 13,63
+	Actor61: mpspawn
+		Owner: Neutral
+		Location: 26,104
+	Actor32: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 91,75
+	Actor33: spice_sifter
+		Owner: Neutral
+		Location: 50,99
+	Actor34: spice_sifter
+		Owner: Neutral
+		Location: 79,99
+	Actor35: spice_sifter
+		Owner: Neutral
+		Location: 100,79
+	Actor36: spice_sifter
+		Owner: Neutral
+		Location: 101,50
+	Actor37: spice_sifter
+		Owner: Neutral
+		Location: 83,32
+	Actor38: spice_sifter
+		Owner: Neutral
+		Location: 50,31
+	Actor39: spice_sifter
+		Owner: Neutral
+		Location: 32,49
+	Actor40: spice_sifter
+		Owner: Neutral
+		Location: 30,80
+	Actor41: crane
+		Owner: Neutral
+		Location: 65,65
+	Actor42: rockslip02_top_right
+		Owner: Neutral
+		Location: 115,100
+	Actor43: rockpass01_right
+		Owner: Neutral
+		Location: 77,123
+	Actor44: rockslip01_left
+		Owner: Neutral
+		Location: 52,125
+	Actor45: rockpass01_right
+		Owner: Neutral
+		Location: 32,111
+	Actor46: rockslip02_top_left
+		Owner: Neutral
+		Location: 14,100
+	Actor47: rockpass01_top
+		Owner: Neutral
+		Location: 8,52
+	Actor48: rockslip01_top
+		Owner: Neutral
+		Location: 17,12
+	Actor49: rockpass01_left
+		Owner: Neutral
+		Location: 49,8
+	Actor50: rockslip02_top_left
+		Owner: Neutral
+		Location: 104,13
+	Actor52: rockslip01_left
+		Owner: Neutral
+		Location: 100,114
+	Actor51: rockpass01_top
+		Owner: Neutral
+		Location: 126,52
+	Actor60: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 34,90
+	Actor62: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 42,96
+	Actor63: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 72,104
+	Actor64: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 60,104
+	Actor65: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 27,59
+	Actor66: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 28,69
+	Actor67: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 35,39
+	Actor68: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 41,31
+	Actor69: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 60,26
+	Actor70: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 70,27
+	Actor71: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 104,41
+	Actor72: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 94,37
+	Actor73: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 103,61
+	Actor74: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 104,70
+	Actor75: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 96,90
+	Actor76: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 88,97
+	Actor77: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 93,123
+	Actor78: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 123,92
+	Actor79: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 122,40
+	Actor80: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 38,10
+	Actor81: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 10,40
+	Actor82: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 11,89
+	Actor83: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 42,120
+	Actor84: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 90,14
+	Actor85: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 59,92
+	Actor86: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 40,73
+	Actor87: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 58,41
+	Actor88: spicebloom.spawnpoint
+		Owner: Neutral
+		Location: 92,56
+	Actor89: radar_station_small
+		Owner: Neutral
+		Location: 83,34
+	Actor90: radar_station_small
+		Owner: Neutral
+		Location: 99,50
+	Actor91: radar_station_small
+		Owner: Neutral
+		Location: 98,79
+	Actor92: radar_station_small
+		Owner: Neutral
+		Location: 79,97
+	Actor93: radar_station_small
+		Owner: Neutral
+		Location: 50,97
+	Actor94: radar_station_small
+		Owner: Neutral
+		Location: 32,80
+	Actor95: radar_station_small
+		Owner: Neutral
+		Location: 34,49
+	Actor96: radar_station_small
+		Owner: Neutral
+		Location: 50,33
+
+FluentMessages: fluent/rules.ftl
+Rules: rules/defaults.yaml, rules/infantry.yaml, rules/vehicles.yaml, rules/tanks.yaml, rules/aircraft.yaml, rules/arrakis.yaml, rules/husks.yaml, rules/starport.yaml, rules/structures.yaml, rules/world.yaml, rules/misc.yaml, rules/ai.yaml, palettes/palettes.yaml, rules/tiles.yaml, rules/neutral.yaml
+Sequences: sequences/units.yaml, sequences/tiles.yaml
+Weapons: rules/weapons.yaml, rules/effects.yaml
+Voices: audio/voices.yaml
+Notifications: audio/notifications.yaml

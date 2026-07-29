@@ -1,0 +1,258 @@
+light_inf:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Queue: Infantry
+		BuildDuration: 60
+		BuildPaletteOrder: 10
+		Description: light-inf.description
+	Valued:
+		Cost: 50
+	Health:
+		HP: 6000
+	Mobile:
+		Speed: 43
+	Armament:
+		Weapon: LMG
+
+trooper:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotATVI
+	Buildable:
+		Prerequisites: upgrade.barracks
+		BuildDuration: 125
+		BuildPaletteOrder: 20
+		Description: trooper.description
+	Valued:
+		Cost: 100
+	Health:
+		HP: 7000
+	Mobile:
+		Speed: 32
+	Armament:
+		Weapon: Bazooka
+		LocalOffset: 128,0,256
+	Armament@Anti_Air:
+		Weapon: Bazzoka_AA
+		LocalOffset: 128,0,256
+
+engineer:
+	Buildable:
+		Prerequisites: upgrade.barracks
+		BuildDuration: 160
+		BuildPaletteOrder: 60
+		Description: engineer.description
+	Valued:
+		Cost: 400
+	Health:
+		HP: 5000
+	Mobile:
+		Speed: 31
+	InstantlyRepairs:
+		Types: Building
+	Captures:
+		CaptureTypes: building
+		PlayerExperience: 10
+	Captures@Husk:
+		CaptureTypes: husk
+		PlayerExperience: 10
+	Captures@cliff:
+		CaptureTypes: cliff
+		ConsumedByCapture: false
+		CaptureDelay: 150
+		ValidRelationships: Enemy, Neutral, Ally
+	Captures@husks:
+		CaptureTypes: husk
+
+grenadier:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Prerequisites: ~barracks.atreides, upgrade.barracks, outpost
+		BuildDuration: 98
+		BuildPaletteOrder: 30
+		Description: grenadier.description
+	Valued:
+		Cost: 80
+	Health:
+		HP: 6000
+	Mobile:
+		Speed: 43
+	Armament:
+		Weapon: grenade
+		LocalOffset: 192,0,224
+		FireDelay: 3
+	TakeCover:
+		ProneOffset: 96,100,-64
+	WithInfantryBody:
+		DefaultAttackSequence: throw
+	FireWarheadsOnDeath:
+		Weapon: GrenDeath
+		EmptyWeapon: GrenDeath
+
+fremen:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotIVT
+	Buildable:
+		Queue: UnusedQueue
+		BuildDuration: 50
+		Prerequisites: ~disabled
+		Description: fremen.description
+	Armament@PRIMARY:
+	Armament@SECONDARY:
+	Mobile:
+		Speed: 47
+	Selectable:
+		Class: fremen
+	ProducibleWithLevel:
+		InitialLevels: 3
+	ChangesHealth@regen:
+		Step: 0
+		PercentageStep: 4
+		Delay: 125
+		StartIfBelow: 100
+		DamageCooldown: 125
+
+fremen.spawn:
+	Inherits: fremen
+	RenderSprites:
+		Image: fremen
+	AutoTarget:
+		ScanRadius: 7
+		InitialStance: AttackAnything
+		InitialStanceAI: AttackAnything
+	ProducibleWithLevel:
+		InitialLevels: 4
+	UpdatesPlayerStatistics:
+		OverrideActor: fremen
+
+sardaukar:
+	Inherits@AutoTargetPriority: ^AutoTargetPriorityFotBotVTI
+	Buildable:
+		Prerequisites: ~barracks.harkonnen, upgrade.barracks, high_tech_factory
+		BuildDuration: 160
+		BuildPaletteOrder: 40
+		Description: sardaukar.description
+	Valued:
+		Cost: 200
+	Health:
+		HP: 10000
+	Mobile:
+		Speed: 32
+	Selectable:
+		Class: sardaukar
+	Armament@PRIMARY:
+		Weapon: M_LMG_H
+	Armament@SECONDARY:
+		Weapon: M_HMG_H
+	TakeCover:
+		RequiresCondition: !rallySardaukar
+	ExternalCondition@rallySardaukar:
+		Condition: rallySardaukar
+	GrantConditionOnPrerequisite@rally:
+		Condition: rank-elite
+		Prerequisites: rallySardaukar
+	GrantConditionOnPrerequisite@rallyNoCover:
+		Condition: rallySardaukar
+		Prerequisites: rallySardaukar
+
+mpsardaukar:
+	-Buildable:
+
+sardaukar.level1:
+	Inherits: sardaukar
+	Buildable:
+		Queue: UnusedQueue
+		Prerequisites: ~disabled
+	RenderSprites:
+		Image: sardaukar
+	ProducibleWithLevel:
+		InitialLevels: 1
+	UpdatesPlayerStatistics:
+		OverrideActor: sardaukar
+
+sardaukar.level2:
+	Inherits: sardaukar
+	Buildable:
+		Queue: UnusedQueue
+		Prerequisites: ~disabled
+	RenderSprites:
+		Image: sardaukar
+	ProducibleWithLevel:
+		InitialLevels: 2
+	UpdatesPlayerStatistics:
+		OverrideActor: sardaukar
+
+sardaukar.level3:
+	Inherits: sardaukar
+	Buildable:
+		Queue: UnusedQueue
+		Prerequisites: ~disabled
+	RenderSprites:
+		Image: sardaukar
+	ProducibleWithLevel:
+		InitialLevels: 3
+	UpdatesPlayerStatistics:
+		OverrideActor: sardaukar
+
+saboteur:
+	Inherits@selection: ^SelectableSupportUnit
+	-Cloak:
+	-GrantChargedConditionOnToggle:
+	-GrantConditionOnDamageState@UNCLOAK:
+	Buildable:
+		Queue: UnusedQueue
+		BuildPaletteOrder: 70
+		Prerequisites: ~disabled
+		Description: saboteur.description
+	ScriptTags:
+	Health:
+		HP: 9700
+	Mobile:
+		Speed: 52
+		PauseOnCondition: suicide-att || notmobile
+	Voiced:
+		VoiceSet: SaboteurVoice
+	WithDecoration@ScullIcon:
+		Image: skullicon
+		Sequence: idle
+		ValidRelationships: Enemy, Neutral, Ally
+		Palette: effect
+		Position: BottomRight
+		Margin: 5, 6
+	Demolition:
+		DetonationDelay: 50
+		Flashes: 3
+		EnterBehaviour: Dispose
+	FireWarheadsOnDeath@Selfkill:
+		Weapon: PlasmaSaboteur
+		EmptyWeapon: PlasmaSaboteur
+		RequiresCondition: suicide-att
+	FireWarheadsOnDeath@Killed:
+		Weapon: HuskC4
+		EmptyWeapon: HuskC4
+		RequiresCondition: !suicide-att
+	GrantConditionOnDeploy:
+		DeployedCondition: suicide-att
+		PauseOnCondition: suicide-att
+	KillsSelf@SuicideKillCount:
+		Delay: 45
+		RequiresCondition: suicide-att
+	TakeCover:
+		RequiresCondition: suicide-att
+	WithIdleOverlay:
+		Sequence: active
+		RequiresCondition: suicide-att
+	WithIdleOverlay@prone:
+		StartSequence: standup
+		Sequence: prone-stand
+		RequiresCondition: suicide-att
+	WithInfantryBody:
+		RequiresCondition: !suicide-att
+	AmbientSound@onSuicide:
+		SoundFiles: audio/explodeSaboteurEmperor02.wav
+		RequiresCondition: suicide-att
+	SpawnActorOnDeath@craters:
+		Actor: crater_small
+		RequiresCondition: !suicide-att
+	SpawnActorOnDeath@craterb:
+		Actor: crater_big
+		RequiresCondition: suicide-att
+	GrantCondition@temporary-cloak:
+		Condition: temporary-clock

@@ -1,0 +1,1572 @@
+^Building:
+	Inherits@SandStorm: ^SandStorm
+	Inherits@DamageVfx: ^DamagedBuildingsVFX
+	GrantRandomCondition@randomFX:
+		Conditions: explode02, explode03
+	AmbientSound@saboteurCharge:
+		SoundFiles: audio/explodeSaboteurEmperor02.wav
+		RequiresCondition: being-demolished
+	InstantlyRepairable:
+		Types: Building
+	ProductionTimeMultiplier@craneBonus:
+		Prerequisites: bonus.crane
+		Multiplier: 95
+	FireWarheadsOnDeath@02:
+		Type: CenterPosition
+		Weapon: buildingExplosions02
+		EmptyWeapon: buildingExplosions02
+		Chance: 50
+		Offset: 1,0,1
+		RequiresCondition: explode02 && !being-demolished
+	FireWarheadsOnDeath@03:
+		Type: CenterPosition
+		Weapon: buildingExplosions03
+		EmptyWeapon: buildingExplosions03
+		Chance: 50
+		Offset: 1,2,1
+		RequiresCondition: (explode02 || explode03) && !being-demolished
+	FireWarheadsOnDeath@sabotuerdemolition:
+		RequiresCondition: being-demolished
+		Type: CenterPosition
+		Weapon: buildingBigExplosion
+		EmptyWeapon: buildingBigExplosion
+	FireProjectilesOnDeath:
+		Weapons: derbisRock01, derbisRock02, derbisRock03, Debris4
+		Pieces: 2, 5
+		Range: 1c512, 4c0
+	SpawnActorOnDeath@bigcrater:
+		Actor: crater_big
+		Offset: 0,1
+		RequiresCondition: being-demolished
+
+^DamagedBuildingsVFX:
+	GrantConditionOnFaction@atreidesVFX:
+		Condition: atreidesVFX
+		Factions: atreides, fremen
+	GrantConditionOnFaction@harkonnenVFX:
+		Condition: harkonnenVFX
+		Factions: harkonnen, corrino
+	GrantConditionOnFaction@ordosVFX:
+		Condition: ordosVFX
+		Factions: ordos, mercenary, smuggler
+	GrantConditionOnDamageState@heavyDamage:
+		Condition: heavy-damage
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		RequiresCondition: heavy-damage && atreidesVFX
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 5
+		Gravity: 60
+		SpawnFrequency: 2, 5
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1224
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		RequiresCondition: heavy-damage && atreidesVFX
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		SpawnFrequency: 4, 15
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1024
+	WithIdleOverlay@Burns1_atreides:
+		RequiresCondition: heavy-damage && atreidesVFX
+		Image: fire
+		Sequence: 1
+		IsDecoration: True
+	WithIdleOverlay@Burns2_atreides:
+		RequiresCondition: heavy-damage && atreidesVFX
+		Image: fire
+		Sequence: 2
+		IsDecoration: True
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		RequiresCondition: heavy-damage && harkonnenVFX
+		Image: smoke4
+		Lifetime: 20,25
+		Speed: 5
+		Gravity: 60
+		SpawnFrequency: 3, 7
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1524
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		RequiresCondition: heavy-damage && harkonnenVFX
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		SpawnFrequency: 4, 15
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1024
+	WithIdleOverlay@Burns1_harkonnen:
+		RequiresCondition: heavy-damage && harkonnenVFX
+		Image: fire
+		Sequence: 1
+		IsDecoration: True
+	WithIdleOverlay@Burns2_harkonnen:
+		RequiresCondition: heavy-damage && harkonnenVFX
+		Image: fire
+		Sequence: 2
+		IsDecoration: True
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		RequiresCondition: heavy-damage && ordosVFX
+		Image: smoke4
+		Lifetime: 20,25
+		Speed: 7
+		Gravity: 60
+		SpawnFrequency: 3, 8
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1524
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		RequiresCondition: heavy-damage && ordosVFX
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		SpawnFrequency: 4, 15
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1024
+	WithIdleOverlay@Burns1_ordos:
+		RequiresCondition: heavy-damage && ordosVFX
+		Image: fire
+		Sequence: 1
+		IsDecoration: True
+	WithIdleOverlay@Burns2_ordos:
+		RequiresCondition: heavy-damage && ordosVFX
+		Image: fire
+		Sequence: 2
+		IsDecoration: True
+
+construction_yard:
+	Buildable:
+		Description: conyard.description
+	Health:
+		HP: 38000
+	Armor:
+		Type: cy
+	Power:
+		Amount: 50
+	GrantConditionOnFaction@atreides:
+		Condition: atreides
+		Factions: atreides
+	GrantConditionOnFaction@harkonnen:
+		Condition: harkonnen
+		Factions: harkonnen
+	GrantConditionOnFaction@ordos:
+		Condition: ordos
+		Factions: ordos
+	Tooltip:
+		Name: Conyard
+		RequiresCondition: !atreides && !harkonnen && !ordos
+	Tooltip@atreides:
+		Name: atreides-conyard
+		RequiresCondition: atreides
+	Tooltip@harkonnen:
+		Name: harkonnen-conyard
+		RequiresCondition: harkonnen
+	Tooltip@ordos:
+		Name: ordos-conyard
+		RequiresCondition: ordos
+	ProvidesPrerequisite@atreides:
+		Prerequisite: conyard.atreides
+		Factions: atreides
+	ProvidesPrerequisite@harkonnen:
+		Prerequisite: conyard.harkonnen
+		Factions: harkonnen
+	ProvidesPrerequisite@ordos:
+		Prerequisite: conyard.ordos
+		Factions: ordos
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 600, -500, 0
+		Gravity: 70
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: -300, -1200, 0
+		SpawnFrequency: 3, 13
+	FloatingSpriteEmitter@smoke3_small_atreides:
+		RequiresCondition: heavy-damage && atreidesVFX
+		Offset: -1024, -500, 0
+		SpawnFrequency: 5, 20
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		Duration: 800
+	WithIdleOverlay@Burns1_atreides:
+		Offset: 300, 500, 0
+	WithIdleOverlay@Burns2_atreides:
+		Offset: 2024, -350, 0
+
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		Offset: -100,300,0
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		Offset: 800,-200,0
+		Speed: 10
+	FloatingSpriteEmitter@smoke3_small_harkonnen:
+		RequiresCondition: heavy-damage && harkonnenVFX
+		Offset: -1024, -500, 0
+		SpawnFrequency: 5, 20
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		Duration: 800
+	WithIdleOverlay@Burns1_harkonnen:
+		Offset: -700, -200,0
+	WithIdleOverlay@Burns2_harkonnen:
+		Offset: 500, 900,0
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		Offset: 500, -1000, 0
+		Gravity: 70
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		Offset: -300, -1200, 0
+		SpawnFrequency: 3, 13
+	FloatingSpriteEmitter@smoke3_small_ordos:
+		RequiresCondition: heavy-damage && ordosVFX
+		Offset: -1024, -500, 0
+		SpawnFrequency: 5, 20
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		Duration: 800
+	WithIdleOverlay@Burns1_ordos:
+		Offset: 300, 500, 0
+	WithIdleOverlay@Burns2_ordos:
+		Offset: 1124, -350, 0
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2
+		Pieces: 1, 3
+		Range: 1c0, 2c0
+	FireProjectilesOnDeath@longer:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 5, 7
+		Range: 3c0, 6c0
+	FireProjectilesOnDeath@longest:
+		Weapons: Debris4, DerbisSiegetank
+		Pieces: 0, 3
+		Range: 6c0, 10c0
+	FireWarheadsOnDeath@02:
+		RequiresCondition: explode02
+	FireWarheadsOnDeath@03:
+		RequiresCondition: explode03
+
+wind_trap:
+	Buildable:
+		BuildDuration: 208
+		BuildDurationModifier: 100
+		Description: wind-trap.description
+	Valued:
+		Cost: 225
+	Health:
+		HP: 34000
+	Power:
+		Amount: 200
+	Armor:
+		Type: building
+		RequiresCondition: ArmorUpgrade || !concrete-on
+	Armor@weakArmor:
+		Type: wood
+		RequiresCondition: !ArmorUpgrade && concrete-on
+	GrantConditionOnPrerequisite:
+		Condition: ArmorUpgrade
+		Prerequisites: upgrade.conyard
+	GrantConditionOnPrerequisite@concreteON:
+		Condition: concrete-on
+		Prerequisites: global-auto-concrete
+	SpawnActorOnDeath@husktype01:
+		Actor: windTrap.husk
+		RequiresCondition: explode02 && !being-demolished
+	SpawnActorOnDeath@huskType02:
+		Actor: windTrap.husk_passable
+		RequiresCondition: explode03 && !being-demolished
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 100, -1024, 0
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: -580, -400, 0
+	WithIdleOverlay@Burns1_atreides:
+		Offset: 1124, 0, 0
+	-WithIdleOverlay@Burns2_atreides:
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		Offset: 100, -1024, 0
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		Offset: -500, -400, 0
+	WithIdleOverlay@Burns1_harkonnen:
+		Offset: 300, -500, 0
+	-WithIdleOverlay@Burns2_harkonnen:
+	-FloatingSpriteEmitter@smoke_huge_ordos:
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		Offset: -500, -900, 0
+		SpawnFrequency: 3, 13
+	WithIdleOverlay@Burns1_ordos:
+		Offset: 500, -700, 0
+	-WithIdleOverlay@Burns2_ordos:
+
+refinery:
+	PlaceBuildingVariants:
+		Actors: refinery_inverted
+		Facings: 384, 896
+	Buildable:
+		BuildDuration: 660
+		Description: refinery.description
+	Selectable:
+		Bounds: 2500, 2048, -256, 0
+		Class: refinery
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 43000
+	Power:
+		Amount: -75
+	Armor:
+		Type: building
+		RequiresCondition: ArmorUpgrade || !concrete-on
+	Armor@weakArmor:
+		Type: wood
+		RequiresCondition: !ArmorUpgrade && concrete-on
+	GrantConditionOnPrerequisite:
+		Condition: ArmorUpgrade
+		Prerequisites: upgrade.conyard
+	GrantConditionOnPrerequisite@concreteON:
+		Condition: concrete-on
+		Prerequisites: global-auto-concrete
+	CustomSellValue:
+		Value: 300
+	FireWarheadsOnDeath@big04:
+		Type: CenterPosition
+		Weapon: buildingExplosions04_big
+		EmptyWeapon: buildingExplosions04_big
+		Chance: 100
+		Offset: 2,2,1
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4, HarvesterSpiceExplosion
+		Pieces: 7, 15
+		Range: 2c0, 10c0
+	GrantConditionOnFaction@Atreides:
+		Condition: atreides
+		Factions: atreides
+	GrantConditionOnFaction@Harkonnen:
+		Condition: harkonnen
+		Factions: harkonnen
+	GrantConditionOnFaction@Ordos:
+		Condition: ordos
+		Factions: ordos
+	SpawnActorOnDeath@ordosHusk:
+		Actor: refinery_husk.ordos
+		RequiresCondition: ordos && !being-demolished
+	SpawnActorOnDeath@atreidesHusk:
+		Actor: refinery_husk.atreides
+		RequiresCondition: atreides && !being-demolished
+	SpawnActorOnDeath@harkonnenHusk:
+		Actor: refinery_husk.harkonnen
+		RequiresCondition: harkonnen && !being-demolished
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: -900, 0, 0
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 700,-612,0
+	WithIdleOverlay@Burns1_atreides:
+		Offset: 950, 600,0
+	WithIdleOverlay@Burns2_atreides:
+		Offset: 700, -800, 0
+		Sequence: 4
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		Offset: 1100,-800,0
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		Offset: -1024, 0,0
+	WithIdleOverlay@Burns1_harkonnen:
+		Offset: 1200, 1000,0
+	WithIdleOverlay@Burns2_harkonnen:
+		Offset: 0, -1024, 0
+		Sequence: 4
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		Offset: -100, -1050, 0
+		Gravity: 70
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		Offset: -250, 250, 0
+		SpawnFrequency: 3, 13
+	WithIdleOverlay@Burns1_ordos:
+		Offset: 1200, -200, 0
+	WithIdleOverlay@Burns2_ordos:
+		Offset: 0, -200, 0
+
+refinery_inverted:
+	Inherits: refinery
+	Buildable:
+		BuildPaletteOrder: 310
+		Description: refinery-inverted.description
+	Tooltip:
+		Name: spice-refinery-inverted
+	ProvidesPrerequisite:
+		Prerequisite: refinery
+	PlaceBuildingVariants:
+		Actors: refinery
+		Facings: 896, 384
+	Selectable:
+		Bounds: 2500, 2048, 256, 0
+	RenderSprites:
+		Image: refinery_invert.ordos
+		FactionImages:
+			atreides: refinery_invert.atreides
+			harkonnen: refinery_invert.harkonnen
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@front:
+		Sequence: idle-front
+		RequiresCondition: !build-incomplete
+	DockHost:
+		Type: Unload
+		DockAngle: 128
+		DockOffset: -1c0,-512,0
+	D2kBuilding:
+		Footprint: === =xx xx=
+		Dimensions: 3,3
+		LocalCenterOffset: 0, 512,0
+	HitShape:
+		Type: Rectangle
+			TopLeft: -512, -1024
+			BottomRight: 1536, 0
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -1536, 0
+			BottomRight: 512, 1048
+	FreeActorWithDelivery:
+		DeliveryOffset: 0,0
+
+barracks:
+	Buildable:
+		BuildDuration: 300
+		Description: barracks.description
+	Valued:
+		Cost: 350
+	Health:
+		HP: 37000
+	Power:
+		Amount: -50
+	Armor:
+		Type: building
+		RequiresCondition: ArmorUpgrade || !concrete-on
+	Armor@weakArmor:
+		Type: wood
+		RequiresCondition: !ArmorUpgrade && concrete-on
+	GrantConditionOnPrerequisite:
+		Condition: ArmorUpgrade
+		Prerequisites: upgrade.conyard
+	GrantConditionOnPrerequisite@concreteON:
+		Condition: concrete-on
+		Prerequisites: global-auto-concrete
+	GrantConditionOnProduction@ClusterdebrisExplosion:
+		Condition: producing
+	FireProjectilesOnDeath@explosiveDerbis:
+		Weapons: DeathHandClusterDebris
+		Pieces: 0, 1
+		Range: 1c0, 2c0
+		RequiresCondition: producing
+	WithIdleOverlay@Burns1_atreides:
+		Offset: 500, 500, 0
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: 600, -500, 0
+	-FloatingSpriteEmitter@smoke_huge_atreides:
+	-WithIdleOverlay@Burns2_atreides:
+	-FloatingSpriteEmitter@smoke_huge_harkonnen:
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		Offset: 0,0,0
+	-WithIdleOverlay@Burns1_harkonnen:
+	WithIdleOverlay@Burns2_harkonnen:
+		Offset: 0,0,0
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		Offset: 300, -800, 0
+	-FloatingSpriteEmitter@smoke2_small_ordos:
+	WithIdleOverlay@Burns1_ordos:
+		Offset: 500, 300, 0
+	-WithIdleOverlay@Burns2_ordos:
+
+light_factory:
+	Buildable:
+		Prerequisites: refinery
+		BuildDuration: 410
+		Description: light-factory.description
+	Valued:
+		Cost: 700
+	Health:
+		HP: 38000
+	Power:
+		Amount: -100
+	Armor:
+		Type: building
+		RequiresCondition: ArmorUpgrade || !concrete-on
+	Armor@weakArmor:
+		Type: wood
+		RequiresCondition: !ArmorUpgrade && concrete-on
+	GrantConditionOnPrerequisite:
+		Condition: ArmorUpgrade
+		Prerequisites: upgrade.conyard
+	GrantConditionOnPrerequisite@concreteON:
+		Condition: concrete-on
+		Prerequisites: global-auto-concrete
+	ProvidesPrerequisite@trike:
+		Prerequisite: light.trike
+		Factions: atreides, harkonnen
+	ProvidesPrerequisite@raider:
+		Prerequisite: light.raider
+		Factions: ordos
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: -400, -500, 0
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 400,-612,0
+	WithIdleOverlay@Burns1_atreides:
+		Offset: 1024, 300,0
+	WithIdleOverlay@Burns2_atreides:
+		Offset: 1024, -500, 0
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		Offset: -100,300,0
+		Speed: 7
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		Offset: -900,-500,0
+		Speed: 10
+	WithIdleOverlay@Burns1_harkonnen:
+		Offset: -0,-950,0
+	WithIdleOverlay@Burns2_harkonnen:
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		Offset: -900, 0, 0
+		Gravity: 70
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		Offset: 300, -200, 0
+		SpawnFrequency: 3, 13
+	WithIdleOverlay@Burns1_ordos:
+		Offset: -600, -1000, 0
+	WithIdleOverlay@Burns2_ordos:
+		Offset: 700, 200, 0
+	FireProjectilesOnDeath:
+		Weapons: Debris2, derbisRock01, Debris4
+		Pieces: 5, 7
+		Range: 0c512, 3c0
+
+outpost:
+	Buildable:
+		Prerequisites: barracks, ~techlevel.medium
+		Queue: Building
+		BuildPaletteOrder: 320
+		BuildDuration: 312
+		BuildDurationModifier: 100
+		Description: outpost.description
+	Health:
+		HP: 37000
+	Power:
+		Amount: -75
+	Armor:
+		Type: building
+	RevealsShroud:
+		Range: 11c0
+		RequiresCondition: !disabled
+	RevealsShroud@lowpower:
+		Range: 4c0
+		RequiresCondition: disabled
+	WithRangeCircle:
+		Range: 6c0
+		RequiresCondition: !disabled
+	DetectCloaked:
+		Range: 6c0
+		RequiresCondition: !disabled
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: -400, -500, 0
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 300,0,0
+	WithIdleOverlay@Burns1_atreides:
+		Offset: -150, 300, 0
+	WithIdleOverlay@Burns2_atreides:
+		Offset: 1024, -400, 0
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		Offset: -550, -500, 0
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		Offset: 400, 0, 0
+	WithIdleOverlay@Burns1_harkonnen:
+		Offset: 600,-600,0
+	-WithIdleOverlay@Burns2_harkonnen:
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		Offset: -600, -300, 0
+		Gravity: 70
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		Offset: 350, 0, 0
+		SpawnFrequency: 3, 13
+	WithIdleOverlay@Burns1_ordos:
+		Offset: 350, -600, 0
+	-WithIdleOverlay@Burns2_ordos:
+
+heavy_factory:
+	Buildable:
+		BuildDuration: 750
+		Description: heavy-factory.description
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 42000
+	Armor:
+		Type: building
+	Power:
+		Amount: -150
+	Selectable:
+		Bounds: 2772, 2900, 300, 0
+	GrantConditionOnPrerequisite@researchPath:
+		Prerequisites: upgrade.heavy
+		Condition: research-allowed
+	ProvidesPrerequisite@researchPath:
+		Prerequisite: research_centre.allowed
+		RequiresCondition: research-allowed
+	GrantConditionOnProduction@debrisExplosion:
+		Condition: producing
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 512, 0, 0
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: -300, -1000, 0
+	WithIdleOverlay@Burns1_atreides:
+		Offset: -200, 300, 0
+	WithIdleOverlay@Burns2_atreides:
+		Offset: 1550, -400, 0
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		Offset: -600,-200,0
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		Offset: 0, -660,0
+	WithIdleOverlay@Burns1_harkonnen:
+		Offset: 500, -600,0
+	WithIdleOverlay@Burns2_harkonnen:
+		Offset: 1800, 50,0
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		Offset: -700, 100,0
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		Offset: -400, -1000,0
+	WithIdleOverlay@Burns1_ordos:
+		Offset: 1300, -500,0
+	WithIdleOverlay@Burns2_ordos:
+		Offset: 100, -600,0
+		Sequence: 4
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 10, 20
+		Range: 1c0, 5c0
+	FireProjectilesOnDeath@explosiveDerbis:
+		Weapons: DeathHandClusterDebris
+		Pieces: 0, 1
+		Range: 1c0, 3c0
+	FireProjectilesOnDeath@explosiveDerbiswhenproducing:
+		Weapons: DeathHandClusterDebris
+		Pieces: 1, 2
+		Range: 1c0, 5c0
+		RequiresCondition: producing
+	SpawnActorOnDeath@bigcrater:
+		Offset: 0,2
+
+high_tech_factory:
+	Buildable:
+		Prerequisites: outpost
+		BuildDuration: 610
+		Description: high-tech-factory.description
+	RallyPoint:
+	Valued:
+		Cost: 1150
+	Health:
+		HP: 45500
+	Armor:
+		Type: building
+		RequiresCondition: ArmorUpgrade
+	Power:
+		Amount: -75
+	GrantConditionOnPrerequisite:
+		Condition: ArmorUpgrade
+		Prerequisites: upgrade.conyard
+	ProvidesPrerequisite@researchPath:
+    	Prerequisite: research_centre.allowed
+	ProvidesPrerequisite@ordosprerequisite:
+		Prerequisite: hightech.ordos
+		Factions: ordos
+	ProvidesPrerequisite@atreidesprerequisite:
+		Prerequisite: hightech.atreides
+		Factions: atreides
+	ProvidesPrerequisite@harkonnenprerequisite:
+		Prerequisite: hightech.harkonnen
+		Factions: harkonnen
+	ProvidesPrerequisite@enableupgrade_airstrike:
+		Prerequisite: hightech.enableupgrade
+		Factions: atreides, ordos
+	GrantConditionOnFaction@reinforcemets:
+		Condition: ordos
+		Factions: ordos
+	GrantConditionOnFaction@atreides:
+		Condition: atreides
+		Factions: atreides
+	-AirstrikePower:
+	SpawnActorPower@ordos_airstrike:
+		Actor: waypoint.ordos_airstrike
+		Icon: ornistrike
+		Prerequisites: upgrade.hightech
+		EffectImage: invisible
+		ChargeInterval: 3500
+		LifeTime: -1
+		Name: ordos-airstrike
+		Description: ordos-airstrike.description
+		SupportPowerPaletteOrder: 55
+		DisplayBeacon: True
+		DisplayRadarPing: true
+		OrderName: ordos_airstrike
+		RequiresCondition: ordos
+		BlockedCursor: move-blocked
+	SpawnActorPower@atreides_airstrike:
+		Actor: waypoint.atreides_airstrike
+		Icon: ornistrike
+		EffectImage: invisible
+		Prerequisites: upgrade.hightech
+		ChargeInterval: 6000
+		LifeTime: -1
+		Name: atreides-airstrike
+		Description: atreides-airstrike.description
+		SupportPowerPaletteOrder: 50
+		DisplayBeacon: True
+		DisplayRadarPing: true
+		OrderName: atreides_airstrike
+		RequiresCondition: atreides
+		BlockedCursor: move-blocked
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 500, -800, 0
+	WithIdleOverlay@Burns1_atreides:
+		Offset: 1100, 500, 0
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		Offset: 400,-150,0
+	-FloatingSpriteEmitter@smoke2_small_harkonnen:
+	WithIdleOverlay@Burns1_harkonnen:
+		Offset: -100, 350,0
+	-WithIdleOverlay@Burns2_harkonnen:
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		Offset: 500, -200, 0
+		Gravity: 70
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		Offset: 0, -800, 0
+		SpawnFrequency: 3, 13
+	WithIdleOverlay@Burns1_ordos:
+		Offset: 0, 450, 0
+	-WithIdleOverlay@Burns2_ordos:
+	SpawnActorOnDeath@bigcrater:
+		Offset: 0,2
+
+repair_pad:
+	Buildable:
+		Queue: Building
+		Prerequisites: heavy_factory
+		BuildDuration: 375
+		Description: repair-pad.description
+	Valued:
+		Cost: 800
+	Health:
+		HP: 39000
+	Armor:
+		Type: wood
+	Power:
+		Amount: -50
+	Capturable:
+		RequiresCondition: !build-incomplete
+		Types: building
+		CancelActivity: true
+	GrantConditionOnDamageState@heavyDamage:
+		Condition: heavy-damage
+	FloatingSpriteEmitter@smoke2_small:
+		Offset: 100, -1400, 0
+		Gravity: 40
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		SpawnFrequency: 4, 15
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1024
+		RequiresCondition: heavy-damage
+	FloatingSpriteEmitter@smoke_huge:
+		Offset: 800,200,0
+		SpawnFrequency: 4,10
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 7
+		Gravity: 60
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1224
+		RequiresCondition: heavy-damage
+	-FireWarheadsOnDeath@02:
+	FireWarheadsOnDeath@03:
+		Type: CenterPosition
+		Weapon: buildingExplosions05
+		EmptyWeapon: buildingExplosions05
+		Chance: 80
+	GrantConditionOnBotOwner@enableProximity:
+		Condition: bot
+		Bots: omnius, vidious, gladius
+	ProximityExternalCondition@repairingForbot:
+		Condition: start-repair
+		Range: 3c0
+		RequiresCondition: bot
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: repair_pad
+
+research_centre:
+	Buildable:
+		BuildDuration: 680
+		Prerequisites: research_centre.allowed
+		Description: research-centre.description
+	Valued:
+		Cost: 1200
+	Health:
+		HP: 29000
+	Armor:
+		Type: building
+		RequiresCondition: ArmorUpgrade
+	GrantConditionOnPrerequisite:
+		Condition: ArmorUpgrade
+		Prerequisites: upgrade.conyard
+	Power:
+		Amount: -175
+	RenderSprites:
+		Image: research.smuggler
+		FactionImages:
+			atreides: research.atreides
+			harkonnen: research.harkonnen
+	GrantConditionOnDamageState@heavyDamage:
+		Condition: heavy-damage
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 512, 0, 0
+		Speed: 10
+		SpawnFrequency: 3,6
+		Image: smoke3
+		Lifetime: 15, 20
+		Gravity: 60
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1224
+		RequiresCondition: heavy-damage
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: 300, -1500, 0
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		SpawnFrequency: 4, 15
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1024
+		RequiresCondition: heavy-damage
+	WithIdleOverlay@Burns1_atreides:
+		Offset: -300, 500, 0
+		Image: fire
+		Sequence: 1
+		IsDecoration: True
+		RequiresCondition: heavy-damage
+
+starport:
+	Inherits@UPGRADEABLE: ^Upgradeable
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	-ProductionAirdrop:
+	-ProductionBar:
+	Buildable:
+		BuildDuration: 625
+		Prerequisites: heavy_factory, outpost
+		Description: starport-desc.description
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 45500
+	Armor:
+		Type: heavy
+	Power:
+		Amount: -150
+	Production:
+		Produces: Starport
+		RequiresCondition: !disabled
+	D2kBuilding:
+		Footprint: =x= +=+ =x=
+		Dimensions: 3,3
+	ProvidesPrerequisite@atreides_starport:
+		Prerequisite: starport.atreides
+		Factions: atreides
+	ProvidesPrerequisite@harkonnen_starport:
+		Prerequisite: starport.harkonnen
+		Factions: harkonnen
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Prerequisites: upgrade.starport
+	ExternalCondition@lights:
+		Condition: frigate-proximity-influence
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && frigate-proximity-influence
+		Sequence: active
+	RenderSprites:
+		Image: starport.ordos
+		FactionImages:
+			atreides: starport.atreides
+			harkonnen: starport.harkonnen
+	-FireWarheadsOnDeath@02:
+	FireWarheadsOnDeath@03:
+		Type: CenterPosition
+		Weapon: buildingExplosions05
+		EmptyWeapon: buildingExplosions05
+		Chance: 80
+	FloatingSpriteEmitter@smoke_huge_atreides:
+		Offset: 900, -1400, 0
+		Gravity: 40
+		Speed: 5
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: -1224, -1312, 0
+		SpawnFrequency: 3, 13
+	WithIdleOverlay@Burns1_atreides:
+		Offset: 1424, -1390, 0
+	-WithIdleOverlay@Burns2_atreides:
+	FloatingSpriteEmitter@smoke_huge_harkonnen:
+		Offset: -1100,-1000,0
+	FloatingSpriteEmitter@smoke2_small_harkonnen:
+		Offset: 700,-900,0
+		Speed: 10
+	-WithIdleOverlay@Burns1_harkonnen:
+	WithIdleOverlay@Burns2_harkonnen:
+		Offset: 1800, 780,0
+	FloatingSpriteEmitter@smoke_huge_ordos:
+		Offset: -1100,-1000,0
+	FloatingSpriteEmitter@smoke2_small_ordos:
+		Offset: 700,-900,0
+		Speed: 10
+	-WithIdleOverlay@Burns1_ordos:
+	WithIdleOverlay@Burns2_ordos:
+		Offset: 1800, 780,0
+
+palace.atreides:
+	Inherits: ^Building
+	Inherits@PRIMARY: ^PrimaryBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Buildable:
+		Prerequisites: research_centre, ~conyard.atreides
+		Queue: Building
+		BuildPaletteOrder: 620
+		BuildDuration: 937
+		BuildDurationModifier: 100
+		Description: palace-atreides.description
+	Tooltip:
+		Name: atreides-palace
+	Selectable:
+		Bounds: 3072, 3072
+	RallyPoint:
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 35000
+	Armor:
+		Type: cy
+	Power:
+		Amount: -200
+	RevealsShroud:
+		Range: 4c768
+	D2kBuilding:
+		Footprint: xx= xxx =xx
+		Dimensions: 3,3
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 512
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -1536, -1536
+			BottomRight: 512, -512
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -512, 512
+			BottomRight: 1536, 1536
+	RenderSprites:
+		Image: palace.atreides
+		FactionImages:
+	WithBuildingBib:
+		HasMinibib: True
+	Exit@1:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,3
+	Exit@3:
+		SpawnOffset: -704,768,0
+		ExitCell: 0,3
+	SupportPowerChargeBar:
+	ProduceActorPower@atreides_reinforcements:
+		Icon: fremen
+		ChargeInterval: 3000
+		StartFullyCharged: false
+		Actors: waypoint.atreides_reinf
+		Type: PalaceQueue
+		Name: recruit-fremen
+		Description: recruit-fremen.description
+		EndChargeTextNotification: notification-fremen-ready
+		ReadyAudio: Reinforce
+		ReadyTextNotification: notification-reinforcements-have-arrived
+		BlockedAudio: NoRoom
+		BlockedTextNotification: notification-no-room-for-new-unit
+		OrderName: ProduceActorPower.AtreidesReinforcements
+		SupportPowerPaletteOrder: 20
+	PrimaryBuilding:
+		PrimaryCondition: primary
+		ProductionQueues: PalaceQueue
+	Production@palace:
+		Produces: PalaceQueue
+	WithTextDecoration@primary:
+		RequiresCondition: primary
+		Position: Top
+		Margin: 0, 5
+		RequiresSelection: true
+		Text: PRIMARY
+
+palace.harkonnen:
+	Inherits: ^Building
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Buildable:
+		Prerequisites: research_centre, ~conyard.harkonnen
+		Queue: Building
+		BuildPaletteOrder: 620
+		BuildDuration: 937
+		BuildDurationModifier: 100
+		Description: palace-harkonnen.description
+	Selectable:
+		Bounds: 3072, 3072
+	Tooltip:
+		Name: harkonnen-palace
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 35000
+	Armor:
+		Type: cy
+	Power:
+		Amount: -200
+	RevealsShroud:
+		Range: 4c768
+	D2kBuilding:
+		Footprint: xx= xxx =xx
+		Dimensions: 3,3
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 512
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -1536, -1536
+			BottomRight: 512, -512
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -512, 512
+			BottomRight: 1536, 1536
+	RenderSprites:
+		Image: palace.harkonnen
+	WithBuildingBib:
+		HasMinibib: True
+	WithSupportPowerActivationOverlay:
+		RequiresCondition: !build-incomplete && !launchpad-damaged
+	GrantConditionOnDamageState@LAUNCHPADDAMAGED:
+		Condition: launchpad-damaged
+	ProvidesPrerequisite@nuke:
+		Prerequisite: palace.nuke
+	NukePower:
+		LaunchSound: audio/death_hand_launch_1.wav
+		Cursor: nuke
+		Icon: deathhand
+		ChargeInterval: 7400
+		MissileWeapon: deathhand
+		MissileDelay: 18
+		Name: death-hand
+		SpawnOffset: 32,816,0
+		DetonationAltitude: 6c0
+		RemoveMissileOnDetonation: True
+		FlightVelocity: 384
+		TrailInterval: 0
+		TrailImage: large_trail
+		TrailSequences: idle
+		CameraRemoveDelay: 80
+		PauseOnCondition: disabled
+		Description: death-hand.description
+		BeginChargeSpeechNotification: DeathHandMissilePrepping
+		EndChargeSpeechNotification: DeathHandMissileReady
+		IncomingSpeechNotification: MissileLaunchDetected
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		CameraRange: 10c0
+		ArrowSequence: arrow
+		CircleSequence: circles
+		SupportPowerPaletteOrder: 40
+		MissileImage: deathhand
+	SupportPowerChargeBar:
+
+palace.ordos:
+	Inherits: ^Building
+	Inherits@PRIMARY: ^PrimaryBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Buildable:
+		Prerequisites: research_centre, ~conyard.ordos
+		Queue: Building
+		BuildPaletteOrder: 620
+		BuildDuration: 937
+		BuildDurationModifier: 100
+		Description: palace-ordos.description
+	Tooltip:
+		Name: ordos-palace
+	Selectable:
+		Bounds: 3072, 3072
+	RallyPoint:
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 35000
+	Armor:
+		Type: cy
+	Power:
+		Amount: -200
+	RevealsShroud:
+		Range: 4c768
+	D2kBuilding:
+		Footprint: xx= xxx =xx
+		Dimensions: 3,3
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 512
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -1536, -1536
+			BottomRight: 512, -512
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -512, 512
+			BottomRight: 1536, 1536
+	WithBuildingBib:
+		HasMinibib: True
+	Exit@1:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,768,0
+		ExitCell: 0,3
+	Exit@3:
+		SpawnOffset: 704,768,0
+		ExitCell: 3,2
+	Exit@4:
+		SpawnOffset: 704,-768,0
+		ExitCell: 3,-1
+	SupportPowerChargeBar:
+	PrimaryBuilding:
+		ProductionQueues: Saboteur
+	Production@Saboteur:
+		Produces: Saboteur
+	WithTextDecoration@primary:
+		RequiresCondition: primary
+		Position: Top
+		Margin: 0, 5
+		RequiresSelection: true
+		Text: PRIMARY
+	ProvidesPrerequisite@saboteur:
+		Prerequisite: palace.saboteur
+	ProduceActorPower@saboteur:
+		Name: recruit-saboteur
+		Description: recruit-saboteur.description
+		PauseOnCondition: disabled
+		Prerequisites: ~palace.saboteur
+		Actors: saboteur
+		Type: Saboteur
+		Icon: saboteur
+		ChargeInterval: 2000
+		ReadyAudio: Reinforce
+		BlockedAudio: NoRoom
+		OrderName: ProduceActorPower.SaboteurOrdos
+		SupportPowerPaletteOrder: 30
+
+palace.corrino:
+	Inherits: ^Defense
+	Inherits: ^Building
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@PRIMARY: ^PrimaryBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	-CommandBarBlacklist:
+	Buildable:
+		Prerequisites: outpost, research_centre, ~conyard.harkonnen
+		Queue: Building
+		BuildPaletteOrder: 620
+		BuildDuration: 937
+		BuildDurationModifier: 100
+		Description: palace-corrino.description
+	Tooltip:
+		Name: emperor-palace
+	Selectable:
+		Bounds: 3072, 3072
+	RallyPoint:
+	Capturable:
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 75000
+	Armor:
+		Type: cy
+	Power:
+		Amount: -200
+	DetectCloaked:
+		Range: 2c0
+	D2kBuilding:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 512
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -1536, -1536
+			BottomRight: 1536, -512
+	RevealsShroud:
+		Range: 6c0
+	WithBuildingBib:
+		HasMinibib: True
+	Exit@1:
+		SpawnOffset: 544,-224,0
+		ExitCell: 2,2
+	Exit@2:
+		SpawnOffset: 544,-224,0
+		ExitCell: 1,3
+	Exit@3:
+		SpawnOffset: 544,-224,0
+		ExitCell: 3,3
+	PrimaryBuilding:
+		ProductionQueues: Sardaukar
+	Production@Sardaukar:
+		Produces: Sardaukar
+	ProduceActorPower@releasethesardaukars:
+		Actors: dummy.sardaukar_rally
+		Type: Sardaukar
+		Name: rally-sardaukars
+		Description: rally-sardaukar-rally.description
+		ChargeInterval: 5500
+		Icon: sardaukarVeterancy
+		PauseOnCondition: disabled
+		LaunchSpeechNotification: release_sardaukars
+		OrderName: Orderproduction.sardaukar
+		SupportPowerPaletteOrder: 25
+		BlockedAudio: NoRoom
+		StartFullyCharged: false
+		LaunchSound: audio/HI_releaseTheSardaukar01.wav
+		IncomingSound: audio/HI_releaseTheSardaukar01.wav
+	Armament:
+		FireDelay: 5
+		Weapon: clusterMissile.palace
+		LocalOffset: -100,0,1024, -100,100,1024, -100,200,1024
+	AttackTurreted:
+		PauseOnCondition: disabled
+		FacingTolerance: 512
+	Turreted:
+		TurnSpeed: 50
+
+fremen_sietch:
+	Inherits: ^Building
+	Inherits@PRIMARY: ^PrimaryBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	-D2kBuilding:
+	WithBuildingBib:
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 630
+		BuildDuration: 937
+		BuildDurationModifier: 100
+		Prerequisites: outpost, research_centre, ~conyard.atreides
+		Description: fremen-sietch.description
+	Tooltip:
+		Name: Sietch
+	SpawnActorsOnSell:
+		ActorTypes: nsfremen
+	Valued:
+		Cost: 1800
+	Health:
+		HP: 35000
+	Armor:
+		Type: cy
+	Selectable:
+		Bounds: 3072, 3072
+	RallyPoint:
+	RevealsShroud:
+		Range: 4c768
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 512
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -536, -1536
+			BottomRight: 512, -512
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -512, 512
+			BottomRight: 1536, 1536
+	Building:
+		Footprint: =x= xxx =xx
+		Dimensions: 3,3
+		TerrainTypes: Rock, Concrete
+		BuildSounds: BUILD1.WAV
+	Exit@1:
+		SpawnOffset: -704,1024,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,1024,0
+		ExitCell: -1,3
+	Exit@3:
+		SpawnOffset: 704,768,0
+		ExitCell: 3,0
+	ProduceActorPower@wormrider:
+		Actors: worm_rider
+		Type: Fremen
+		Name: worm-rider
+		Description: worm-rider-sp.description
+		ChargeInterval: 4300
+		Icon: sandworm
+		StartFullyCharged: false
+		BlockedAudio: NoRoom
+		SupportPowerPaletteOrder: 90
+		OrderName: SpawnActorPowerInfoOrder.wormride
+		ReadyAudio: Reinforce
+	Production@wormriderproduction:
+		Produces: Fremen
+	Production@sietch:
+		Produces: UnusedQueue
+
+wall:
+	Buildable:
+		BuildDuration: 100
+		Description: wall.description
+	Valued:
+		Cost: 100
+	Health:
+		HP: 20000
+	Armor:
+		Type: wall
+	-RevealsShroud:
+
+silo:
+	Buildable:
+		BuildPaletteOrder: 650
+		Description: silo.description
+	Valued:
+		Cost: 120
+	Health:
+		HP: 18000
+	Armor:
+		Type: building
+	Power:
+		Amount: -10
+	StoresPlayerResources:
+		Capacity: 2000
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 3, 5
+		Range: 2c0, 5c0
+	GrantConditionOnDamageState@heavyDamage:
+		Condition: heavy-damage
+	GrantConditionOnDamageState@critical:
+		ValidDamageStates: Critical
+		Condition: critical-damage
+	WithIdleOverlay@Burns1_atreides:
+		RequiresCondition: critical-damage
+		Image: fire
+		Sequence: 1
+		IsDecoration: True
+	FloatingSpriteEmitter@smoke2_small_atreides:
+		Offset: 0, -300, 0
+		RequiresCondition: heavy-damage
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		SpawnFrequency: 4, 15
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1024
+
+medium_gun_turret:
+	Buildable:
+		Prerequisites: barracks
+		BuildDuration: 300
+		Description: gun-turret.description
+	Valued:
+		Cost: 550
+	Health:
+		HP: 30000
+	Armor:
+		Type: wall
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 5c768
+	Turreted:
+		TurnSpeed: 24
+		InitialFacing: 512
+		RealignDelay: -1
+	WithSpriteTurret:
+		Recoils: false
+	WithSpriteBarrel:
+		RequiresCondition: !build-incomplete
+	Armament:
+		Weapon: 110mm_Gun
+		LocalOffset: 512,0,432
+		MuzzleSequence: muzzle
+		Recoil: 200
+		RecoilRecovery: 25
+	DetectCloaked:
+		Range: 3c0
+	GrantConditionOnDamageState@heavyDamage:
+		Condition: heavy-damage
+	FloatingSpriteEmitter@smoke2_small:
+		Offset: 0, -700, 0
+		RequiresCondition: heavy-damage
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		SpawnFrequency: 4, 15
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1024
+
+large_gun_turret:
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Buildable:
+		BuildDuration: 380
+		Description: rocket-turret.description
+	Valued:
+		Cost: 750
+	Health:
+		HP: 32000
+	Armor:
+		Type: wall
+	RevealsShroud:
+		Range: 6c768
+	Armament:
+		Weapon: MissleTowerNew
+		LocalOffset: 256,384,768, 256,-384,768
+	Turreted:
+		TurnSpeed: 32
+	Power:
+		Amount: -70
+	DetectCloaked:
+		Range: 3c512
+	GrantConditionOnDamageState@heavyDamage:
+		Condition: heavy-damage
+	FloatingSpriteEmitter@smoke2_small:
+		Offset: 0, -700, 0
+		RequiresCondition: heavy-damage
+		Image: smoke3
+		Lifetime: 15, 20
+		Speed: 3
+		Gravity: 50
+		SpawnFrequency: 4, 15
+		RandomFacing: true
+		RandomRate: 4
+		TurnRate: 3
+		Duration: 1024
+
+upgrade.conyard:
+	Buildable:
+		Prerequisites: construction_yard
+		BuildDuration: 1200
+		BuildPaletteOrder: 10
+		Description: upgrade-conyard.description
+	Valued:
+		Cost: 1000
+
+upgrade.barracks:
+	Buildable:
+		Prerequisites: barracks
+		BuildDuration: 600
+		BuildPaletteOrder: 20
+		Description: upgrade-barracks.description
+	Valued:
+		Cost: 400
+	RenderSprites:
+		Image: barracks.ordos
+		FactionImages:
+			atreides: barracks.atreides
+			harkonnen: barracks.harkonnen
+
+upgrade.light:
+	Buildable:
+		Prerequisites: light_factory
+		BuildDuration: 800
+		BuildPaletteOrder: 30
+		Description: upgrade-light.description
+	Valued:
+		Cost: 600
+
+upgrade.heavy:
+	Buildable:
+		Prerequisites: heavy_factory
+		BuildDuration: 1000
+		BuildPaletteOrder: 40
+		Description: upgrade-heavy.description
+	Valued:
+		Cost: 800
+
+upgrade.starport:
+	AlwaysVisible:
+	Interactable:
+	ScriptTriggers:
+	Tooltip:
+		Name: starport-upgrade
+	Buildable:
+		Prerequisites: outpost, research_centre, starport, ~conyard.ordos
+		BuildPaletteOrder: 50
+		Queue: Upgrade
+		BuildLimit: 1
+		BuildDuration: 1145
+		BuildDurationModifier: 100
+		Description: upgrade-starport.description
+	Valued:
+		Cost: 2000
+	RenderSprites:
+		Image: starport.ordos
+
+upgrade.hightech:
+	Buildable:
+		Prerequisites: ~hightech.enableupgrade
+		BuildDuration: 1000
+		BuildPaletteOrder: 60
+		Description: upgrade-hightech.description
+	Valued:
+		Cost: 1200
+	RenderSprites:
+		Image: hightech.atreides
+		FactionImages:
+			ordos: hightech.ordos
+			harkonnen: hightech.harkonnen
+
+sietch:
+	-GrantRandomCondition@randomFX:
+	-FireWarheadsOnDeath@02:
+	-FireWarheadsOnDeath@03:
+	-FireWarheadsOnDeath@sabotuerdemolition:
+	-AmbientSound@saboteurCharge:
+	-SpawnActorOnDeath@bigcrater:
+
+palace:
+	-Buildable:
+
+concretea:
+	-Buildable:
+
+concreteb:
+	-Buildable:
