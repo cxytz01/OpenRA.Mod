@@ -80,6 +80,7 @@ WorldLoaded = function()
 
 	Trigger.AfterDelay(DateTime.Minutes(7), botEconomyStrategy)
 	Trigger.AfterDelay(DateTime.Minutes(15), botLateGameStrategy)
+	Trigger.AfterDelay(DateTime.Minutes(40), botSiloCheck)
 end
 
 Tick = function()
@@ -559,23 +560,32 @@ end
 function botRefinerySellCheck()
 	for _, player in ipairs(ActivePlayers) do
 		if player.IsBot then
-			local ratio = player.Resources / player.ResourceCapacity
-			if ratio < 0.2 then
-				local refs = player.GetActorsByTypes({"refinery", "refinery_inverted"})
-				for i = 10, #refs do
-					local victim = Utils.Random(refs)
-					victim.Sell()
-					for j, r in ipairs(refs) do
-						if r == victim then
-							table.remove(refs, j)
-							break
-						end
-					end
+			local refs = player.GetActorsByTypes({"refinery", "refinery_inverted"})
+			if #refs >= 10 then
+				while #refs > 10 do
+					local idx = Utils.RandomInteger(1, #refs + 1)
+					refs[idx].Sell()
+					table.remove(refs, idx)
 				end
 			end
 		end
 	end
 	Trigger.AfterDelay(DateTime.Seconds(60), botRefinerySellCheck)
+end
+
+function botSiloCheck()
+	for _, player in ipairs(ActivePlayers) do
+		if player.IsBot then
+			local silos = player.GetActorsByType("silo")
+			local harvesters = player.GetActorsByType("harvester")
+			if #silos >= 100 and #harvesters >= 40 and player.Resources >= 100000 then
+				for _, s in ipairs(silos) do
+					s.Sell()
+				end
+			end
+		end
+	end
+	Trigger.AfterDelay(DateTime.Minutes(5), botSiloCheck)
 end
 
 function botLateGameStrategy()

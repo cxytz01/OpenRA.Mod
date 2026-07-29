@@ -1,8 +1,8 @@
 """
-Build script for Enhanced12 mod.
+Build script for Enhanced12 mods.
 Usage: python check_and_pack.py
 
-Performs:
+Performs for each map:
   1. Lua syntax check (block balancing: if/do/function/for/while vs end)
   2. YAML rule check (OpenRA.Utility.exe d2k --check-yaml)
   3. Packages to oramap if both pass
@@ -12,11 +12,38 @@ import os
 import sys
 import re
 import zipfile
+import glob
 
 # ── Config ──
-MOD_DIR = r'G:\prj\OpenRA-Hacking\Mods\Enhanced12_Imperial-Basin'
 UTILITY = r'F:\games\OpenRA\OpenRA.Utility.exe'
-OUTPUT  = r'C:\Users\xy\AppData\Roaming\OpenRA\maps\d2k\release-20250330\Enhanced12_Imperial-Basin.oramap'
+
+MAPS = [
+    {
+        'name': 'Imperial-Basin',
+        'dir':  r'G:\prj\OpenRA-Hacking\Mods\Enhanced12_Imperial-Basin',
+        'out':  r'C:\Users\xy\AppData\Roaming\OpenRA\maps\d2k\release-20250330\Enhanced12_Imperial-Basin.oramap',
+    },
+    {
+        'name': 'Spice-Islands',
+        'dir':  r'G:\prj\OpenRA-Hacking\Mods\Enhanced12_Spice-Islands',
+        'out':  r'C:\Users\xy\AppData\Roaming\OpenRA\maps\d2k\release-20250330\Enhanced12_Spice-Islands.oramap',
+    },
+    {
+        'name': 'Stone-Plateaus',
+        'dir':  r'G:\prj\OpenRA-Hacking\Mods\Enhanced12_Stone-Plateaus',
+        'out':  r'C:\Users\xy\AppData\Roaming\OpenRA\maps\d2k\release-20250330\Enhanced12_Stone-Plateaus.oramap',
+    },
+    {
+        'name': 'Habbanya-Erg-Pro',
+        'dir':  r'G:\prj\OpenRA-Hacking\Mods\Enhanced12_Habbanya-Erg-Pro',
+        'out':  r'C:\Users\xy\AppData\Roaming\OpenRA\maps\d2k\release-20250330\Enhanced12_Habbanya-Erg-Pro.oramap',
+    },
+    {
+        'name': 'Tenaya-of-Test',
+        'dir':  r'G:\prj\OpenRA-Hacking\Mods\Enhanced12_Tenaya-of-Test',
+        'out':  r'C:\Users\xy\AppData\Roaming\OpenRA\maps\d2k\release-20250330\Enhanced12_Tenaya-of-Test.oramap',
+    },
+]
 
 OPENERS = {'function', 'if', 'for', 'while', 'repeat'}
 CLOSERS = {'end', 'until'}
@@ -139,42 +166,63 @@ def package(mod_dir, output_path):
     return len(all_files), os.path.getsize(output_path)
 
 
-# ── Main ──
-if __name__ == '__main__':
+def build_map(cfg):
+    """Run full check+pack pipeline for one map. Returns True on success."""
+    mod_dir = cfg['dir']
+    name = cfg['name']
     all_ok = True
 
-    # 1. Lua check — scan all .lua files
-    import glob
-    lua_files = sorted(glob.glob(os.path.join(MOD_DIR, '*.lua')) + glob.glob(os.path.join(MOD_DIR, 'scripts', '*.lua')))
+    # 1. Lua check
+    lua_files = sorted(glob.glob(os.path.join(mod_dir, '*.lua')) + glob.glob(os.path.join(mod_dir, 'scripts', '*.lua')))
     if not lua_files:
-        lua_files = [os.path.join(MOD_DIR, 'scripts', 'scripts.lua')]
+        lua_files = [os.path.join(mod_dir, 'scripts', 'scripts.lua')]
 
     for lua_file in lua_files:
         fname = os.path.basename(lua_file)
-        print(f'[1/3] Checking Lua: {fname}')
+        print(f'  [1/3] Checking Lua: {fname}')
         errs, warns = lua_check(lua_file)
         for w in warns:
-            print(f'  LUA WARNING: {w}')
+            print(f'    LUA WARNING: {w}')
         if errs:
             for e in errs:
-                print(f'  LUA ERROR: {e}')
+                print(f'    LUA ERROR: {e}')
             all_ok = False
         else:
-            print(f'  OK — {len(warns)} warning(s), no fatal errors')
+            print(f'    OK — {len(warns)} warning(s), no fatal errors')
 
     # 2. YAML check
-    print(f'[2/3] Checking YAML (--check-yaml)')
-    ok, out = yaml_check(MOD_DIR)
-    print(out.strip())
+    print(f'  [2/3] Checking YAML (--check-yaml)')
+    ok, out = yaml_check(mod_dir)
+    for line in out.strip().split('\n'):
+        print(f'    {line}')
     if not ok:
         all_ok = False
 
     # 3. Package
     if not all_ok:
-        print('\n[3/3] SKIPPED — fix errors above first.')
-        sys.exit(1)
+        print(f'\n  [3/3] SKIPPED — fix errors above first.')
+        return False
 
-    print('[3/3] Packaging...')
-    count, size = package(MOD_DIR, OUTPUT)
-    print(f'  OK — {count} files, {size / 1048576:.1f} MB')
-    print(f'  → {OUTPUT}')
+    print(f'  [3/3] Packaging...')
+    count, size = package(mod_dir, cfg['out'])
+    print(f'    OK — {count} files, {size / 1048576:.1f} MB')
+    print(f'    → {cfg["out"]}')
+    return True
+
+
+# ── Main ──
+if __name__ == '__main__':
+    all_passed = True
+    for cfg in MAPS:
+        print(f'\n{"─" * 50}')
+        print(f'Map: {cfg["name"]}')
+        print(f'{"─" * 50}')
+        if not build_map(cfg):
+            all_passed = False
+
+    print()
+    if all_passed:
+        print(f'All {len(MAPS)} maps built successfully.')
+    else:
+        print('Some maps failed. Check errors above.')
+        sys.exit(1)

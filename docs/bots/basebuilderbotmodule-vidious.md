@@ -71,7 +71,7 @@
 | `palace.corrino` | Corrino宫殿 | 2 | |
 | `fremen_sietch` | 弗瑞曼穴地 | 2 | |
 | `silo` | 仓库 | - | |
-| `medium_gun_turret` | 中型炮塔 | 10 | |
+| `medium_gun_turret` | 中型炮塔 | - | |
 | `large_gun_turret` | 火箭炮塔 | - | |
 | `upgrade.conyard` | 建造场升级 | 1 | |
 | `upgrade.barracks` | 兵营升级 | 1 | |
@@ -101,7 +101,7 @@
 | `palace.corrino` | Corrino宫殿 | 3 | |
 | `fremen_sietch` | 弗瑞曼穴地 | 3 | |
 | `silo` | 仓库 | - | |
-| `medium_gun_turret` | 中型炮塔 | 30 | |
+| `medium_gun_turret` | 中型炮塔 | 25 | |
 | `large_gun_turret` | 火箭炮塔 | 6 | |
 | `upgrade.conyard` | 建造场升级 | 1 | |
 | `upgrade.barracks` | 兵营升级 | 1 | |

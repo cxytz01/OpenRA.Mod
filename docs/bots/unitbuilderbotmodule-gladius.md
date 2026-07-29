@@ -63,7 +63,6 @@ Source: `OpenRA.Mods.Common\Traits\BotModules\UnitBuilderBotModule.cs`
 | `carryall` | 运输机 | 23 | |
 | `harvester` | 采矿车 | - | |
 | `mcv` | MCV | 1 | |
-| `frigate.harkonnen_fortress` | 空中堡垒 | 7 | |
 
 ## UnitDelays (tick)
 
