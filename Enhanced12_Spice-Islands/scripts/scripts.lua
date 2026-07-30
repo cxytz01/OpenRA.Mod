@@ -1,6 +1,6 @@
 InfantryTypes = {light_inf=true, trooper=true, engineer=true, grenadier=true, fremen=true, ["fremen.spawn"]=true, sardaukar=true, mpsardaukar=true, ["sardaukar.level1"]=true, ["sardaukar.level2"]=true, ["sardaukar.level3"]=true, thumper=true, saboteur=true, worm_rider=true}
 MicroUnitTypes = {trike=true, raider=true, stealth_raider=true, sand_runner=true, quad=true, heavy_quad=true, dustrider=true}
-TankTypes = {dustrider=true, combat_tank_a=true, combat_tank_h=true, combat_tank_o=true, bison_tank=true}
+TankTypes = {dustrider=true, combat_tank_a=true, combat_tank_h=true, combat_tank_o=true, bison_tank=true, mp_sandworm=true}
 
 RepairPads = {} -- {[internalName] = {pad1, pad2, ...}}
 CurrentConyards = {}
@@ -430,6 +430,7 @@ function autoCrush(unit, bot)
 		return
 	end
 
+	local isWorm = unit.Type == "mp_sandworm"
 	local actors = Map.ActorsInCircle(unit.CenterPosition, WDist.FromCells(4), function (a)
 		return
 		not a.IsDead and
@@ -437,18 +438,32 @@ function autoCrush(unit, bot)
 		not a.Owner.IsAlliedWith(bot)
 	end)
 	local targets = Utils.Where(actors, function(a)
+		if isWorm then
+			local t = Map.TerrainType(a.Location)
+			return t == "Sand" or t == "Spice" or t == "Dune" or t == "SpiceSand"
+		end
 		return InfantryTypes[a.Type]
 	end)
 	if next(targets) ~= nil then
-		unit.GrantCondition("reject-orders", 50)
+		local rejectDuration = 50
+		local afterDelay = 25
+		if isWorm then
+			rejectDuration = 100
+			afterDelay = 50
+		end
+		unit.GrantCondition("reject-orders", rejectDuration)
 		unit.Move(Utils.Random(targets).Location)
-		Trigger.AfterDelay(25, function ()
+		Trigger.AfterDelay(afterDelay, function ()
 			autoCrush(unit, bot)
 		end)
 		return
 	end
 
-	Trigger.AfterDelay(100, function ()
+	local idleRetry = 100
+	if isWorm then
+		idleRetry = 200
+	end
+	Trigger.AfterDelay(idleRetry, function ()
 		autoCrush(unit, bot)
 	end)
 end
