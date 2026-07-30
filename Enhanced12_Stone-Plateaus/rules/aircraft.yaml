@@ -22,11 +22,6 @@ carryall.reinforce:
 		IdleTurnSpeed: 4
 		IdleSpeed: 115
 		MinAirborneAltitude: 400
-		TakeoffSounds: audio/adv_carryall_takeoff_1.wav
-		LandingSounds: audio/adv_carryall_land_1.wav
-	AmbientSound:
-		SoundFiles: audio/carryallSound(2).wav
-		RequiresCondition: cruising
 	GrantConditionOnDamageState@HEAVY:
 		Condition: heavy-damage
 	Cloak:
@@ -61,13 +56,9 @@ carryall:
 	Inherits@SelectableEco: ^SelectableSupportUnit
 	-Interactable:
 	-Cloak:
-	-AmbientSound:
 	Buildable:
 		BuildPaletteOrder: 101
 		Description: carryall-manual.description
-	Aircraft:
-		-TakeoffSounds: audio/adv_carryall_takeoff_1.wav
-		-LandingSounds: audio/adv_carryall_land_1.wav
 	Selectable:
 		Priority: 5
 	GrantConditionOnBotOwner@BOTOWNER:
@@ -95,20 +86,20 @@ carryall:
 	TemporaryOwnerManager:
 
 carryall.support:
-	Inherits: carryall
-	-Buildable:
-	-GrantConditionOnBotOwner@BOTOWNER:
-	-RejectsOrders@botNoControl:
-	RejectsOrders:
-		Except: Repair
-	-Selectable:
-	Interactable:
+	Inherits: carryall.reinforce
+	-Cloak:
 	Tooltip:
 		Name: carryall-support
 
 carryall.transport:
 	Inherits: carryall.reinforce
 	-Cloak:
+	Aircraft:
+		TakeoffSounds: audio/adv_carryall_takeoff_1.wav
+		LandingSounds: audio/adv_carryall_land_1.wav
+	AmbientSound:
+		SoundFiles: audio/carryallSound(2).wav
+		RequiresCondition: cruising
 	Cargo:
 		MaxWeight: 10
 		Types: Infantry, Vehicle
