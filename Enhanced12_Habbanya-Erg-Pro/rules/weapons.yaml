@@ -569,7 +569,7 @@ Sound:
 OrnithopterSound:
 	Inherits: Sound
 	ValidTargets: Ground, Air
-	Range: 9c0
+	Range: 8c0
 	MinRange: 0c0
 	Projectile: AreaBeam
 		Duration: 3
@@ -578,8 +578,8 @@ OrnithopterSound:
 		Range: 0, 12c0
 		Falloff: 100, 100
 		Color: FFCC00C8
-		BeyondTargetRange: 3c0
-		MinDistance: 7c0
+		BeyondTargetRange: 4c0
+		MinDistance: 8c0
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
 		ValidRelationships: Neutral, Enemy
