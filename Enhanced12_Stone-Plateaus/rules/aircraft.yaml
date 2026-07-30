@@ -200,7 +200,7 @@ ornithopter.sound:
 	Tooltip:
 		Name: sonic-ornithopter
 	Valued:
-		Cost: 1100
+		Cost: 1300
 	Health:
 		HP: 13000
 	Aircraft:
@@ -228,7 +228,7 @@ ornithopter.laser:
 	Tooltip:
 		Name: laser-ornithopter
 	Valued:
-		Cost: 1200
+		Cost: 1400
 	Health:
 		HP: 15000
 	Aircraft:
@@ -329,12 +329,12 @@ frigate.harkonnen_fortress:
 		Queue: Aircraft
 		Prerequisites: research_centre, ~hightech.harkonnen
 		BuildPaletteOrder: 152
-		BuildDuration: 1850
+		BuildDuration: 1900
 		Description: air-fortress.description
 	Tooltip:
 		Name: harkonnen-air-fortress
 	Valued:
-		Cost: 3100
+		Cost: 3300
 	Health:
 		HP: 50000
 	Armor:
@@ -411,7 +411,7 @@ frigate.harkonnen_fortress:
 		TargetTypes: CapturedUnit, Air
 		RequiresCondition: unit-capturated
 	ChangesHealth@unstable:
-		Step: -43
+		Step: -40
 		Delay: 8
 		StartIfBelow: 50
 	GrantConditionOnDamageState@HEAVY:

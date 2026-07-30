@@ -564,7 +564,7 @@ Sound:
 OrnithopterSound:
 	Inherits: Sound
 	ValidTargets: Ground, Air
-	Range: 8c0
+	Range: 7c0
 	MinRange: 0c0
 	Projectile: AreaBeam
 		Duration: 3
@@ -579,30 +579,30 @@ OrnithopterSound:
 		ValidTargets: Ground, Air
 		ValidRelationships: Neutral, Enemy
 		Versus:
-			none: 210
-			wall: 100
-			building: 10
-			wood: 110
-			light: 150
-			heavy: 120
+			none: 230
+			wall: 120
+			building: 30
+			wood: 130
+			light: 170
+			heavy: 140
 			invulnerable: 0
-			cy: 40
-			harvester: 80
+			cy: 60
+			harvester: 100
 	Warhead@2Dam: SpreadDamage
 		ValidTargets: Ground, Air
 		ValidRelationships: Ally
-		Damage: 354
+		Damage: 330
 		AffectsParent: false
 		Versus:
-			none: 210
-			wall: 100
-			building: 10
-			wood: 110
-			light: 150
-			heavy: 120
+			none: 230
+			wall: 120
+			building: 30
+			wood: 130
+			light: 170
+			heavy: 140
 			invulnerable: 0
-			cy: 40
-			harvester: 80
+			cy: 60
+			harvester: 100
 		DamageTypes: Prone50Percent, TriggerProne, SoundDeath
 
 clusterDeviatorMissile:
@@ -630,7 +630,7 @@ OrnithopterLaser:
 		SecondaryBeamColor: FF3300
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
-		Damage: 900
+		Damage: 1100
 		Range: 0, 2
 		Falloff: 100, 100
 		DamageTypes: FireDeath
