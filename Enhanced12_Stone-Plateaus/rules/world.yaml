@@ -85,7 +85,7 @@
 			Spice: 100
 World:
 	LuaScript:
-		Scripts: scripts/scripts.lua, scripts/starport.lua, scripts/atreides_reinforcements.lua, scripts/support_powers.lua, scripts/harkonnen_reinforcements.lua, scripts/ordos_reinforcements.lua, scripts/thumper_mission.lua, scripts/sietch_support.lua
+		Scripts: scripts/scripts.lua, scripts/starport.lua, scripts/atreides_reinforcements.lua, scripts/airstrikes.lua, scripts/harkonnen_reinforcements.lua, scripts/ordos_reinforcements.lua, scripts/thumper_mission.lua, scripts/sietch_support.lua
 	MissionData:
 		Briefing: \n\n**** Enhanced D2k 1.2 ****\nAdditional Assets by SirCake, Fey, Kipp, N.N.> and Fed2k forum.\nFULL CHANGELOG AT ORA DISCORD.
 	MapOptions:

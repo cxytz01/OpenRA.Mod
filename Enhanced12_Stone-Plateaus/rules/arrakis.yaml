@@ -96,9 +96,10 @@ sandworm:
 		ValidRelationships: Ally, Neutral, Enemy
 
 mp_sandworm:
-	Inherits@World: ^ExistsInWorld
-	Inherits@Selectable: ^SelectableCombatUnit
 	Inherits@1: ^SpriteActor
+	Inherits@World: ^ExistsInWorld
+	Inherits@BotInMission: ^BotRejectOrders
+	Inherits@Selectable: ^SelectableCombatUnit
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
 		Name: Sandworm
