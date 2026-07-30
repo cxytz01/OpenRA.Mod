@@ -246,6 +246,7 @@ dustrider:
 		RequiresCondition: !being-demolished
 	SpawnActorOnDeath@husk:
 		Actor: dustrider.husk
+		RequiresCondition: !worm-attack
 	AttractsWorms:
 		Intensity: 316
 

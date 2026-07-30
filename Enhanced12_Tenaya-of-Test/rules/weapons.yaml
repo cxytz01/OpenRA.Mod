@@ -114,7 +114,7 @@ Fremen_wormrider:
 	Range: 5c0
 	Report: FREMODD1.WAV
 	Projectile: AreaBeam
-		Width: 500
+		Width: 0c500
 		Duration: 3
 		DamageInterval: 3
 		Speed: 0c350, 0c500
@@ -130,10 +130,6 @@ Fremen_wormrider:
 		Falloff: 100, 100
 		Damage: 1300
 		AffectsParent: false
-		ValidRelationships: Neutral, Enemy, Ally
-		Versus:
-			building: 40
-			infantry: 200
 
 Fremen_wormrider2:
 	Inherits: Fremen_wormrider
@@ -141,7 +137,7 @@ Fremen_wormrider2:
 	Range: 5c0
 	Report: FREMODD1.WAV
 	Projectile: AreaBeam
-		Width: 500
+		Width: 0c500
 		Duration: 3
 		DamageInterval: 3
 		Speed: 0c350, 0c500
@@ -152,7 +148,6 @@ Fremen_wormrider2:
 		Range: 0, 32
 		Falloff: 100, 100
 		AffectsParent: false
-		ValidRelationships: Neutral, Enemy, Ally
 
 ^Cannon:
 	ReloadDelay: 60
