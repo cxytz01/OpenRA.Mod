@@ -151,11 +151,6 @@ mp_sandworm:
 		Condition: worm-attack
 		Range: 1c768
 		ValidRelationships: Ally, Neutral, Enemy
-	GrantConditionOnCombatantOwner@nonAi:
-		Condition: human-player
-	RejectsOrders:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: human-player
 	IgnoresCloak:
 	HiddenUnderFog:
 	AppearsOnRadar:
@@ -169,12 +164,6 @@ mp_sandworm:
 	KillsSelf:
 		Delay: 3500
 		GrantsCondition: dispose
-	Demolition:
-		DetonationDelay: 0
-		Flashes: 0
-		DamageTypes: Vehicle, Infantry
-		EnterBehaviour: Exit
-		Cursor: attack
 	Armament@1:
 		Name: primary
 		Weapon: Fremen_wormrider
